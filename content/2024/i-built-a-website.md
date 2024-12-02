@@ -13,7 +13,7 @@ Swiss design, also known as the $\text{International Typographic Style}$, emphas
 - [Swiss Design](https://www.design.swiss/): A treasure trove of inspiration for creating clean and simple designs. The website's examples influenced the overall layout of my pages.
 
 <div style="text-align: center">
-  <img alt="simple, clean; design.swiss made me focus on grids" height="180" src="images/design-swiss.png" title="Homepage of design.swiss" width="320"/>
+  <img alt="simple, clean; design.swiss made me focus on grids" height="180" src="content/images/design-swiss.png" title="Homepage of design.swiss" width="320"/>
 </div>
 
 - [Swiss Colors](https://fabianburghardt.de/swisscolors/): Helped me finalize my color palette. I went with a classic combination of blues and whites for a calm, professional aesthetic. I might add a secondary theme in the future.
