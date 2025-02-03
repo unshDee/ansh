@@ -1,0 +1,56 @@
+<div class="min-h-[calc(100vh-10rem)] flex flex-col justify-center">
+  <div>
+    <h1 class="text-8xl md:text-9xl">hello</h1>
+    <br>
+    <p class="text-md md:text-xl font-mono">
+      i'm <span class="font-bold">Ansh</span>
+      <br>
+      studying neural networks, and generative ai...
+    </p>
+  </div>
+  <div class="mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <app-window title="@saarland university" class="font-bold">
+        student
+      </app-window>
+      <app-window title="masters" class="font-bold">
+        data science & ai
+      </app-window>
+      <app-window title="location" class="font-bold">
+        saarbrücken, germany
+      </app-window>
+      <app-window title="interests" class="font-bold">
+        <ul class="list-disc list-inside">
+          <li>machine learning</li>
+          <li>natural language processing</li>
+          <li>web development</li>
+        </ul>
+      </app-window>
+      <app-window title="updates">
+        <ul class="list-disc list-inside">
+          <li>currently working on a few projects</li>
+          <li>learning new things everyday</li>
+          <li>open to collaborations</li>
+        </ul>
+      </app-window>
+      <app-window title="interesting articles" [initialMinimized]="true">
+        <ul class="list-disc pl-4">
+          <li>
+            <a
+              href="https://www.inverse.com/article/40113-arc-protein-ancient-mouse-brain-rna-capsid"
+              target="_blank">
+              all your memories are stored by one weird, ancient molecule ⎋
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.nytimes.com/2018/12/21/style/glitter-factory.html"
+              target="_blank">
+              what is glitter? ⎋
+            </a>
+          </li>
+        </ul>
+      </app-window>
+    </div>
+  </div>
+</div>

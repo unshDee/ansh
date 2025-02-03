@@ -1,0 +1,61 @@
+<div
+  class="border rounded-none overflow-hidden"
+  [ngClass]="maximized ? 'fixed inset-0 m-8 z-50 bg-[var(--color-bg)] overflow-y-auto' : ''"
+  [style.maxHeight]="maximized ? maxHeight : null"
+  [@containerCollapse]="
+      maximized
+      ? 'none'
+      : {
+          value: minimized ? 'collapsed' : 'expanded',
+          params: {
+             expandedHeight: wordWrap ? normalMaxHeight : expandedHeightFallback,
+             titleBarHeight: titleBarHeight
+          }
+        }"
+>
+  <!-- Title Bar (fixed height of 2.5rem, i.e. h-10) -->
+  <div class="flex items-center justify-between border-b px-2 py-1 bg-[var(--color-text)] text-[var(--color-bg)] h-10" (click)="!maximized ? toggleMinimize() : null">
+    <span class="font-semibold font-mono">
+      {{ title }}
+    </span>
+    <div class="flex space-x-1">
+      <!-- Minimize/Restore Button -->
+      <button
+        type="button"
+        class="p-1 flex items-center justify-center border-dotted focus:outline-none"
+        (click)="toggleMinimize()"
+        title="{{ minimized ? 'Expand' : 'Minimize' }}"
+      >
+        @if (!maximized) {
+          <span class="text-xs">
+          {{ minimized ? '🢱' : '🗕' }}
+        </span>
+        }
+      </button>
+      <!-- Optional Maximize/Restore Button -->
+      <ng-container *ngIf="showMaximize">
+        <button
+          type="button"
+          class="p-1 flex items-center justify-center border-dotted focus:outline-none"
+          (click)="toggleMaximize($event)"
+          title="{{ maximized ? 'Restore' : 'Maximize' }}"
+        >
+          <span class="text-xs">
+            {{ maximized ? '🗗' : '🗖' }}
+          </span>
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  <!-- Content Area with Smooth Opacity Animation -->
+  <div
+    [@toggleContent]="minimized ? 'collapsed' : 'expanded'"
+    class="overflow-y-auto"
+    [style.height]="!maximized && wordWrap ? 'calc(' + normalMaxHeight + ' - 2.5rem)' : null"
+    (click)="showMaximize && !maximized ? toggleMaximize($event) : null"
+  >
+    <div class="p-2">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

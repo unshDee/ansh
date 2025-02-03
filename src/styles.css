@@ -1,1 +1,170 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* ============================================
+   Swiss Design Inspired Theme (Light Mode)
+   ============================================
+   Define CSS variables for a minimal and clean aesthetic.
+   The palette is inspired by Swiss design: white for clarity,
+   Swiss red for strong accents, and black/grey for text and borders.
+*/
+:root {
+  --color-bg: #FFFFFF; /* Crisp white background */
+  --color-text: #333333; /* Dark gray for clear, legible text */
+  --color-primary: #FF0000; /* Bold Swiss red for accents */
+  --color-secondary: #000000; /* Deep black for contrasting elements */
+  --color-border: #DDDDDD; /* Light border for subtle separation */
+  --font-sans: 'Inter', sans-serif; /* Primary font for body */
+  --font-mono: 'JetBrains Mono', monospace; /* Monospace font for code */
+}
+
+/* ============================================
+   Dark Mode Overrides
+   ============================================
+   Activating dark mode (by adding the "dark" class) will override
+   the above variables with a darker palette while retaining the
+   accent colors and overall minimal aesthetic.
+*/
+.dark {
+  --color-bg: #1C1C1C;
+  --color-text: #E0E0E0;
+  --color-primary: #FF4D4D; /* A slightly adjusted red for better contrast */
+  --color-secondary: #FFFFFF;
+  --color-border: #444444;
+}
+
+html, body {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
+/* ============================================
+   Noise Overlay with Animation
+   ============================================ */
+@layer base {
+  body::after {
+    content: "";
+    inset: 0;
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200vh;
+    background: url("./app/assets/noise.png") repeat;
+    opacity: 0.5; /* Adjust as needed */
+    pointer-events: none;
+    z-index: 9999;
+    animation: noiseAnim 0.5s steps(20) infinite;
+  }
+
+  @keyframes noiseAnim {
+    0% {
+      transform: translate(0, 0)
+    }
+    10% {
+      transform: translate(-5%, -5%)
+    }
+    20% {
+      transform: translate(-10%, 5%)
+    }
+    30% {
+      transform: translate(5%, -10%)
+    }
+    40% {
+      transform: translate(-5%, 15%)
+    }
+    50% {
+      transform: translate(-10%, 5%)
+    }
+    60% {
+      transform: translate(15%, 0)
+    }
+    70% {
+      transform: translate(0, 10%)
+    }
+    80% {
+      transform: translate(-15%, 0)
+    }
+    90% {
+      transform: translate(10%, 5%)
+    }
+    100% {
+      transform: translate(5%, 0)
+    }
+  }
+}
+
+/* ============================================
+   Base Styles
+   ============================================
+   Set up typography and global element styling that reflect
+   Swiss design’s emphasis on clarity and precision.
+*/
+
+@layer base {
+  /* Global Body Style */
+  body {
+    @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans antialiased;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  /* Headings with Swiss typographic influence */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Paragraph styling for clean layout and generous spacing */
+  p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  input, textarea {
+    @apply p-2 mb-4 w-full border-1 border-[var(--color-text)];
+  }
+}
+
+/* ============================================
+   Component Styles
+   ============================================
+   Define reusable components that integrate the theme’s
+   color variables and minimal design cues.
+*/
+@layer components {
+  /* Button Component */
+  .btn {
+    @apply p-1 border-1 transition duration-300 ease-in-out;
+    @apply hover:bg-[var(--color-secondary)] hover:text-[var(--color-bg)];
+  }
+
+  /* Website Logo */
+  .logo {
+    @apply text-2xl font-mono tracking-tight transform duration-300 ease-in-out;
+    @apply hover:font-bold hover:scale-110 hover:translate-x-1;
+    /*@apply hover:underline decoration-(--color-primary) underline-offset-8;*/
+    /*@apply text-[var(--color-bg)] bg-[var(--color-text)];*/
+  }
+
+  .nav-link {
+    @apply font-medium transform duration-300 ease-in-out;
+    @apply hover:scale-110 hover:-translate-x-1;
+    @apply underline underline-offset-8 hover:decoration-(--color-primary);
+  }
+}
+
+/* ============================================
+   Utility Classes for Swiss Grid Layout
+   ============================================
+   A simple grid utility to help maintain the strict, modular
+   layouts characteristic of Swiss design.
+*/
+@layer utilities {
+  .grid-swiss {
+    @apply grid gap-4;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
