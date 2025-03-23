@@ -8,13 +8,14 @@
    Swiss red for strong accents, and black/grey for text and borders.
 */
 :root {
-  --color-bg: #FFFFFF; /* Crisp white background */
-  --color-text: #333333; /* Dark gray for clear, legible text */
-  --color-primary: #FF0000; /* Bold Swiss red for accents */
+  --color-bg: #e0e0e0; /* Crisp white background */
+  --color-text: #252525; /* Dark gray for clear, legible text */
+  --color-primary: #db0000; /* Bold Swiss red for accents */
   --color-secondary: #000000; /* Deep black for contrasting elements */
   --color-border: #DDDDDD; /* Light border for subtle separation */
   --font-sans: 'Inter', sans-serif; /* Primary font for body */
   --font-mono: 'JetBrains Mono', monospace; /* Monospace font for code */
+  --font-serif: 'EB Garamond', serif; /* Serif font for headings */
 }
 
 /* ============================================

@@ -3,15 +3,21 @@
     <h1 class="text-8xl md:text-9xl">about</h1>
   </div>
   <div class="grid md:grid-cols-2 gap-4">
-    <app-window title="introduction">
-      Hi, I’m <span class="font-bold">Ansh Dawda</span>, a Master’s student in <span class="font-semibold">Data Science and Artificial
-          Intelligence</span> at <a href="https://www.uni-saarland.de" target="_blank"
-                                    class="underline underline-offset-4">Universität des Saarlandes</a>, Germany.
-      My journey is a mix of technology, creativity, and curiosity, driven by a passion for <span class="font-semibold">Machine Learning</span>,
-      <span class="font-semibold">Natural Language Processing</span>, and <span
-      class="font-semibold">Web Development</span>.
+
+    <!-- Introduction -->
+    <app-window title="introduction" class="col-span-2 md:col-span-1">
+      Hi, I’m <span class="font-bold">Ansh Dawda</span>, a Master’s student in <span class="font-semibold">Data Science
+        and Artificial
+        Intelligence</span> at <a href="https://www.uni-saarland.de" target="_blank"
+        class="underline underline-offset-4">Universität des Saarlandes</a>, Germany.
+      My journey is a mix of technology, creativity, and curiosity, driven by a passion for <span
+        class="font-semibold">Machine Learning</span>,
+      <span class="font-semibold">Natural Language Processing</span>, and <span class="font-semibold">Web
+        Development</span>.
     </app-window>
-    <app-window title="education">
+
+    <!-- Education -->
+    <app-window title="education" class="col-span-2 md:col-span-1">
       <ul class="list-disc pl-4">
         <li>
           <span class="font-bold">Master of Science in Data Science and Artificial Intelligence</span>
@@ -25,38 +31,59 @@
         </li>
       </ul>
     </app-window>
+
+    <!-- Work Experience -->
     <app-window title="work experience" class="col-span-2">
       <ul class="list-disc pl-4">
         <li>
-          <span class="font-semibold">KPMG India</span>: Developed web app features and APIs while working in advisory
-          services.
+          <span class="font-semibold"><span class="font-normal">Werkstudent &#64; InnoLab,</span> DHC Business Solutions
+          </span>
         </li>
         <li>
-          <span class="font-semibold">Samsung R&D</span>: Built a Personally Identifiable Information (PII) detection
-          framework using Python and NLP tools.
+          <span class="font-semibold"><span class="font-normal">Research Assistant &#64; Smart Serivce
+              Engineering Group,</span> DFKI</span>
         </li>
         <li>
-          <span class="font-semibold">Google Developer Student Club</span>: Organized workshops and events as a core
-          team member.
+          <span class="font-semibold"><span class="font-normal">Intern &#64; Government & Public Services,</span> KPMG
+            India</span>
+        </li>
+        <li>
+          <span class="font-semibold"><span class="font-normal">Intern &#64;</span> Samsung R&D Institute, Bangalore,
+            India</span>
         </li>
       </ul>
     </app-window>
-    <app-window title="projects" class="col-span-2">
+
+    <!-- Projects -->
+    <!-- <app-window title="projects" class="col-span-2">
       <ul class="list-disc pl-4">
         <li>
-          <span class="font-semibold">Predicting Healthcare Utilization:</span> Applied regression models to predict
-          medical expenditure.
+          <a class="underline underline-offset-2" routerLink="/projects">Data Selection Strategies and Fine-Tuning for
+            Chemical Language
+            Models</a>
         </li>
         <li>
-          <span class="font-semibold">VoxArt:</span> Built an Android app for voice-to-image synthesis using sentiment
-          analysis.
+          <a class="underline underline-offset-2" routerLink="/projects">Fact Checking Q&A Chatbot</a>
+        </li>
+        <li>
+          <a class="underline underline-offset-2" routerLink="/projects">LLM Fine-Tuning for Program Repair ang Hint
+            Generation</a>
+        </li>
+        <li>
+          <a class="underline underline-offset-2" routerLink="/projects">Predicting Healthcare Utilization</a>
+        </li>
+        <li>
+          <a class="underline underline-offset-2" routerLink="/projects">Voice-to-Image Generation with Sentiment
+            Analysis</a>
         </li>
       </ul>
-    </app-window>
+    </app-window> -->
+
+    <!-- Achievements -->
     <app-window title="achievements" class="col-span-2">
       <ul class="list-disc pl-4">
         <li><span class="italic border-e-2 pe-2">2024</span> Silver Medal for securing the 2nd rank in academics at
-          Amity University. 🥈
+          Amity University.
         </li>
         <li><span class="italic border-e-2 pe-2">2024</span> Shri Baljit Shastri Award for exemplary human and
           traditional values.
@@ -66,15 +93,23 @@
         </li>
       </ul>
     </app-window>
-    <app-window title="languages">
+
+    <!-- Languages -->
+    <app-window title="languages" class="col-span-2 md:col-span-1">
       <ul class="list-disc pl-4">
         <li>English: Fluent (C1)</li>
-        <li>German: Beginner (A2) (<span class="italic">currently learning</span>)</li>
+        <li>German: Beginner (A2)</li>
         <li>Hindi: Native Speaker</li>
       </ul>
     </app-window>
-    <app-window title="??">
+
+    <!-- ?? -->
+    <app-window title="??" class="col-span-2 md:col-span-1">
       Outside of tech, I enjoy hiking, watching history and art documentaries, and reading.
+      <br>
+      <a href="https://www.playbalatro.com/"
+        class="underline-offset-4 hover:text-(--color-primary) hover:text-8xl hover:font-bold transform duration-1000 ease-in-out">Balatro
+        <span class="no-underline">🃏</span></a> has become a recent favorite.
     </app-window>
   </div>
 </div>

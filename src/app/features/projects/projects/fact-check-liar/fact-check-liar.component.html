@@ -1,0 +1,110 @@
+<app-project-template projectTitle="A Fact Checking Bot" projectLink="https://github.com/unshDee/FactCheckLIAR"
+    note="embedded demo at the end" demo="Streamlit" demoLink="https://unshdee-factcheckliar-app-2y5wr1.streamlit.app"
+    [technologies]="['LIAR Dataset','FAISS', 'BM25', 'Transformers', 'Streamlit']">
+
+    <div description>
+        With the LIAR dataset, categorizing natural language queries based on their <span
+            class="italic">truthfulness</span>.
+    </div>
+
+    <div content>
+        <div class="grid grid-cols-4 gap-4">
+            <div class="font-serif text-xl text-justify col-span-4 lg:col-span-3">
+                <span class="text-4xl">M</span>isinformation detection is a challenging task because claims often lack
+                exact matches in labeled
+                datasets.
+                A robust system needs to retrieve <span class="italic">relevant</span> and <span
+                    class="italic">semantically
+                    similar</span> statements while ensuring accurate classification. To achieve this goal, a
+                combination of spare and dense retrieval techniques is used. Additionally, fine-tuning a BERT-based
+                classifier improved contextual understanding over simpler ML models.
+            </div>
+            <div class="col-span-4 lg:col-span-1">
+                <br>
+                <app-window title="LIAR">
+                    <ul class="list-disc pl-4">
+                        <li>12.8k manually labelled statements</li>
+                        <li class="font-bold">6 classes</li>
+                    </ul>
+                </app-window>
+            </div>
+        </div>
+
+        <h2 class="text-3xl my-4 mt-10">The Labels</h2>
+        <div class="grid grid-cols-6 grid-rows-2 gap-1">
+            <app-window title="pants-fire" [initialMinimized]=true class="col-span-3 lg:col-span-2">
+                completely false, no factual basis
+            </app-window>
+            <app-window title="false" [initialMinimized]=true class="col-span-3 lg:col-span-2">
+                factually incorrect, not outrageous
+            </app-window>
+            <app-window title="barely-true" [initialMinimized]=true class="col-span-3 lg:col-span-2">
+                some truth, but misleading
+            </app-window>
+            <app-window title="half-true" [initialMinimized]=true class="col-span-3 lg:col-span-2">
+                partially correct
+            </app-window>
+            <app-window title="mostly-true" [initialMinimized]=true class="col-span-3 lg:col-span-2">
+                mostly correct, minor inaccuracies
+            </app-window>
+            <app-window title="true" [initialMinimized]=true class="col-span-3 lg:col-span-2">
+                completely true
+            </app-window>
+        </div>
+
+        <div class="font-serif text-xl my-4 mt-10">
+            The system consists of two components, one for <span class="italic">retrieval</span> and the other for <span
+                class="italic">classification</span>.
+        </div>
+        <h2 class="text-3xl my-4 mt-8">The Retrieval Component</h2>
+        <div class="font-serif text-xl text-justify">
+
+            Retrieving relevant information is crucial for fact-checking, especially as claims usually do not have
+            one-to-one matches in the dataset. To improve retrieval effectiveness, a hybrid approach combining both
+            sparse and dense retrieval is used. This is achieved by calculating a weighted sum of the respective scores.
+
+            <div class="grid grid-cols-2 gap-4 my-4">
+                <div class="col-span-2 lg:col-span-1">
+                    <h3 class="font-sans text-2xl mb-4">
+                        Sparse Retrieval
+                    </h3>
+                    BM25 ranks documents based on TF-IDF (Term Frequency-Inverse Document Frequency) scores, making it
+                    effective for keyword-based searching. The top-<span class="italic">k</span> documents are selected
+                    based on their BM25 scores.
+                </div>
+                <div class="col-span-2 lg:col-span-1">
+                    <h3 class="font-sans text-2xl mb-4">
+                        Dense Retrieval
+                    </h3>
+                    Sparse retrieval fails to capture semantic similarity, which is problematic for fact-checking. To
+                    address this, I used FAISS (Facebook AI Similarity Search) with sentence transformers, using
+                    'all-MiniLM-L6-v2' for encoding. The claims are first converted to dense vector representations, and
+                    the closest dense vectors from the dataset are retrieved.
+                </div>
+            </div>
+
+            The final ranking is determined by combining scores from both methods with weighted sum to maximize recall and precision.
+        </div>
+
+        <h3 class="font-sans text-3xl my-4 mt-10">The Classification Component</h3>
+        <div class="font-serif text-xl text-justify">
+            Transformer-based models, particularly BERT, are superior for fact-checking due to their ability to capture nuanced relationships in text. I fine-tuned the model on the LIAR dataset to optimize it for six-class veracity predictions.
+        </div>
+        <div>
+            <h2 class="text-3xl my-4 mt-10">Demo</h2>
+            <div class="font-serif text-xl text-justify mb-4">
+                Check it out! Here's a few of examples:
+                <ul class="list-disc pl-4">
+                    <li>Is it true that Barack Obama was born in Kenya?</li>
+                    <li>Is it true that climate change is a hoax?</li>
+                    <li>Is it true that increasing the minimum wage will lead to massive job losses?</li>
+                </ul>
+            </div>
+            
+            <iframe 
+            src="https://unshdee-factcheckliar-app-2y5wr1.streamlit.app?embed=true" 
+            class="w-full h-[calc(100vh-10rem)] border-2 rounded-2xl"
+            ></iframe>
+        </div>
+    </div>
+</app-project-template>

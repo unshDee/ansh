@@ -1,7 +1,40 @@
 <div class="min-h-[calc(100vh-10rem)] flex flex-col justify-center">
   <div class="mb-4">
     <h1 class="text-8xl md:text-9xl">projects</h1>
-    <br>
-    will be adding this soon...
+  </div>
+
+  <div class="grid gap-4">
+    <app-window title="This Year">
+      <ul class="list-disc pl-4">
+        <li>
+          <a class="underline underline-offset-2" routerLink="data-selection-peft">Data Selection Strategies and
+            Fine-Tuning for
+            Chemical Language
+            Models</a>
+        </li>
+        <li>
+          <a class="underline underline-offset-2" routerLink="fact-check-liar">Fact Checking Q&A Chatbot</a>
+        </li>
+        <li>
+          <a class="underline underline-offset-2" routerLink="program-repair-hint">LLM Fine-Tuning for Program Repair ang
+            Hint
+            Generation</a>
+        </li>
+      </ul>
+    </app-window>
+
+    <app-window title="Older">
+      <ul class="list-disc pl-4">
+        <li>
+          <a class="underline underline-offset-2" routerLink="healthcare-utilization">Predicting Healthcare
+            Utilization</a>
+        </li>
+        <li>
+          <a class="underline underline-offset-2" routerLink="voxart">Voice-to-Image Generation with Sentiment
+            Analysis</a>
+        </li>
+      </ul>
+    </app-window>
+    <!-- <router-outlet/> -->
   </div>
 </div>
