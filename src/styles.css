@@ -13,7 +13,8 @@
   --color-primary: #db0000; /* Bold Swiss red for accents */
   --color-secondary: #000000; /* Deep black for contrasting elements */
   --color-border: #dddddd; /* Light border for subtle separation */
-  --font-sans: "Helvetica Neue", Helvetica, "Inter", sans-serif; /* Primary font for body */
+  --font-sans:
+    "Helvetica Neue", Helvetica, "Inter", sans-serif; /* Primary font for body */
   --font-mono: "JetBrains Mono", monospace; /* Monospace font for code */
   --font-serif: "EB Garamond", serif; /* Serif font for headings */
 }
