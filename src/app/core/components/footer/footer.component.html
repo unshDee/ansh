@@ -1,30 +1,69 @@
 <!-- app-footer.component.html -->
 <div class="group">
-  <div class="flex -mt-6 group-hover:animate-bounce group-hover:px-8 transform duration-500 ease-in-out">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-         class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"/>
+  <div
+    class="flex -mt-6 group-hover:animate-bounce group-hover:px-8 transform duration-500 ease-in-out"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"
+      />
     </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-         class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"/>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"
+      />
     </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-         class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"/>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"
+      />
     </svg>
   </div>
   <div class="border-t bottom-0">
     <div class="flex justify-between items-start">
-      <a class="p-0 m-0 px-2 border-0 border-t-0 font-bold text-(--color-bg) bg-(--color-text) group-hover:px-8 transform duration-500 ease-in-out"
-         href="https://drive.google.com/drive/folders/1L_vdbj_VAxHeUS9elJBKDoc489Sgm6iI?usp=sharing"
-         type="application/pdf" target="_blank">my
-        resume</a>
+      @if (isCurrentRoute("/resume")) {
+        <a
+          class="p-0 m-0 px-2 border-0 border-t-0 font-bold text-(--color-bg) bg-(--color-text) group-hover:px-8 transform duration-300 ease-in-out"
+          href="https://drive.google.com/file/d/1txmklPhAH6ylXCJMCRkWP-sLqB40SXr0/view?usp=drive_link"
+          type="application/pdf"
+          target="_blank"
+          >download</a
+        >
+      } @else {
+        <a
+          class="p-0 m-0 px-2 border-0 border-t-0 font-bold text-(--color-bg) bg-(--color-text) group-hover:px-8 transform duration-300 ease-in-out"
+          routerLink="/resume"
+          >my resume</a
+        >
+      }
       <app-theme-toggle></app-theme-toggle>
     </div>
   </div>
 </div>
-

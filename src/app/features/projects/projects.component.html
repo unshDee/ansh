@@ -3,44 +3,67 @@
     <h1 class="text-8xl md:text-9xl">projects</h1>
   </div>
 
-  <br>
-  <br>
+  <br />
+  <br />
 
-  <div class="italic text-(--color-primary)">Please note that most pages are still empty (<a routerLink="fact-check-liar" class="underline underline-offset-2">Fact Checking Q&A Chatbot</a> is almost done), I'm in the process of creating them, but it takes time. I'm working on it! Thanks for understanding!</div>
+  <div class="italic text-(--color-primary) text-justify">
+    Please note that most pages are still empty (<a
+      routerLink="data-selection-peft"
+      class="underline underline-offset-2"
+      >Data Selection Strategies...</a
+    >
+    and
+    <a routerLink="fact-check-liar" class="underline underline-offset-2"
+      >Fact Checking...</a
+    >
+    have some content but I'm looking into different options for
+    visualizing results instead of adding images), I'm in the process of
+    creating them, but it takes time. I'm working on it! Thanks for
+    understanding!
+  </div>
 
-  <br>
-  <br>
+  <br />
+  <br />
 
   <div class="grid gap-4">
-    <app-window title="This Year">
+    <app-window windowTitle="This Year">
       <ul class="list-disc pl-4">
         <li>
-          <a class="underline underline-offset-2" routerLink="data-selection-peft">Data Selection Strategies and
-            Fine-Tuning for
-            Chemical Language
-            Models</a>
+          <a
+            class="underline underline-offset-2"
+            routerLink="data-selection-peft"
+            >Data Selection Strategies and Fine-Tuning for Chemical Language
+            Models</a
+          >
         </li>
         <li>
-          <a class="underline underline-offset-2" routerLink="fact-check-liar">Fact Checking Q&A Chatbot</a>
+          <a class="underline underline-offset-2" routerLink="fact-check-liar"
+            >Fact Checking Q&A Chatbot</a
+          >
         </li>
         <li>
-          <a class="underline underline-offset-2" routerLink="program-repair-hint">LLM Fine-Tuning for Program Repair
-            ang
-            Hint
-            Generation</a>
+          <a
+            class="underline underline-offset-2"
+            routerLink="program-repair-hint"
+            >LLM Fine-Tuning for Program Repair ang Hint Generation</a
+          >
         </li>
       </ul>
     </app-window>
 
-    <app-window title="Older">
+    <app-window windowTitle="Older">
       <ul class="list-disc pl-4">
         <li>
-          <a class="underline underline-offset-2" routerLink="healthcare-utilization">Predicting Healthcare
-            Utilization</a>
+          <a
+            class="underline underline-offset-2"
+            routerLink="healthcare-utilization"
+            >Predicting Healthcare Utilization</a
+          >
         </li>
         <li>
-          <a class="underline underline-offset-2" routerLink="voxart">Voice-to-Image Generation with Sentiment
-            Analysis</a>
+          <a class="underline underline-offset-2" routerLink="voxart"
+            >Voice-to-Image Generation with Sentiment Analysis</a
+          >
         </li>
       </ul>
     </app-window>

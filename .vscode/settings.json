@@ -1,0 +1,17 @@
+{
+  "cSpell.words": [
+    "Colab",
+    "FAISS",
+    "isinformation",
+    "katex",
+    "PEFT",
+    "rdkit",
+    "Streamlit",
+    "voxart",
+    "xlink"
+  ],
+  "prettier.experimentalTernaries": true,
+  "prettier.bracketSameLine": true,
+  "prettier.tabWidth": 4,
+  "prettier.useTabs": false
+}

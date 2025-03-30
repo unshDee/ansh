@@ -1,48 +1,54 @@
 <div class="flex justify-between items-center">
-
   <!-- Logo -->
-  <a class="logo" routerLink="/home">
-    ansh dawda
-  </a>
+  <a class="logo" routerLink="/home"> ansh dawda </a>
 
   <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-
     <!-- About -->
-    @if (!isCurrentRoute('/about')) {
-    <a class="nav-link group" routerLink="/about"><span class="group-hover:text-(--color-primary)">↝</span> about</a>
-    }
-    @else {
-    <a class="nav-link group text-(--color-primary) italic" routerLink="/home"><span
-        class="group-hover:text-(--color-primary) not-italic">↜</span> home</a>
+    @if (!isCurrentRoute("/about")) {
+      <a class="nav-link group" routerLink="/about"
+        ><span class="group-hover:text-(--color-primary)">↝</span> about</a
+      >
+    } @else {
+      <a class="nav-link group text-(--color-primary) italic" routerLink="/home"
+        ><span class="group-hover:text-(--color-primary) not-italic">↜</span>
+        home</a
+      >
     }
 
     <!-- Blog -->
-    @if (!isCurrentRoute('/blog')) {
-    <a class="nav-link group" routerLink="/blog"><span class="group-hover:text-(--color-primary)">↝</span> blog</a>
-    }
-    @else {
-    <a class="nav-link group text-(--color-primary) italic" routerLink="/home"><span
-        class="group-hover:text-(--color-primary) not-italic">↜</span> home</a>
+    @if (!isCurrentRoute("/blog")) {
+      <a class="nav-link group" routerLink="/blog"
+        ><span class="group-hover:text-(--color-primary)">↝</span> blog</a
+      >
+    } @else {
+      <a class="nav-link group text-(--color-primary) italic" routerLink="/home"
+        ><span class="group-hover:text-(--color-primary) not-italic">↜</span>
+        home</a
+      >
     }
 
     <!-- Contact -->
-    @if (!isCurrentRoute('/contact')) {
-    <a class="nav-link group" routerLink="/contact"><span class="group-hover:text-(--color-primary)">↝</span>
-      contact</a>
-    }
-    @else {
-    <a class="nav-link group text-(--color-primary) italic" routerLink="/home"><span
-        class="group-hover:text-(--color-primary) not-italic">↜</span> home</a>
+    @if (!isCurrentRoute("/contact")) {
+      <a class="nav-link group" routerLink="/contact"
+        ><span class="group-hover:text-(--color-primary)">↝</span> contact</a
+      >
+    } @else {
+      <a class="nav-link group text-(--color-primary) italic" routerLink="/home"
+        ><span class="group-hover:text-(--color-primary) not-italic">↜</span>
+        home</a
+      >
     }
 
     <!-- Projects -->
-    @if (!isCurrentRoute('/projects')) {
-    <a class="nav-link group" routerLink="/projects"><span class="group-hover:text-(--color-primary)">↝</span>
-      projects</a>
-    }
-    @else {
-    <a class="nav-link group text-(--color-primary) italic" routerLink="/home"><span
-        class="group-hover:text-(--color-primary) not-italic">↜</span> home</a>
+    @if (!isCurrentRoute("/projects")) {
+      <a class="nav-link group" routerLink="/projects"
+        ><span class="group-hover:text-(--color-primary)">↝</span> projects</a
+      >
+    } @else {
+      <a class="nav-link group text-(--color-primary) italic" routerLink="/home"
+        ><span class="group-hover:text-(--color-primary) not-italic">↜</span>
+        home</a
+      >
     }
   </div>
 </div>

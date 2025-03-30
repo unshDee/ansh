@@ -5,13 +5,8 @@ import { ProjectTemplateComponent } from './shared/project-template/project-temp
 
 @Component({
   selector: 'app-projects',
-  imports: [
-    RouterLink,
-    WindowComponent,
-  ],
+  imports: [RouterLink, WindowComponent],
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+  styleUrl: './projects.component.css',
 })
-export class ProjectsComponent {
-
-}
+export class ProjectsComponent {}

@@ -1,61 +1,82 @@
 <div class="pb-4 min-h-[calc(100vh-10rem)] flex flex-col justify-center gap-4">
-    <div class="flex flex-col items-end">
-        <a class="text-l m-0 p-1 px-4 font-bold text-(--color-bg) bg-(--color-text) hover:px-8 transform duration-500 ease-in-out group"
-            routerLink="/projects">
-            <span class="text-(--color-primary) group-hover:text-(--color-bg)">↜</span>
-            go back to projects
-        </a>
-        <hr class="w-full border-t border-(--color-text)">
-        @if (note) {
-        <p class="text-lg px-1 text-(--color-text) font-serif italic self-start">note: {{note}}</p>
-        }
-    </div>
+  <div class="flex flex-col items-end">
+    <a
+      class="m-0 p-1 px-4 font-bold text-(--color-bg) bg-(--color-text) hover:px-8 transform duration-500 ease-in-out group"
+      routerLink="/projects"
+    >
+      <span
+        class="text-(--color-primary) group-hover:text-(--color-bg) transform duration-500 ease-in-out"
+        >↜</span
+      >
+      go back to projects
+    </a>
+    <hr class="w-full border-t border-(--color-text)" />
+    @if (note) {
+      <p class="text-lg px-1 text-(--color-text) font-serif italic self-start">
+        {{ note }}
+      </p>
+    }
+  </div>
 
-    <div class="fade-in-title">
-        <h1 class="text-6xl md:text-8xl mb-4 font-serif font-normal">{{projectTitle}}</h1>
+  <div class="fade-in-title">
+    <h1 class="text-6xl md:text-8xl mb-4 font-serif font-normal">
+      {{ projectTitle }}
+    </h1>
 
-        <div class="grid grid-cols-2 gap-2 md:gap-x-4">
-            <div class="md:row-span-2 col-span-2 md:col-span-1">
-                <p class="text-2xl md:text-4xl font-serif">
-                    <ng-content select="[description]"></ng-content>
-                </p>
-            </div>
-            @if (demoLink || projectLink) {
-            <div>
-                <app-window title="links" [initialMinimized]=false>
-                    <ul class="list-disc pl-4">
-                        @if (projectLink) {
-                        <li><a href="{{projectLink}}" target="_blank" class="underline  underline-offset-4">Code</a>
-                        </li>
-                        }
-                        @if (demoLink) {
-                        <li><a href="{{demoLink}}" target="_blank" class="underline underline-offset-4">{{demo}}</a>
-                        </li>
-                        }
-                    </ul>
-                </app-window>
-            </div>
-            }
-            @if (technologies.length > 0) {
-            <div>
-                <app-window title="built with" [initialMinimized]=true>
-                    <ul class="list-disc pl-4">
-                        @for (tech of technologies; track tech) {
-                        <li>{{tech}}</li>
-                        }
-                    </ul>
-                </app-window>
-            </div>
-            }
+    <div class="grid grid-cols-2 gap-2 md:gap-x-4">
+      <div class="md:row-span-2 col-span-2 md:col-span-1">
+        <p class="text-2xl md:text-4xl font-serif">
+          <ng-content select="[description]"></ng-content>
+        </p>
+      </div>
+      @if (demoLink || projectLink) {
+        <div>
+          <app-window windowTitle="links" [initialMinimized]="false">
+            <ul class="list-disc pl-4">
+              @if (projectLink) {
+                <li>
+                  <a
+                    href="{{ projectLink }}"
+                    target="_blank"
+                    class="underline underline-offset-4"
+                    >Code</a
+                  >
+                </li>
+              }
+              @if (demoLink) {
+                <li>
+                  <a
+                    href="{{ demoLink }}"
+                    target="_blank"
+                    class="underline underline-offset-4"
+                    >{{ demo }}</a
+                  >
+                </li>
+              }
+            </ul>
+          </app-window>
         </div>
-    </div>
-
-    <!-- <p>project-template works!</p> -->
-    <div class="mt-8 grid grid-cols-8 fade-in">
-        <div class="md:col-span-1 l:col-span-2"></div>
-        <div class="col-span-8 md:col-span-6 l:col-span-4">
-            <ng-content select="[content]"></ng-content>
+      }
+      @if (technologies.length > 0) {
+        <div>
+          <app-window windowTitle="built with" [initialMinimized]="true">
+            <ul class="list-disc pl-4">
+              @for (tech of technologies; track tech) {
+                <li>{{ tech }}</li>
+              }
+            </ul>
+          </app-window>
         </div>
-        <div class="md:col-span-1 l:col-span-2"></div>
+      }
     </div>
+  </div>
+
+  <!-- <p>project-template works!</p> -->
+  <div class="mt-8 grid grid-cols-8 fade-in">
+    <div class="md:col-span-1 l:col-span-2"></div>
+    <div class="col-span-8 md:col-span-6 l:col-span-4">
+      <ng-content select="[content]"></ng-content>
+    </div>
+    <div class="md:col-span-1 l:col-span-2"></div>
+  </div>
 </div>

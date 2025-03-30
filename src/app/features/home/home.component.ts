@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import {WindowComponent} from '../../shared/components/window/window.component';
+import { WindowComponent } from '../../shared/components/window/window.component';
 
 @Component({
   selector: 'app-home',
-  imports: [
-    WindowComponent
-  ],
+  imports: [WindowComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

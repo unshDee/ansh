@@ -8,9 +8,8 @@ describe('FactCheckLiarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FactCheckLiarComponent]
-    })
-    .compileComponents();
+      imports: [FactCheckLiarComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FactCheckLiarComponent);
     component = fixture.componentInstance;

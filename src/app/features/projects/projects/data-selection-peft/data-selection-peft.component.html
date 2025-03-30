@@ -1,11 +1,257 @@
-<app-project-template projectTitle="Data Selection and PEFT">
+<app-project-template
+  projectTitle="Data Selection and PEFT"
+  note="Course Project - Neural Networks: Theory & Implementation"
+  demo="Google Colab"
+  demoLink="https://colab.research.google.com/"
+  [technologies]="[
+    'MoleculeNet Lipophilicity',
+    'MolFormer',
+    'PyTorch',
+    'RDKit',
+    'DeepChem',
+    'Transformers',
+  ]"
+>
+  <div description>
+    Selecting <span class="italic">Influential</span> Data for different
+    Parameter-Efficient Fine-Tuning Techniques
+  </div>
 
-    <div description>
-        Selecting Influential Data for BitFit, LoRA, and (IA)<sup>3</sup>
+  <div content>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="font-serif text-xl text-justify col-span-4 lg:col-span-3">
+        <span class="text-4xl">T</span>his course project for "Neural Networks:
+        Theory and Implementation" addresses different data selection strategies
+        for Parameter-Efficient Fine-Tuning (PEFT) in molecular property
+        prediction. By combining the best data selection method to select points
+        from an external dataset with BitFit, LoRA, and (IA)<sup>3</sup>
+        techniques, the project fine-tunes MolFormer on the
+        <a
+          href="https://moleculenet.org/datasets-1"
+          target="_blank"
+          class="underline underline-offset-4 decoration-1"
+          >MoleculeNet Lipophilicity dataset</a
+        >
+        using criteria based on gradient norms, embedding distances, and
+        uncertainty estimates. Results demonstrate reduced computational
+        requirements while maintaining comparable predictive performance to full
+        dataset fine-tuning, enabling more resource-conscious adaptation of
+        pre-trained models to specific chemical prediction tasks.
+      </div>
+      <div class="col-span-4 lg:col-span-1">
+        <h2 class="text-3xl my-4 lg:my-0 lg:text-lg lg:font-light">Datasets</h2>
+        <div class="grid grid-cols-2 gap-2">
+          <app-window
+            windowTitle="Lipophilicity"
+            class="col-span-1 lg:col-span-2"
+          >
+            <ul class="list-disc pl-4">
+              <li>4200 data points</li>
+              <li class="font-bold">2444 unique scaffolds</li>
+            </ul>
+          </app-window>
+          <app-window windowTitle="External" class="col-span-1 lg:col-span-2">
+            <ul class="list-disc pl-4">
+              <li>300 data points</li>
+            </ul>
+          </app-window>
+        </div>
+      </div>
     </div>
 
-    <div content>
-        In the process of creating this page... give me some time
+    <h2 class="text-3xl my-4 mt-8">
+      <a href="https://arxiv.org/abs/1703.00564" target="_blank" class="group"
+        >MoleculeNet Benchmark<sup
+          class="font-extralight transform duration-300 ease-in-out group-hover:text-(--color-primary) group-hover:translate-3"
+          >↗</sup
+        ></a
+      >
+    </h2>
+    <div class="font-serif text-justify">
+      <div class="text-xl">
+        <a
+          href="https://moleculenet.org/datasets-1"
+          target="_blank"
+          class="underline underline-offset-4 decoration-1"
+          >MoleculeNet</a
+        >
+        contains various datasets for molecular property prediction tasks. The
+        datasets are used to benchmark machine learning models for drug
+        discovery and molecular property prediction. The datasets are curated
+        from various sources and are used to evaluate the performance of models
+        on different molecular property prediction tasks
+      </div>
+      <div class="font-serif text-xl">
+        <h3 class="font-sans text-2xl my-4">Lipophilicity Dataset</h3>
+        The <span class="italic">Lipophilicity dataset</span> contains
+        experimental lipophilicity values for 4200 molecules represented as
+        SMILES strings.
+      </div>
+
+      <div class="grid grid-cols-2 gap-y-4 gap-x-8 mt-4">
+        <div class="col-span-2 lg:col-span-1">
+          <h3 class="font-sans text-2xl mb-4">SMILES</h3>
+          <div class="text-xl">
+            Simplified Molecular Input Line Entry System (SMILES) is a line
+            notation for representing molecules and reactions. It encodes
+            molecular structures as line notations using ASCII strings, which
+            can be used to generate molecular graphs. These notations follow a
+            <a
+              href="https://en.wikipedia.org/wiki/Simplified_Molecular_Input_Line_Entry_System"
+              class="underline underline-offset-4 decoration-1"
+              >certain set of rules</a
+            >
+            which can be parsed to generate molecular structures.
+          </div>
+        </div>
+        <div class="font-sans col-span-2 lg:col-span-1">
+          <app-window windowTitle="Phenol is Oc1ccccc1">
+            <div class="flex flex-col items-center">
+              <div [innerHTML]="phenolSvg | safeHTML"></div>
+              <div
+                [innerHTML]="
+                  '\\text{Phenol (C}_6 \\text{H}_5 \\text{OH)}' | safeLatex
+                "
+              ></div>
+            </div>
+          </app-window>
+        </div>
+        <div class="font-sans col-span-2 lg:col-span-1">
+          <app-window windowTitle="Toluene is Cc1ccccc1">
+            <div class="flex flex-col items-center">
+              <div [innerHTML]="tolueneSvg | safeHTML"></div>
+              <div
+                [innerHTML]="
+                  '\\text{Toluene (C}_6 \\text{H}_5 \\text{CH}_3 \\text{)}'
+                    | safeLatex
+                "
+              ></div>
+            </div>
+          </app-window>
+        </div>
+        <div class="col-span-2 lg:col-span-1">
+          <h3 class="font-sans text-2xl mb-4">Lipophilicity Values</h3>
+          <div class="text-xl">
+            Lipophilicity is a measure of the ability of a chemical compound to
+            dissolve in fats, oils, and lipids. It is a key property in drug
+            discovery and design, influencing the absorption, distribution,
+            metabolism, and excretion of drugs. The dataset contains
+            experimental lipophilicity values for the corresponding SMILES
+            strings.
+          </div>
+        </div>
+      </div>
     </div>
 
+    <div class="grid grid-cols-2 gap-4 gap-x-8 mt-8">
+      <div class="col-span-2 lg:col-span-1 font-serif text-xl text-justify">
+        <h3 class="font-sans text-3xl mb-4">What are Scaffolds?</h3>
+        <span class="italic">Scaffolds</span> are the core structures of
+        molecules that are common across different molecules. They are used to
+        represent the core structure of a molecule and are used to group
+        molecules based on their structural similarity. Scaffolds are used in
+        cheminformatics to analyze and compare molecular structures.
+        <div class="mt-2">
+          For examples, the compounds - <span class="italic">benzene</span>,
+          <span class="italic">toluene</span>, and
+          <span class="italic">phenol</span> have the same scaffold -
+          <span class="italic">benzene</span>.
+        </div>
+      </div>
+      <div class="col-span-2 lg:col-span-1">
+        <app-window windowTitle="Scaffold">
+          <div class="flex flex-col items-center">
+            <div [innerHTML]="benzeneSvg | safeHTML"></div>
+            <div
+              [innerHTML]="
+                '\\text{Benzene (C}_6 \\text{H}_6 \\text{)}' | safeLatex
+              "
+            ></div>
+          </div>
+        </app-window>
+      </div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Data Splitting</h2>
+    <div class="text-justify">
+      <div class="font-serif text-xl mb-4">
+        For datasets containing molecular structures, it is essential to split
+        the such that it generalizes well to novel molecules. The dataset splits
+        might contain overlapping scaffolds, which can lead to data leakage and
+        overfitting.
+        <br />
+        <div class="mt-2">
+          Different data splitting strategies were tested and the best
+          performing one was selected to be used for the PEFT experiments. The
+          main criteria for selecting the splitting strategy was to ensure there
+          were no overlapping scaffolds between the sets. The following splits
+          from DeepChem were tested:
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="grid grid-cols-6 grid-rows-2 gap-1">
+          <app-window
+            windowTitle="random"
+            [initialMinimized]="true"
+            class="col-span-3 lg:col-span-2"
+          >
+            Random data splits
+          </app-window>
+          <app-window
+            windowTitle="scaffold"
+            [initialMinimized]="true"
+            class="col-span-3 lg:col-span-2"
+          >
+            Scaffold-based data splits (Bemis-Murcko scaffold)
+          </app-window>
+          <app-window
+            windowTitle="weight"
+            [initialMinimized]="true"
+            class="col-span-3 lg:col-span-2"
+          >
+            Molecular weight splits
+          </app-window>
+          <app-window
+            windowTitle="maxmin"
+            [initialMinimized]="true"
+            class="col-span-3 lg:col-span-2"
+          >
+            Diversity splits based on MaxMin diversity algorithm
+          </app-window>
+          <app-window
+            windowTitle="butina"
+            [initialMinimized]="true"
+            class="col-span-3 lg:col-span-2"
+          >
+            Data splits based on Butina clustering of a bulk Tanimoto
+            fingerprint matrix
+          </app-window>
+          <app-window
+            windowTitle="fingerprint"
+            [initialMinimized]="true"
+            class="col-span-3 lg:col-span-2"
+          >
+            Splits based on Tanimoto similar between ECFP4 fingerprints
+          </app-window>
+        </div>
+      </div>
+
+      <h3 class="text-2xl my-4 mt-8">Observations</h3>
+      <div class="font-serif text-xl"></div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">MolFormer</h2>
+    <div class="font-serif text-xl text-justify">
+      <a
+        href="https://research.ibm.com/blog/molecular-transformer-discovery"
+        class="underline underline-offset-4 decoration-1 italic"
+        >MolFormer</a
+      >
+      is a transformer-based model for molecular property prediction. It is
+      pre-trained on a large corpus of molecular data and fine-tuned on specific
+      datasets to predict various molecular properties. MolFormer uses SMILES
+      strings as input and predicts the corresponding property values.
+    </div>
+  </div>
 </app-project-template>

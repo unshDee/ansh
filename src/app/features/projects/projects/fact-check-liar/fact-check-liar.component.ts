@@ -6,8 +6,6 @@ import { WindowComponent } from '../../../../shared/components/window/window.com
   selector: 'app-fact-check-liar',
   imports: [ProjectTemplateComponent, WindowComponent],
   templateUrl: './fact-check-liar.component.html',
-  styleUrl: './fact-check-liar.component.css'
+  styleUrl: './fact-check-liar.component.css',
 })
-export class FactCheckLiarComponent {
-
-}
+export class FactCheckLiarComponent {}

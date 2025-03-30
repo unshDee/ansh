@@ -8,9 +8,8 @@ describe('DataSelectionPeftComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataSelectionPeftComponent]
-    })
-    .compileComponents();
+      imports: [DataSelectionPeftComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DataSelectionPeftComponent);
     component = fixture.componentInstance;

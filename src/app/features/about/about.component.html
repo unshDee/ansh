@@ -1,115 +1,63 @@
-<div class="pb-4 min-h-[calc(100vh-10rem)] flex flex-col justify-center">
-  <div class="mb-4">
-    <h1 class="text-8xl md:text-9xl">about</h1>
-  </div>
+<div
+  class="pb-4 min-h-[calc(100vh-10rem)] flex flex-col justify-center text-justify"
+>
   <div class="grid md:grid-cols-2 gap-4">
-
-    <!-- Introduction -->
-    <app-window title="introduction" class="col-span-2 md:col-span-1">
-      Hi, I’m <span class="font-bold">Ansh Dawda</span>, a Master’s student in <span class="font-semibold">Data Science
-        and Artificial
-        Intelligence</span> at <a href="https://www.uni-saarland.de" target="_blank"
-        class="underline underline-offset-4">Universität des Saarlandes</a>, Germany.
-      My journey is a mix of technology, creativity, and curiosity, driven by a passion for <span
-        class="font-semibold">Machine Learning</span>,
-      <span class="font-semibold">Natural Language Processing</span>, and <span class="font-semibold">Web
-        Development</span>.
-    </app-window>
-
-    <!-- Education -->
-    <app-window title="education" class="col-span-2 md:col-span-1">
-      <ul class="list-disc pl-4">
-        <li>
-          <span class="font-bold">Master of Science in Data Science and Artificial Intelligence</span>
-          <br>
-          Universität des Saarlandes, Germany (2023 - Present)
-        </li>
-        <li>
-          <span class="font-bold">Bachelor of Technology in Computer Science and Engineering</span>
-          <br>
-          Amity University, Mumbai (2019 - 2023)
-        </li>
-      </ul>
-    </app-window>
-
-    <!-- Work Experience -->
-    <app-window title="work experience" class="col-span-2">
-      <ul class="list-disc pl-4">
-        <!-- <li>
-          <span class="font-semibold"><span class="font-normal">Werkstudent &#64; InnoLab,</span> DHC Business Solutions
-          </span>
-        </li>
-        <li>
-          <span class="font-semibold"><span class="font-normal">Research Assistant &#64; Smart Serivce
-              Engineering Group,</span> DFKI</span>
-        </li> -->
-        <li>
-          <span class="font-semibold"><span class="font-normal">Intern &#64; Government & Public Services,</span> KPMG
-            India</span>
-        </li>
-        <li>
-          <span class="font-semibold"><span class="font-normal">Intern &#64;</span> Samsung R&D Institute, Bangalore,
-            India</span>
-        </li>
-      </ul>
-    </app-window>
-
-    <!-- Projects -->
-    <!-- <app-window title="projects" class="col-span-2">
-      <ul class="list-disc pl-4">
-        <li>
-          <a class="underline underline-offset-2" routerLink="/projects">Data Selection Strategies and Fine-Tuning for
-            Chemical Language
-            Models</a>
-        </li>
-        <li>
-          <a class="underline underline-offset-2" routerLink="/projects">Fact Checking Q&A Chatbot</a>
-        </li>
-        <li>
-          <a class="underline underline-offset-2" routerLink="/projects">LLM Fine-Tuning for Program Repair ang Hint
-            Generation</a>
-        </li>
-        <li>
-          <a class="underline underline-offset-2" routerLink="/projects">Predicting Healthcare Utilization</a>
-        </li>
-        <li>
-          <a class="underline underline-offset-2" routerLink="/projects">Voice-to-Image Generation with Sentiment
-            Analysis</a>
-        </li>
-      </ul>
-    </app-window> -->
-
-    <!-- Achievements -->
-    <app-window title="achievements" class="col-span-2">
-      <ul class="list-disc pl-4">
-        <li><span class="italic border-e-2 pe-2">2024</span> Silver Medal for securing the 2nd rank in academics at
-          Amity University.
-        </li>
-        <li><span class="italic border-e-2 pe-2">2024</span> Shri Baljit Shastri Award for exemplary human and
-          traditional values.
-        </li>
-        <li><span class="italic border-e-2 pe-2">2022</span> Certificate of Excellence for outstanding performance at
-          Samsung R&D Institute.
-        </li>
-      </ul>
-    </app-window>
-
-    <!-- Languages -->
-    <app-window title="languages" class="col-span-2 md:col-span-1">
-      <ul class="list-disc pl-4">
-        <li>English: Fluent (C1)</li>
-        <li>German: Beginner (A2)</li>
-        <li>Hindi: Native Speaker</li>
-      </ul>
-    </app-window>
-
-    <!-- ?? -->
-    <app-window title="??" class="col-span-2 md:col-span-1">
-      Outside of tech, I enjoy hiking, watching history and art documentaries, and reading.
-      <br>
-      <a href="https://www.playbalatro.com/"
-        class="underline-offset-4 hover:text-(--color-primary) hover:text-8xl hover:font-bold transform duration-1000 ease-in-out">Balatro
-        <span class="no-underline">🃏</span></a> has become a recent favorite.
-    </app-window>
+    <div class="self-center">
+      <div class="mb-4">
+        <h1 class="text-8xl md:text-9xl">about</h1>
+      </div>
+      <p>
+        I'm Ansh, a tech enthusiast who enjoys solving problems, building
+        things, and exploring creative ideas. When I'm not working on something
+        technical, I like to spend time drawing, playing games (like
+        <a
+          href="https://www.playbalatro.com/"
+          class="underline underline-offset-4 decoration-1"
+          >Balatro</a
+        >) or watching interesting videos (like this
+        <a
+          href="https://youtu.be/RTB5XhjbgZA?si=NP-QHpe_TlUje9c6"
+          class="underline underline-offset-4 decoration-1"
+          >one</a
+        >).
+        <br />
+        <br />
+        <span class="italic"
+          >More about me? Check the footer for my resume.</span
+        >
+      </p>
+      <p class="invisible md:visible">
+        This site is a space where I share my work and ideas. Feel free to look
+        around, and if you want to connect,
+        <a
+          routerLink="/contact"
+          class="underline underline-offset-4 decoration-1"
+          >reach out</a
+        >.
+      </p>
+    </div>
+    <div
+      class="group transform-3d perspective-midrange perspective-origin-center flex flex-col items-center -translate-y-1/6 md:translate-y-0 hover:scale-110 transition-transform duration-500 ease-in-out"
+    >
+      <img
+        [src]="'/img/self.jpg'"
+        width="250"
+        height="350"
+        class="rotate-z-5 -rotate-y-2 -rotate-x-5 translate-y-1/8 -translate-z-8 shadow-sm rounded-md group-hover:shadow-xl hover:translate-z-20 transition-all duration-500 ease-in-out"
+      />
+      <img
+        [src]="'/img/doodles.jpg'"
+        width="250"
+        height="350"
+        class="-rotate-z-5 rotate-y-10 rotate-x-40 -translate-y-0 translate-z-18 shadow-sm rounded-md group-hover:shadow-xl hover:translate-z-30 transition-all duration-500 ease-in-out"
+      />
+    </div>
   </div>
+  <p class="md:invisible">
+    This site is a space where I share my work and ideas. Feel free to look
+    around, and if you want to connect,
+    <a routerLink="/contact" class="underline underline-offset-4 decoration-1"
+      >reach out</a
+    >.
+  </p>
 </div>

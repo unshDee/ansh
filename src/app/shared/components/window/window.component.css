@@ -1,0 +1,4 @@
+.no-theme-transition * {
+    transition: none !important;
+    animation: none !important;
+  }

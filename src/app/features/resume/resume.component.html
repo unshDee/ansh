@@ -1,0 +1,253 @@
+<div class="pb-4 min-h-[calc(100vh-10rem)] flex flex-col justify-between">
+  <div class="self-end -mt-6 md:-mt-2">
+    <a class="nav-link group text-(--color-primary) italic" routerLink="/home"
+      ><span class="group-hover:text-(--color-primary) not-italic">↜</span>
+      home</a
+    >
+    &nbsp;
+  </div>
+  <div>
+    <div class="mb-4">
+      <h1 class="text-8xl md:text-9xl">resume</h1>
+    </div>
+    <div class="flex">
+      <a
+        class="m-0 px-2 font-bold text-(--color-bg) bg-(--color-text) duration-500 ease-in-out group hover:shadow-lg shadow-red-500/50"
+        href="https://drive.google.com/file/d/1txmklPhAH6ylXCJMCRkWP-sLqB40SXr0/view?usp=sharing"
+        target="_blank"
+        type="application/pdf"
+      >
+        <span
+          class="text-(--color-primary) group-hover:text-(--color-bg) transform duration-500 ease-in-out"
+          >↜</span
+        >
+        view pdf
+      </a>
+    </div>
+    <br />
+    <div class="grid gap-4">
+      <!-- Education -->
+      <h2 class="text-3xl">education</h2>
+      <div class="grid grid-cols-2 gap-2">
+        <app-window
+          windowTitle="universität des saarlandes"
+          class="col-span-2 md:col-span-1"
+        >
+          <span class="font-bold mb-1">
+            Master of Science: Data Science and Artificial Intelligence
+          </span>
+          <div class="flex justify-between">
+            <span>Saarbrücken, Germany</span>
+            <span class="italic"
+              >2023 - <span class="text-(--color-primary)">Present</span></span
+            >
+          </div>
+          <hr class="my-1" />
+          <ul class="list-disc pl-4 text-justify">
+            <li>
+              <span class="font-bold">Natural Language Processing</span>,
+              <span class="font-bold">Neural Networks</span>,
+              <span class="font-bold">Generative AI</span>,
+              <span class="font-bold">Machine Translation</span>
+            </li>
+            <li>
+              Seminar: <span class="font-bold">Machine Learning for NLP</span> -
+              challenges and applications of large language models
+            </li>
+            <li>
+              Seminar:
+              <span class="font-bold"
+                >Compositionality in Language & Computation</span
+              >
+              - whether neural networks learn true compositional representations
+              or merely memorize surface level patterns
+            </li>
+          </ul>
+        </app-window>
+        <app-window
+          windowTitle="amity university"
+          class="col-span-2 md:col-span-1"
+        >
+          <span class="font-bold mb-1">
+            Bachelor of Technology: Computer Science and Engineering
+          </span>
+          <div class="flex justify-between">
+            <span>Mumbai, India</span>
+            <span class="italic">2019 - 2023</span>
+          </div>
+          <hr class="my-1" />
+          <ul class="list-disc pl-4">
+            <li>
+              Data Structures & Algorithms, Object Oriented Programming,
+              Database Management Systems
+            </li>
+            <li>Minor in Animation</li>
+            <li>Bachelor Thesis: Voice-to-Image Synthesis with NLP and Sentiment Analysis</li>
+          </ul>
+        </app-window>
+      </div>
+
+      <!-- Work Experience -->
+      <h2 class="text-3xl">work experience</h2>
+      <div class="grid grid-cols-2 gap-2">
+        <app-window
+          windowTitle="DHC Business Solutions"
+          class="col-span-2 md:col-span-1"
+        >
+          <div class="flex justify-between">
+            <span>InnoLab</span>
+            <span class="italic"
+              >04.25 - <span class="text-(--color-primary)">Present</span></span
+            >
+          </div>
+          <p class="font-bold mb-0">Werkstudent</p>
+        </app-window>
+        <app-window windowTitle="DFKI" class="col-span-2 md:col-span-1">
+          <div class="flex justify-between">
+            <span>Smart Service Engineering</span>
+            <span class="italic"
+              >04.25 - <span class="text-(--color-primary)">Present</span></span
+            >
+          </div>
+          <p class="font-bold mb-0">Research Assistant</p>
+        </app-window>
+        <app-window windowTitle="KPMG India" class="col-span-2 md:col-span-1">
+          <div class="flex justify-between">
+            <span>Government & Public Services</span>
+            <span class="italic">03.23 - 09.23</span>
+          </div>
+          <p class="font-bold mb-1">Intern</p>
+          <hr />
+          <p class="font-bold mt-1 mb-0">Full Stack Development</p>
+          <ul class="list-disc pl-4">
+            <li>
+              Developed and integrated web application features using Spring
+              Boot and deployed RESTful APIs for seamless communication.
+            </li>
+          </ul>
+        </app-window>
+        <app-window
+          windowTitle="Samsung Research & Development Institute"
+          class="col-span-2 md:col-span-1"
+        >
+          <div class="flex justify-between">
+            <span>PRISM Program</span>
+            <span class="italic">09.21 - 02.22</span>
+          </div>
+          <p class="font-bold mb-1">Intern</p>
+          <hr />
+          <p class="font-bold mt-1 mb-0">Machine Learning & Data Privacy</p>
+          <ul class="list-disc pl-4">
+            <li>
+              Created a Personally Identifiable Information detection framework
+              with 18 custom recognizers using NLTK and SpaCy.
+            </li>
+          </ul>
+        </app-window>
+      </div>
+
+      <!-- Skills -->
+      <h2 class="text-3xl">skills</h2>
+      <app-window windowTitle="">
+        <ul class="list-disc pl-4">
+          <li>
+            <span class="font-bold">Programming</span>: Python, Java, SQL, R,
+            JavaScript
+          </li>
+          <li>
+            <span class="font-bold">Machine Learning</span>: PyTorch,
+            Scikit-Learn, Pandas, NumPy, Matplotlib, HuggingFace Transformers 🤗
+          </li>
+          <li>
+            <span class="font-bold">Web & Mobile Development</span>: React,
+            Angular, Django, FastAPI, Flutter, Streamlit
+          </li>
+          <li>
+            <span class="font-bold">Backend & Databases</span>: Spring Boot,
+            MySQL, PostgreSQL
+          </li>
+          <li><span class="font-bold">Tools</span>: Postman, Git, Docker</li>
+        </ul>
+      </app-window>
+
+      <!-- Projects & Language Proficiency -->
+      <div class="grid grid-cols-3 gap-2 gap-y-4 md:gap-y-2">
+        <div class="col-span-3 md:col-span-2">
+          <!-- Projects -->
+          <h2 class="text-3xl mb-4">projects</h2>
+          <app-window windowTitle="click titles for details">
+            <ul class="list-disc pl-4">
+              <li>
+                <a
+                  routerLink="/projects/data-selection-peft"
+                  class="underline underline-offset-4 decoration-1"
+                  >Data Selection Strategies and Fine-Tuning Molecular
+                  Transformer Models</a
+                >
+              </li>
+              <li>
+                <a
+                  routerLink="/projects/fact-check-liar"
+                  class="underline underline-offset-4 decoration-1"
+                  >Fact Checking Q&A Chatbot</a
+                >
+              </li>
+              <li>
+                <a
+                  routerLink="/projects/program-repair-hint"
+                  class="underline underline-offset-4 decoration-1"
+                >
+                  LLM Fine-Tuning for Program Repair and Hint Generation
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="/projects/healthcare-utilization"
+                  class="underline underline-offset-4 decoration-1"
+                  >Predicting Healthcare Utilization</a
+                >
+              </li>
+              <li>
+                <a
+                  routerLink="/projects/voxart"
+                  class="underline underline-offset-4 decoration-1"
+                  >Voice-to-Image Generation with Sentiment Analysis</a
+                >
+              </li>
+            </ul>
+          </app-window>
+        </div>
+        <div class="col-span-3 md:col-span-1">
+          <!-- Language Proficiency -->
+          <h2 class="text-3xl mb-4">languages</h2>
+          <app-window windowTitle="proficiency">
+            <ul class="list-disc pl-4">
+              <li>English: C1 (Fluent)</li>
+              <li>German: A1 (Learning)</li>
+              <li>Hindi: Native</li>
+            </ul>
+          </app-window>
+        </div>
+      </div>
+
+      <h2 class="text-3xl">achievements</h2>
+      <app-window windowTitle="achievements">
+        <ul class="list-disc pl-4">
+          <li>
+            <span class="italic border-e-2 pe-2">2024</span> Silver Medal for
+            securing the 2nd rank in academics at Amity University.
+          </li>
+          <li>
+            <span class="italic border-e-2 pe-2">2024</span> Shri Baljit Shastri
+            Award for exemplary human and traditional values.
+          </li>
+          <li>
+            <span class="italic border-e-2 pe-2">2022</span>
+            Certificate of Excellence for outstanding performance at Samsung R&D
+            Institute.
+          </li>
+        </ul>
+      </app-window>
+    </div>
+  </div>
+</div>

@@ -8,9 +8,8 @@ describe('ProgramRepairHintComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgramRepairHintComponent]
-    })
-    .compileComponents();
+      imports: [ProgramRepairHintComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProgramRepairHintComponent);
     component = fixture.componentInstance;

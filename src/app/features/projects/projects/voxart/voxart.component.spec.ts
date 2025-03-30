@@ -8,9 +8,8 @@ describe('VoxartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VoxartComponent]
-    })
-    .compileComponents();
+      imports: [VoxartComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VoxartComponent);
     component = fixture.componentInstance;

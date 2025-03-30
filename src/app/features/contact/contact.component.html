@@ -3,7 +3,7 @@
     <h1 class="text-8xl md:text-9xl">contact</h1>
   </div>
   <div class="grid md:grid-cols-2 gap-4">
-    <app-window title="email" class="font-mono">
+    <app-window windowTitle="email" class="font-mono">
       <a
         href="mailto:ansh.dawda@gmail.com"
         class="hover:underline underline-offset-4 decoration-(--color-primary)"
@@ -11,41 +11,43 @@
         ansh[dot]dawda[at]gmail[dot]com
       </a>
     </app-window>
-    <app-window title="linkedin" class="font-mono">
-      <a href="https://www.linkedin.com/in/anshdawda/"
-         target="_blank"
-         class="hover:underline underline-offset-4 decoration-(--color-primary)"
+    <app-window windowTitle="linkedin" class="font-mono">
+      <a
+        href="https://www.linkedin.com/in/anshdawda/"
+        target="_blank"
+        class="hover:underline underline-offset-4 decoration-(--color-primary)"
       >
         linkedin.com/in/anshdawda
       </a>
     </app-window>
-    <app-window title="github" class="font-mono">
-      <a href="https://www.github.com/unshDee"
-         target="_blank"
-         class="hover:underline underline-offset-4 decoration-(--color-primary)"
+    <app-window windowTitle="github" class="font-mono">
+      <a
+        href="https://www.github.com/unshDee"
+        target="_blank"
+        class="hover:underline underline-offset-4 decoration-(--color-primary)"
       >
         unshDee
       </a>
     </app-window>
-    <app-window title="something else?" class="font-mono">
+    <app-window windowTitle="something else?" class="font-mono">
       <form action="https://formspree.io/f/mvgowjgy" method="post">
         <!-- Name Field -->
         <div>
           <label for="name" class="block text-sm font-bold mb-1">Name</label>
-          <input type="text" id="name" name="name" required/>
+          <input type="text" id="name" name="name" required />
         </div>
         <!-- Email Field -->
         <div>
           <label for="email" class="block text-sm font-bold mb-1">Email</label>
-          <input type="email" id="email" name="email" required/>
+          <input type="email" id="email" name="email" required />
         </div>
         <div>
-          <label for="message" class="block text-sm font-bold mb-1">Message</label>
+          <label for="message" class="block text-sm font-bold mb-1"
+            >Message</label
+          >
           <textarea id="message" name="message" required rows="3"></textarea>
         </div>
-        <button type="submit" class="btn w-full">
-          Send Message
-        </button>
+        <button type="submit" class="btn w-full">Send Message</button>
       </form>
     </app-window>
   </div>

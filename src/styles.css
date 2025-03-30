@@ -12,10 +12,10 @@
   --color-text: #252525; /* Dark gray for clear, legible text */
   --color-primary: #db0000; /* Bold Swiss red for accents */
   --color-secondary: #000000; /* Deep black for contrasting elements */
-  --color-border: #DDDDDD; /* Light border for subtle separation */
-  --font-sans: 'Inter', sans-serif; /* Primary font for body */
-  --font-mono: 'JetBrains Mono', monospace; /* Monospace font for code */
-  --font-serif: 'EB Garamond', serif; /* Serif font for headings */
+  --color-border: #dddddd; /* Light border for subtle separation */
+  --font-sans: "Helvetica Neue", Helvetica, "Inter", sans-serif; /* Primary font for body */
+  --font-mono: "JetBrains Mono", monospace; /* Monospace font for code */
+  --font-serif: "EB Garamond", serif; /* Serif font for headings */
 }
 
 /* ============================================
@@ -26,14 +26,15 @@
    accent colors and overall minimal aesthetic.
 */
 .dark {
-  --color-bg: #1C1C1C;
-  --color-text: #E0E0E0;
-  --color-primary: #FF4D4D; /* A slightly adjusted red for better contrast */
-  --color-secondary: #FFFFFF;
+  --color-bg: #1c1c1c;
+  --color-text: #e0e0e0;
+  --color-primary: #fe6060; /* A slightly adjusted red for better contrast */
+  --color-secondary: #ffffff;
   --color-border: #444444;
 }
 
-html, body {
+html,
+body {
   @apply transition-colors duration-300 ease-in-out;
 }
 
@@ -60,37 +61,37 @@ html, body {
 
   @keyframes noiseAnim {
     0% {
-      transform: translate(0, 0)
+      transform: translate(0, 0);
     }
     10% {
-      transform: translate(-5%, -5%)
+      transform: translate(-5%, -5%);
     }
     20% {
-      transform: translate(-10%, 5%)
+      transform: translate(-10%, 5%);
     }
     30% {
-      transform: translate(5%, -10%)
+      transform: translate(5%, -10%);
     }
     40% {
-      transform: translate(-5%, 15%)
+      transform: translate(-5%, 15%);
     }
     50% {
-      transform: translate(-10%, 5%)
+      transform: translate(-10%, 5%);
     }
     60% {
-      transform: translate(15%, 0)
+      transform: translate(15%, 0);
     }
     70% {
-      transform: translate(0, 10%)
+      transform: translate(0, 10%);
     }
     80% {
-      transform: translate(-15%, 0)
+      transform: translate(-15%, 0);
     }
     90% {
-      transform: translate(10%, 5%)
+      transform: translate(10%, 5%);
     }
     100% {
-      transform: translate(5%, 0)
+      transform: translate(5%, 0);
     }
   }
 }
@@ -106,17 +107,23 @@ html, body {
   /* Global Body Style */
   body {
     @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans antialiased;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   /* Headings with Swiss typographic influence */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold tracking-tight;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
-  code, pre {
-    font-family: 'JetBrains Mono', monospace;
+  code,
+  pre {
+    font-family: "JetBrains Mono", monospace;
   }
 
   /* Paragraph styling for clean layout and generous spacing */
@@ -124,7 +131,8 @@ html, body {
     @apply mb-4 leading-relaxed;
   }
 
-  input, textarea {
+  input,
+  textarea {
     @apply p-2 mb-4 w-full border-1 border-[var(--color-text)];
   }
 }
