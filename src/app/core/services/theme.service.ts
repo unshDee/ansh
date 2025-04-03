@@ -4,12 +4,16 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
-  theme: WritableSignal<string> = signal<string>(localStorage.getItem('theme') || window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') // Signal to hold the theme
+  theme: WritableSignal<string> = signal<string>(
+    localStorage.getItem('theme') ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light',
+  ); // Signal to hold the theme
   themeChanging: WritableSignal<boolean> = signal(false);
 
   constructor() {
     this.initializeTheme();
-    
   }
 
   initializeTheme() {
