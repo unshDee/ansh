@@ -1,15 +1,430 @@
 <app-project-template
-  projectTitle="Repair and Hint Generation"
+  projectTitle="Program Repair and Hint Generation"
   note="Course Project - Generative AI"
+  demo="Related Research Paper"
+  demoLink="https://openreview.net/pdf?id=JRMSC08gSF"
   [technologies]="[
     'OpenAI API',
-    'Prompt Engineering',
     'GPT 4o Mini',
     'Phi 3 Mini',
-    'Fine-Tuning',
+    'LoRA Fine-tuning',
+    'Chain-of-Thought Prompting',
   ]"
 >
-  <div description>LLMs for Program Repair and Hint Generation</div>
+  <div description>
+    Exploring generative AI models for automated
+    <span class="italic">program repair</span> and
+    <span class="italic">hint generation</span> for Python programming education
+    using the INTROPYNUS dataset.
+  </div>
+  <div content>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="font-serif text-xl text-justify col-span-4">
+        <span class="text-4xl">P</span>rogramming education faces significant
+        challenges in providing timely, personalized feedback to students. This
+        project investigates how generative AI can automate
+        <span class="italic">program repair</span> and generate
+        <span class="italic">educational hints</span> for Python programming
+        exercises using the INTROPYNUS dataset (5 tasks, with 5 buggy programs
+        each). Through careful prompt engineering, LoRA fine-tuning, and
+        multi-task learning approaches, we explore how to balance correctness,
+        pedagogical value, and computational efficiency in automated programming
+        education tools.
+      </div>
+    </div>
 
-  <div content>placeholder text for now...</div>
+    <h2 class="text-3xl my-4 mt-10">Problem Statement</h2>
+    <div class="font-serif text-xl text-justify mb-6">
+      The core objective is to develop AI systems that can automatically repair
+      buggy Python programs and generate educational hints that guide students
+      toward correct solutions without directly revealing the answer. This
+      addresses the scalability challenges in programming education where
+      personalized feedback is crucial but resource-intensive.
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Program Repair"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        Given a buggy Python program, automatically generate a corrected version
+        that passes all test cases while maintaining pedagogical intent.
+      </app-window>
+      <app-window
+        windowTitle="Hint Generation"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        Provide natural language feedback that guides students toward solutions
+        without directly revealing the fix or complete answer.
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Dataset & Evaluation</h2>
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <div class="col-span-2 lg:col-span-1">
+        <h3 class="font-sans text-2xl mb-4">INTROPYNUS Dataset</h3>
+        <div class="font-serif text-xl text-justify mb-4">
+          A comprehensive dataset of Python programming exercises with buggy
+          implementations, correct solutions, and test cases designed for
+          introductory programming education. Here we consider 5 tasks, each
+          containing 5 buggy programs.
+        </div>
+      </div>
+      <div class="col-span-2 lg:col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Evaluation Metrics</h3>
+        <div class="font-serif text-xl text-justify mb-4">
+          Program repair effectiveness measured by
+          <span class="italic">RPass</span> (Repair Pass rate) and hint quality
+          assessed through pedagogical criteria.
+        </div>
+        <div class="grid grid-cols-1 gap-2">
+          <app-window windowTitle="RPass Rate">
+            Percentage of buggy programs successfully repaired to pass all test
+            cases
+          </app-window>
+          <app-window windowTitle="Hint Quality">
+            Correctness, informativeness, concealment, and comprehensibility of
+            generated hints
+          </app-window>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Baseline Performance</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Initial evaluation of foundation models on program repair tasks reveals
+      significant performance differences between large and small models, with
+      GPT-4o-mini achieving excellent results while Phi-3-mini requires
+      substantial improvement.
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="GPT-4o-mini Baseline"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="text-center space-y-2">
+          <div class="text-4xl font-bold text-green-400">92%</div>
+          <div class="text-lg">RPass Rate</div>
+          <div class="text-sm text-gray-400">
+            Excellent performance on program repair tasks
+          </div>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Phi-3-mini Baseline"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="text-center space-y-2">
+          <div class="text-4xl font-bold text-(--color-primary)">36%</div>
+          <div class="text-lg">RPass Rate</div>
+          <div class="text-sm text-gray-400">
+            Requires fine-tuning for effective deployment
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Multi-Candidate Sampling</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Generating multiple repair candidates and selecting the best solution
+      significantly improves performance, especially for smaller models.
+      Analysis shows diminishing returns beyond 5-10 candidates.
+    </div>
+
+    <div class="grid grid-cols-4 gap-2 mb-8">
+      <app-window windowTitle="k=1" class="col-span-1">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-(--color-primary)">36%</div>
+          <div class="text-sm">Phi-3-mini</div>
+        </div>
+      </app-window>
+      <app-window windowTitle="k=5" class="col-span-1">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-orange-400">52%</div>
+          <div class="text-sm">+16%</div>
+        </div>
+      </app-window>
+      <app-window windowTitle="k=10" class="col-span-1">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-yellow-400">58%</div>
+          <div class="text-sm">+6%</div>
+        </div>
+      </app-window>
+      <app-window windowTitle="k=20" class="col-span-1">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-green-400">62%</div>
+          <div class="text-sm">+4%</div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">LoRA Fine-tuning Results</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Low-Rank Adaptation (LoRA) fine-tuning dramatically improves small model
+      performance. Different configurations of rank
+      <span [innerHTML]="'(r)' | safeLatex"></span> and scaling factor
+      <span [innerHTML]="'(\\alpha)' | safeLatex"></span> offer trade-offs
+      between performance and computational requirements.
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 mb-8">
+      <div class="col-span-3 lg:col-span-1">
+        <h3 class="font-sans text-xl mb-2">Low Rank</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
+          <app-window windowTitle="r=4, α=8">
+            <div class="flex justify-between">
+              <span>RPass:</span>
+              <span class="font-bold text-(--color-primary)">64%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Params:</span>
+              <span class="text-sm">7.4M</span>
+            </div>
+          </app-window>
+          <app-window windowTitle="Memory">
+            <div class="text-center">
+              <div class="text-lg font-bold">0.817 GB</div>
+              <div class="text-sm">Training Memory</div>
+            </div>
+          </app-window>
+        </div>
+      </div>
+
+      <div class="col-span-3 lg:col-span-1">
+        <h3 class="font-sans text-xl mb-2">Medium Rank</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
+          <app-window windowTitle="r=16, α=32">
+            <div class="flex justify-between">
+              <span>RPass:</span>
+              <span class="font-bold text-amber-400">80%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Params:</span>
+              <span class="text-sm">29.8M</span>
+            </div>
+          </app-window>
+          <app-window windowTitle="Memory">
+            <div class="text-center">
+              <div class="text-lg font-bold">1.022 GB</div>
+              <div class="text-sm">Training Memory</div>
+            </div>
+          </app-window>
+        </div>
+      </div>
+
+      <div class="col-span-3 lg:col-span-1">
+        <h3 class="font-sans text-xl mb-2">High Rank</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
+          <app-window windowTitle="r=64, α=128">
+            <div class="flex justify-between">
+              <span>RPass:</span>
+              <span class="font-bold text-green-400">88%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Params:</span>
+              <span class="text-sm">119.5M</span>
+            </div>
+          </app-window>
+          <app-window windowTitle="Memory">
+            <div class="text-center">
+              <div class="text-lg font-bold">1.625 GB</div>
+              <div class="text-sm">Training Memory</div>
+            </div>
+          </app-window>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Multi-task Learning</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Training models simultaneously on program repair and hint generation tasks
+      leverages shared representations and improves overall performance on both
+      objectives compared to single-task approaches.
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Single-task Performance"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <span>Program Repair:</span>
+            <span class="font-bold">80%</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Hint Quality:</span>
+            <span class="font-bold">0.72</span>
+          </div>
+          <div class="text-sm text-gray-400">
+            Models trained separately on each task
+          </div>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Multi-task Performance"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <span>Program Repair:</span>
+            <span class="font-bold text-green-400">84%</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Hint Quality:</span>
+            <span class="font-bold text-green-400">0.78</span>
+          </div>
+          <div class="text-sm text-gray-400">
+            Joint training improves both tasks
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Example Program Repair</h2>
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <div class="col-span-2">
+        <h3 class="font-sans text-xl mb-2">Buggy Implementation</h3>
+        <app-window windowTitle="student_solution.py">
+          <pre class="text-sm"><code>def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n)  # Missing decrement!</code></pre>
+        </app-window>
+        <div class="mt-2">
+          <app-window windowTitle="Error">
+            <span class="text-(--color-primary)">RecursionError:</span> maximum recursion
+            depth exceeded
+          </app-window>
+        </div>
+      </div>
+      <div class="col-span-2">
+        <h3 class="font-sans text-xl mb-2">AI-Generated Repair</h3>
+        <app-window windowTitle="repaired_solution.py">
+          <pre class="text-sm"><code>def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)  # Fixed: decrement n</code></pre>
+        </app-window>
+        <div class="mt-2">
+          <app-window windowTitle="Generated Hint">
+            "Think about what happens to the parameter in each recursive call.
+            What should change to eventually reach the base case?"
+          </app-window>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Theoretical Framework</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      The approach builds on pedagogical theories emphasizing guided discovery
+      and scaffolded learning. Mathematical formalization includes repair
+      accuracy as
+      <span class="text-sm"
+        [innerHTML]="'P(\\texttt{repair\\_correct | buggy\\_code, context})' | safeLatex"
+      ></span>
+      and hint quality as a multi-dimensional vector
+      <span class="text-sm"
+        [innerHTML]="
+          '\\vec{q} = (\\texttt{correctness, informativeness, concealment, comprehensibility})'
+            | safeLatex
+        "
+      ></span
+      >
+    </div>
+
+    <div class="grid grid-cols-1 gap-2 mb-8">
+      <app-window
+        windowTitle="Correctness"
+        [initialMinimized]="true"
+      >
+        <span
+          [innerHTML]="
+            'C = \\frac{|\\{h \\in H : semantically\\_correct(h)\\}|}{|H|}'
+              | safeLatex
+          "
+        ></span>
+      </app-window>
+      <app-window
+        windowTitle="Informativeness"
+        [initialMinimized]="true"
+      >
+        Measured by semantic richness and actionability of provided guidance
+      </app-window>
+      <app-window
+        windowTitle="Concealment"
+        [initialMinimized]="true"
+      >
+        <span
+          [innerHTML]="
+            '\\text{conceal}(h) = 1 - \\text{similarity}(h, solution)'
+              | safeLatex
+          "
+        ></span>
+      </app-window>
+      <app-window
+        windowTitle="Comprehensibility"
+        [initialMinimized]="true"
+      >
+        Readability and clarity for target student population
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Key Findings</h2>
+    <div class="font-serif text-xl text-justify mb-6">
+      The research demonstrates that LoRA fine-tuning is essential for small
+      models to achieve competitive program repair performance. The optimal
+      configuration
+      <span [innerHTML]="'(r=16, \\alpha=32)' | safeLatex"></span> balances
+      performance and computational efficiency. Multi-task learning provides
+      synergistic benefits, and careful prompt engineering with chain-of-thought
+      reasoning significantly enhances both repair accuracy and hint quality.
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 mb-8">
+      <app-window
+        windowTitle="LoRA Effectiveness"
+        [initialMinimized]="true"
+        class="col-span-3 lg:col-span-1"
+      >
+        Fine-tuning improves Phi-3-mini from 36% to 88% RPass rate, making small
+        models viable for educational deployment.
+      </app-window>
+      <app-window
+        windowTitle="Multi-task Benefits"
+        [initialMinimized]="true"
+        class="col-span-3 lg:col-span-1"
+      >
+        Joint training on repair and hint generation improves both tasks through
+        shared representation learning.
+      </app-window>
+      <app-window
+        windowTitle="Prompt Engineering"
+        [initialMinimized]="true"
+        class="col-span-3 lg:col-span-1"
+      >
+        Chain-of-thought prompting enhances reasoning quality and educational
+        value of generated content.
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-8">Limitations & Future Work</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+      <app-window windowTitle="Language Expansion" [initialMinimized]="false">
+        Extend beyond Python to Java, C++, and JavaScript for broader
+        educational impact
+      </app-window>
+      <app-window windowTitle="Personalization" [initialMinimized]="false">
+        Incorporate student learning patterns and preferences for adaptive hint
+        generation
+      </app-window>
+      <app-window windowTitle="Advanced Pedagogy" [initialMinimized]="false">
+        Develop sophisticated Socratic questioning and scaffolding techniques
+        for deeper learning
+      </app-window>
+    </div>
+  </div>
 </app-project-template>
