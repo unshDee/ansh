@@ -18,7 +18,7 @@ export class FactCheckLiarComponent implements OnInit {
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Fact Check LIAR Dataset',
       page_location: '/projects/fact-check-liar',
-      project_category: 'machine-learning'
+      project_category: 'machine-learning',
     });
   }
 }

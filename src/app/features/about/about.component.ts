@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
     // Track about page view
     this.analyticsService.trackEvent('page_view', {
       page_title: 'About',
-      page_location: '/about'
+      page_location: '/about',
     });
   }
 

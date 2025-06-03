@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
     // Track contact page view
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Contact',
-      page_location: '/contact'
+      page_location: '/contact',
     });
   }
 
@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
     this.analyticsService.trackEvent('contact_interaction', {
       event_category: 'engagement',
       event_label: method,
-      value: value
+      value: value,
     });
   }
 

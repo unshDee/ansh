@@ -13,9 +13,10 @@
       >Data Selection Strategies...</a
     >
     and
-    <a routerLink="fact-check-liar" 
-       class="underline underline-offset-2"
-       (click)="trackProjectClick('Fact Checking')"
+    <a
+      routerLink="fact-check-liar"
+      class="underline underline-offset-2"
+      (click)="trackProjectClick('Fact Checking')"
       >Fact Checking...</a
     >
     have some content but I'm looking into different options for visualizing
@@ -26,21 +27,27 @@
   <br />
   <br />
 
-  <div class="grid gap-4">    <app-window windowTitle="This Year">
+  <div class="grid gap-4">
+    <app-window windowTitle="This Year">
       <ul class="list-disc pl-4">
         <li>
           <a
             class="underline underline-offset-2"
             routerLink="data-selection-peft"
-            (click)="trackProjectClick('Data Selection Strategies and Fine-Tuning for Chemical Language Models')"
+            (click)="
+              trackProjectClick(
+                'Data Selection Strategies and Fine-Tuning for Chemical Language Models'
+              )
+            "
             >Data Selection Strategies and Fine-Tuning for Chemical Language
             Models</a
           >
         </li>
         <li>
-          <a class="underline underline-offset-2" 
-             routerLink="fact-check-liar"
-             (click)="trackProjectClick('Fact Checking QA Chatbot')"
+          <a
+            class="underline underline-offset-2"
+            routerLink="fact-check-liar"
+            (click)="trackProjectClick('Fact Checking QA Chatbot')"
             >Fact Checking Q&A Chatbot</a
           >
         </li>
@@ -48,12 +55,17 @@
           <a
             class="underline underline-offset-2"
             routerLink="program-repair-hint"
-            (click)="trackProjectClick('LLM Fine-Tuning for Program Repair and Hint Generation')"
+            (click)="
+              trackProjectClick(
+                'LLM Fine-Tuning for Program Repair and Hint Generation'
+              )
+            "
             >LLM Fine-Tuning for Program Repair ang Hint Generation</a
           >
         </li>
       </ul>
-    </app-window>    <app-window windowTitle="Older">
+    </app-window>
+    <app-window windowTitle="Older">
       <ul class="list-disc pl-4">
         <li>
           <a
@@ -64,9 +76,14 @@
           >
         </li>
         <li>
-          <a class="underline underline-offset-2" 
-             routerLink="voxart"
-             (click)="trackProjectClick('Voice-to-Image Generation with Sentiment Analysis')"
+          <a
+            class="underline underline-offset-2"
+            routerLink="voxart"
+            (click)="
+              trackProjectClick(
+                'Voice-to-Image Generation with Sentiment Analysis'
+              )
+            "
             >Voice-to-Image Generation with Sentiment Analysis</a
           >
         </li>
