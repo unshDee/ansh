@@ -13,6 +13,11 @@
   --color-primary: #db0000; /* Bold Swiss red for accents */
   --color-secondary: #000000; /* Deep black for contrasting elements */
   --color-border: #dddddd; /* Light border for subtle separation */
+  --color-green: #15803d;
+  --color-orange: #ea580c;
+  --color-amber: #d97706;
+  --color-yellow: #eab308; 
+
   --font-sans:
     "Helvetica Neue", Helvetica, "Inter", sans-serif; /* Primary font for body */
   --font-mono: "JetBrains Mono", monospace; /* Monospace font for code */
@@ -32,6 +37,12 @@
   --color-primary: #fe6060; /* A slightly adjusted red for better contrast */
   --color-secondary: #ffffff;
   --color-border: #444444;
+
+  --color-green: #4ade80;
+  --color-orange: #fb923c;
+  --color-amber: #fbbf24;
+  --color-yellow: #facc15;
+
 }
 
 html,

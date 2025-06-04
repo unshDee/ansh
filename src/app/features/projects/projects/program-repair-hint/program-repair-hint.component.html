@@ -91,7 +91,6 @@
         </div>
       </div>
     </div>
-
     <h2 class="text-3xl my-4 mt-8">Baseline Performance</h2>
     <div class="font-serif text-xl text-justify mb-4">
       Initial evaluation of foundation models on program repair tasks reveals
@@ -100,67 +99,57 @@
       substantial improvement.
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mb-8">
-      <app-window
-        windowTitle="GPT-4o-mini Baseline"
-        class="col-span-2 lg:col-span-1"
-      >
-        <div class="text-center space-y-2">
-          <div class="text-4xl font-bold text-green-400">92%</div>
-          <div class="text-lg">RPass Rate</div>
-          <div class="text-sm text-gray-400">
-            Excellent performance on program repair tasks
-          </div>
-        </div>
-      </app-window>
-      <app-window
-        windowTitle="Phi-3-mini Baseline"
-        class="col-span-2 lg:col-span-1"
-      >
-        <div class="text-center space-y-2">
-          <div class="text-4xl font-bold text-(--color-primary)">36%</div>
-          <div class="text-lg">RPass Rate</div>
-          <div class="text-sm text-gray-400">
-            Requires fine-tuning for effective deployment
-          </div>
+    <div class="grid grid-cols-1 gap-4 mb-8">
+      <app-window windowTitle="Baseline Model Comparison" class="col-span-1">
+        <div class="h-80">
+          <canvas #baselineChart></canvas>
         </div>
       </app-window>
     </div>
 
     <h2 class="text-3xl my-4 mt-8">Multi-Candidate Sampling</h2>
-    <div class="font-serif text-xl text-justify mb-4">
-      Generating multiple repair candidates and selecting the best solution
+
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-8">
+      <div class="grid grid-cols-2 gap-2">
+        <div class="col-span-2 font-serif text-xl text-justify">
+          Generating multiple repair candidates and selecting the best solution
       significantly improves performance, especially for smaller models.
       Analysis shows diminishing returns beyond 5-10 candidates.
+        </div>
+        <app-window windowTitle="k=1" class="col-span-1">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-(--color-primary)">36%</div>
+            <div class="text-sm text-zinc-500">Phi-3-mini</div>
+          </div>
+        </app-window>
+        <app-window windowTitle="k=5" class="col-span-1">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-(--color-orange)">52%</div>
+            <div class="text-sm text-zinc-500">+16%</div>
+          </div>
+        </app-window>
+        <app-window windowTitle="k=10" class="col-span-1">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-(--color-yellow)">58%</div>
+            <div class="text-sm text-zinc-500">+6%</div>
+          </div>
+        </app-window>
+        <app-window windowTitle="k=20" class="col-span-1">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-(--color-green)">62%</div>
+            <div class="text-sm text-zinc-500">+4%</div>
+          </div>
+        </app-window>
+      </div>
+      <app-window
+        windowTitle="Sampling Performance Analysis"
+        class="col-span-1"
+      >
+        <div class="h-80">
+          <canvas #samplingChart></canvas>
+        </div>
+      </app-window>
     </div>
-
-    <div class="grid grid-cols-4 gap-2 mb-8">
-      <app-window windowTitle="k=1" class="col-span-1">
-        <div class="text-center">
-          <div class="text-2xl font-bold text-(--color-primary)">36%</div>
-          <div class="text-sm">Phi-3-mini</div>
-        </div>
-      </app-window>
-      <app-window windowTitle="k=5" class="col-span-1">
-        <div class="text-center">
-          <div class="text-2xl font-bold text-orange-400">52%</div>
-          <div class="text-sm">+16%</div>
-        </div>
-      </app-window>
-      <app-window windowTitle="k=10" class="col-span-1">
-        <div class="text-center">
-          <div class="text-2xl font-bold text-yellow-400">58%</div>
-          <div class="text-sm">+6%</div>
-        </div>
-      </app-window>
-      <app-window windowTitle="k=20" class="col-span-1">
-        <div class="text-center">
-          <div class="text-2xl font-bold text-green-400">62%</div>
-          <div class="text-sm">+4%</div>
-        </div>
-      </app-window>
-    </div>
-
     <h2 class="text-3xl my-4 mt-8">LoRA Fine-tuning Results</h2>
     <div class="font-serif text-xl text-justify mb-4">
       Low-Rank Adaptation (LoRA) fine-tuning dramatically improves small model
@@ -170,72 +159,109 @@
       between performance and computational requirements.
     </div>
 
-    <div class="grid grid-cols-3 gap-4 mb-8">
-      <div class="col-span-3 lg:col-span-1">
-        <h3 class="font-sans text-xl mb-2">Low Rank</h3>
-        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
-          <app-window windowTitle="r=4, α=8">
-            <div class="flex justify-between">
-              <span>RPass:</span>
-              <span class="font-bold text-(--color-primary)">64%</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Params:</span>
-              <span class="text-sm">7.4M</span>
+    <div class="mb-4">
+      <button
+        (click)="toggleDetailedView()"
+        class="px-4 py-2 border-2 border-(--color-text) bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-300 ease-in-out font-sans"
+      >
+        {{ showDetailedView ? "Hide Data" : "Show Data" }}
+      </button>
+      <!-- Detailed Analysis Section -->
+      <div *ngIf="showDetailedView" class="my-8">
+        <h3 class="text-2xl font-sans mb-4">
+          Detailed Configuration Comparison
+        </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <app-window windowTitle="Low Rank (r=4, α=8)" class="col-span-1">
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="font-medium">RPass Rate:</span>
+                <span class="text-2xl font-bold text-(--color-primary)"
+                  >64%</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium">Parameters:</span>
+                <span class="text-lg font-semibold">7.4M</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium">Memory:</span>
+                <span class="text-lg font-semibold">0.817 GB</span>
+              </div>
+              <div class="mt-2">
+                <div class="text-sm text-zinc-500">
+                  <strong>Trade-off:</strong> Low resource usage but lower
+                  performance. Ideal for resource-constrained environments.
+                </div>
+              </div>
             </div>
           </app-window>
-          <app-window windowTitle="Memory">
-            <div class="text-center">
-              <div class="text-lg font-bold">0.817 GB</div>
-              <div class="text-sm">Training Memory</div>
-            </div>
-          </app-window>
-        </div>
-      </div>
 
-      <div class="col-span-3 lg:col-span-1">
-        <h3 class="font-sans text-xl mb-2">Medium Rank</h3>
-        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
-          <app-window windowTitle="r=16, α=32">
-            <div class="flex justify-between">
-              <span>RPass:</span>
-              <span class="font-bold text-amber-400">80%</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Params:</span>
-              <span class="text-sm">29.8M</span>
+          <app-window windowTitle="Medium Rank (r=16, α=32)" class="col-span-1">
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="font-medium">RPass Rate:</span>
+                <span class="text-2xl font-bold text-(--color-amber)">80%</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium">Parameters:</span>
+                <span class="text-lg font-semibold">29.8M</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium">Memory:</span>
+                <span class="text-lg font-semibold">1.022 GB</span>
+              </div>
+              <div class="mt-2">
+                <div class="text-sm text-zinc-500">
+                  <strong>Trade-off:</strong> Balanced performance and
+                  efficiency. Recommended for most applications.
+                </div>
+              </div>
             </div>
           </app-window>
-          <app-window windowTitle="Memory">
-            <div class="text-center">
-              <div class="text-lg font-bold">1.022 GB</div>
-              <div class="text-sm">Training Memory</div>
-            </div>
-          </app-window>
-        </div>
-      </div>
 
-      <div class="col-span-3 lg:col-span-1">
-        <h3 class="font-sans text-xl mb-2">High Rank</h3>
-        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
-          <app-window windowTitle="r=64, α=128">
-            <div class="flex justify-between">
-              <span>RPass:</span>
-              <span class="font-bold text-green-400">88%</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Params:</span>
-              <span class="text-sm">119.5M</span>
-            </div>
-          </app-window>
-          <app-window windowTitle="Memory">
-            <div class="text-center">
-              <div class="text-lg font-bold">1.625 GB</div>
-              <div class="text-sm">Training Memory</div>
+          <app-window windowTitle="High Rank (r=64, α=128)" class="col-span-1">
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="font-medium">RPass Rate:</span>
+                <span class="text-2xl font-bold text-(--color-green)">88%</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium">Parameters:</span>
+                <span class="text-lg font-semibold">119.5M</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium">Memory:</span>
+                <span class="text-lg font-semibold">1.625 GB</span>
+              </div>
+              <div class="mt-2">
+                <div class="text-sm text-zinc-500">
+                  <strong>Trade-off:</strong> Maximum performance with increased
+                  resource requirements. Best for production systems.
+                </div>
+              </div>
             </div>
           </app-window>
         </div>
       </div>
+    </div>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="LoRA Configuration: Performance Comparison"
+        class="col-span-1"
+      >
+        <div class="h-96">
+          <canvas #loraChart></canvas>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="LoRA Configuration: Resource Usage"
+        class="col-span-1"
+      >
+        <div class="h-96">
+          <canvas #loraResourceChart></canvas>
+        </div>
+      </app-window>
     </div>
 
     <h2 class="text-3xl my-4 mt-8">Multi-task Learning</h2>
@@ -259,7 +285,7 @@
             <span>Hint Quality:</span>
             <span class="font-bold">0.72</span>
           </div>
-          <div class="text-sm text-gray-400">
+          <div class="text-sm text-zinc-500">
             Models trained separately on each task
           </div>
         </div>
@@ -271,13 +297,13 @@
         <div class="space-y-2">
           <div class="flex justify-between">
             <span>Program Repair:</span>
-            <span class="font-bold text-green-400">84%</span>
+            <span class="font-bold text-(--color-green)">84%</span>
           </div>
           <div class="flex justify-between">
             <span>Hint Quality:</span>
-            <span class="font-bold text-green-400">0.78</span>
+            <span class="font-bold text-(--color-green)">0.78</span>
           </div>
-          <div class="text-sm text-gray-400">
+          <div class="text-sm text-zinc-500">
             Joint training improves both tasks
           </div>
         </div>
@@ -329,11 +355,10 @@
           'P(\\texttt{repair\\_correct | buggy\\_code, context})' | safeLatex
         "
       ></span>
-      and hint quality as a multi-dimensional vector
-      <span
+      and hint quality as a multi-dimensional vector      <span
         class="text-sm"
         [innerHTML]="
-          '\\vec{q} = (\\texttt{correctness, informativeness, concealment, comprehensibility})'
+          '\\vec{q} = \\begin{pmatrix} \\texttt{correctness} \\\\ \\texttt{informativeness} \\\\ \\texttt{concealment} \\\\ \\texttt{comprehensibility} \\end{pmatrix}'
             | safeLatex
         "
       ></span>
@@ -342,8 +367,9 @@
     <div class="grid grid-cols-1 gap-2 mb-8">
       <app-window windowTitle="Correctness" [initialMinimized]="true">
         <span
+          class="text-sm"
           [innerHTML]="
-            'C = \\frac{|\\{h \\in H : semantically\\_correct(h)\\}|}{|H|}'
+            'C = \\frac{|\\{h \\in H : \\texttt{semantically\\_correct}(h)\\}|}{|H|}'
               | safeLatex
           "
         ></span>

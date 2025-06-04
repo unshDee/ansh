@@ -1,0 +1,87 @@
+/* Chart container styling */
+canvas {
+  background-color: var(--color-bg);
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+canvas:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(37, 37, 37, 0.1);
+}
+
+/* Ensure charts are responsive */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+/* Custom styling for window components containing charts */
+app-window:has(canvas) {
+  transition: all 0.3s ease-in-out;
+}
+
+app-window:has(canvas):hover {
+  transform: translateY(-2px);
+}
+
+/* Toggle button styling */
+button {
+  font-family: var(--font-sans);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+/* Detailed view animations */
+.detailed-analysis {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced window styling for detailed views */
+.detailed-config-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.detailed-config-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(37, 37, 37, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+  
+  canvas:hover {
+    transform: scale(1.01);
+  }
+}
