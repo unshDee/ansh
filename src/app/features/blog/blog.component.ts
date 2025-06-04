@@ -15,7 +15,7 @@ export class BlogComponent implements OnInit {
     // Track blog page view
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Blog',
-      page_location: '/blog'
+      page_location: '/blog',
     });
   }
 
@@ -23,7 +23,7 @@ export class BlogComponent implements OnInit {
     this.analyticsService.trackEvent('blog_post_click', {
       event_category: 'engagement',
       event_label: postTitle,
-      value: postUrl || postTitle
+      value: postUrl || postTitle,
     });
   }
 
