@@ -2,7 +2,8 @@
   <div class="mb-4">
     <h1 class="text-8xl md:text-9xl">contact</h1>
   </div>
-  <div class="grid md:grid-cols-2 gap-4">    <app-window windowTitle="email" class="font-mono">
+  <div class="grid md:grid-cols-2 gap-4">
+    <app-window windowTitle="email" class="font-mono">
       <a
         href="mailto:ansh.dawda@gmail.com"
         class="hover:underline underline-offset-4 decoration-(--color-primary)"
@@ -16,7 +17,12 @@
         href="https://www.linkedin.com/in/anshdawda/"
         target="_blank"
         class="hover:underline underline-offset-4 decoration-(--color-primary)"
-        (click)="trackContactMethod('linkedin', 'https://www.linkedin.com/in/anshdawda/')"
+        (click)="
+          trackContactMethod(
+            'linkedin',
+            'https://www.linkedin.com/in/anshdawda/'
+          )
+        "
       >
         linkedin.com/in/anshdawda
       </a>
@@ -31,7 +37,12 @@
         unshDee
       </a>
     </app-window>
-    <app-window windowTitle="something else?" class="font-mono">      <form action="https://formspree.io/f/mvgowjgy" method="post" (submit)="trackFormSubmission()">
+    <app-window windowTitle="something else?" class="font-mono">
+      <form
+        action="https://formspree.io/f/mvgowjgy"
+        method="post"
+        (submit)="trackFormSubmission()"
+      >
         <!-- Name Field -->
         <div>
           <label for="name" class="block text-sm font-bold mb-1">Name</label>

@@ -15,7 +15,7 @@ export class AppComponent {
   title = 'self';
   constructor(
     private themeService: ThemeService,
-    private analyticsService: AnalyticsService
+    private analyticsService: AnalyticsService,
   ) {
     effect(() => {
       if (this.themeService.theme() === 'dark') {

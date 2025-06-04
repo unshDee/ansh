@@ -6,16 +6,16 @@ import { environment } from '../../../environments/environment';
 declare let gtag: Function;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnalyticsService {
   constructor(private router: Router) {
     // Track route changes
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.trackPageView(event.urlAfterRedirects);
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.trackPageView(event.urlAfterRedirects);
+      });
   }
   /**
    * Track page views
@@ -23,7 +23,7 @@ export class AnalyticsService {
   trackPageView(url: string) {
     if (typeof gtag !== 'undefined') {
       gtag('config', environment.googleAnalyticsId, {
-        page_path: url
+        page_path: url,
       });
     }
   }
@@ -44,7 +44,7 @@ export class AnalyticsService {
     this.trackEvent('click', {
       event_category: 'outbound',
       event_label: url,
-      value: linkText
+      value: linkText,
     });
   }
 
@@ -55,7 +55,7 @@ export class AnalyticsService {
     this.trackEvent('download', {
       event_category: 'engagement',
       event_label: fileName,
-      value: fileType
+      value: fileType,
     });
   }
 
@@ -65,7 +65,7 @@ export class AnalyticsService {
   trackProjectView(projectName: string) {
     this.trackEvent('view_project', {
       event_category: 'engagement',
-      event_label: projectName
+      event_label: projectName,
     });
   }
 
@@ -75,7 +75,7 @@ export class AnalyticsService {
   trackContactSubmission() {
     this.trackEvent('contact_form_submit', {
       event_category: 'engagement',
-      event_label: 'contact_form'
+      event_label: 'contact_form',
     });
   }
 }

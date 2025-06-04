@@ -17,7 +17,7 @@ export class ProjectsComponent implements OnInit {
     // Track projects page view
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Projects',
-      page_location: '/projects'
+      page_location: '/projects',
     });
   }
 

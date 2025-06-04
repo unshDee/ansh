@@ -16,7 +16,7 @@ export class ResumeComponent implements OnInit {
     // Track resume page view
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Resume',
-      page_location: '/resume'
+      page_location: '/resume',
     });
   }
 
@@ -27,7 +27,7 @@ export class ResumeComponent implements OnInit {
   trackResumeView() {
     this.analyticsService.trackEvent('resume_view', {
       event_category: 'engagement',
-      event_label: 'resume_viewed'
+      event_label: 'resume_viewed',
     });
   }
 }

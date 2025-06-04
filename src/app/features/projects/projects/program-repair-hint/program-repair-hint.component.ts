@@ -15,11 +15,13 @@ export class ProgramRepairHintComponent implements OnInit {
 
   ngOnInit() {
     // Track project page view
-    this.analyticsService.trackProjectView('Program Repair and Hint Generation');
+    this.analyticsService.trackProjectView(
+      'Program Repair and Hint Generation',
+    );
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Program Repair and Hint Generation',
       page_location: '/projects/program-repair-hint',
-      project_category: 'generative-ai'
+      project_category: 'generative-ai',
     });
   }
 
@@ -27,7 +29,7 @@ export class ProgramRepairHintComponent implements OnInit {
     this.analyticsService.trackEvent('demo_click', {
       event_category: 'engagement',
       event_label: 'program-repair-demo',
-      project_name: 'Program Repair and Hint Generation'
+      project_name: 'Program Repair and Hint Generation',
     });
   }
 

@@ -17,7 +17,7 @@ export class VoxartComponent implements OnInit {
     this.analyticsService.trackEvent('page_view', {
       page_title: 'VoxArt',
       page_location: '/projects/voxart',
-      project_category: 'web-development'
+      project_category: 'web-development',
     });
   }
 }

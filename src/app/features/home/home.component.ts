@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     // Track home page view
     this.analyticsService.trackEvent('page_view', {
       page_title: 'Home',
-      page_location: '/home'
+      page_location: '/home',
     });
   }
 }

@@ -296,8 +296,8 @@
         </app-window>
         <div class="mt-2">
           <app-window windowTitle="Error">
-            <span class="text-(--color-primary)">RecursionError:</span> maximum recursion
-            depth exceeded
+            <span class="text-(--color-primary)">RecursionError:</span> maximum
+            recursion depth exceeded
           </app-window>
         </div>
       </div>
@@ -323,24 +323,24 @@
       The approach builds on pedagogical theories emphasizing guided discovery
       and scaffolded learning. Mathematical formalization includes repair
       accuracy as
-      <span class="text-sm"
-        [innerHTML]="'P(\\texttt{repair\\_correct | buggy\\_code, context})' | safeLatex"
+      <span
+        class="text-sm"
+        [innerHTML]="
+          'P(\\texttt{repair\\_correct | buggy\\_code, context})' | safeLatex
+        "
       ></span>
       and hint quality as a multi-dimensional vector
-      <span class="text-sm"
+      <span
+        class="text-sm"
         [innerHTML]="
           '\\vec{q} = (\\texttt{correctness, informativeness, concealment, comprehensibility})'
             | safeLatex
         "
-      ></span
-      >
+      ></span>
     </div>
 
     <div class="grid grid-cols-1 gap-2 mb-8">
-      <app-window
-        windowTitle="Correctness"
-        [initialMinimized]="true"
-      >
+      <app-window windowTitle="Correctness" [initialMinimized]="true">
         <span
           [innerHTML]="
             'C = \\frac{|\\{h \\in H : semantically\\_correct(h)\\}|}{|H|}'
@@ -348,16 +348,10 @@
           "
         ></span>
       </app-window>
-      <app-window
-        windowTitle="Informativeness"
-        [initialMinimized]="true"
-      >
+      <app-window windowTitle="Informativeness" [initialMinimized]="true">
         Measured by semantic richness and actionability of provided guidance
       </app-window>
-      <app-window
-        windowTitle="Concealment"
-        [initialMinimized]="true"
-      >
+      <app-window windowTitle="Concealment" [initialMinimized]="true">
         <span
           [innerHTML]="
             '\\text{conceal}(h) = 1 - \\text{similarity}(h, solution)'
@@ -365,10 +359,7 @@
           "
         ></span>
       </app-window>
-      <app-window
-        windowTitle="Comprehensibility"
-        [initialMinimized]="true"
-      >
+      <app-window windowTitle="Comprehensibility" [initialMinimized]="true">
         Readability and clarity for target student population
       </app-window>
     </div>
