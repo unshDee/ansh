@@ -45,7 +45,7 @@ export class ProgramRepairHintComponent
     private analyticsService: AnalyticsService,
     private themeService: ThemeService,
   ) {
-    Chart.register(...registerables);    // React to theme changes
+    Chart.register(...registerables); // React to theme changes
     effect(() => {
       const currentTheme = this.themeService.theme();
       // Add a small delay to ensure charts are created
@@ -115,7 +115,7 @@ export class ProgramRepairHintComponent
             }
           }
         });
-      }      // Update dataset colors based on chart type
+      } // Update dataset colors based on chart type
       chart.data.datasets.forEach((dataset: any, datasetIndex) => {
         if (index === 0) {
           // Baseline Chart - bars with text border and themed background
@@ -126,10 +126,10 @@ export class ProgramRepairHintComponent
           dataset.borderColor = colors.text;
           dataset.backgroundColor = `${colors.text}1A`;
           dataset.pointBackgroundColor = [
-            colors.primary,  // k=1 (lowest) - red
-            colors.orange,   // k=5 - orange
-            colors.yellow,   // k=10 - yellow
-            colors.green,    // k=20 (highest) - green
+            colors.primary, // k=1 (lowest) - red
+            colors.orange, // k=5 - orange
+            colors.yellow, // k=10 - yellow
+            colors.green, // k=20 (highest) - green
           ];
           dataset.pointBorderColor = [
             colors.primary,
@@ -175,7 +175,8 @@ export class ProgramRepairHintComponent
           'Low Rank\n(r=4, α=8)',
           'Medium Rank\n(r=16, α=32)',
           'High Rank\n(r=64, α=128)',
-        ],        datasets: [
+        ],
+        datasets: [
           {
             label: 'RPass Rate (%)',
             data: [64, 80, 88],
@@ -190,7 +191,8 @@ export class ProgramRepairHintComponent
             borderSkipped: false,
           },
         ],
-      },      options: {
+      },
+      options: {
         responsive: true,
         maintainAspectRatio: false,
         elements: {
@@ -280,7 +282,8 @@ export class ProgramRepairHintComponent
           'Low Rank\n(r=4, α=8)',
           'Medium Rank\n(r=16, α=32)',
           'High Rank\n(r=64, α=128)',
-        ],        datasets: [
+        ],
+        datasets: [
           {
             label: 'Parameters (M)',
             data: [7.4, 29.8, 119.5],
@@ -301,7 +304,7 @@ export class ProgramRepairHintComponent
             borderWidth: 2,
             borderDash: [5, 5],
             pointRadius: 6,
-                        pointHoverRadius: 6, // Same as pointRadius to prevent scaling
+            pointHoverRadius: 6, // Same as pointRadius to prevent scaling
             pointBorderWidth: 0,
             pointBackgroundColor: colors.green, // Green for highest values
             yAxisID: 'y1',
@@ -310,7 +313,8 @@ export class ProgramRepairHintComponent
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,        elements: {
+        maintainAspectRatio: false,
+        elements: {
           point: {
             radius: 6,
             hoverRadius: 6, // Same as radius to prevent scaling on hover
@@ -425,7 +429,8 @@ export class ProgramRepairHintComponent
     const config: ChartConfiguration = {
       type: 'line',
       data: {
-        labels: ['k=1', 'k=5', 'k=10', 'k=20'],        datasets: [
+        labels: ['k=1', 'k=5', 'k=10', 'k=20'],
+        datasets: [
           {
             label: 'RPass Rate (%)',
             data: [36, 52, 58, 62],
@@ -453,7 +458,8 @@ export class ProgramRepairHintComponent
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,        elements: {
+        maintainAspectRatio: false,
+        elements: {
           point: {
             radius: 6,
             hoverRadius: 6, // Same as radius to prevent scaling on hover
@@ -550,7 +556,8 @@ export class ProgramRepairHintComponent
     const config: ChartConfiguration = {
       type: 'bar',
       data: {
-        labels: ['GPT-4o-mini', 'Phi-3-mini'],        datasets: [
+        labels: ['GPT-4o-mini', 'Phi-3-mini'],
+        datasets: [
           {
             label: 'RPass Rate (%)',
             data: [92, 36],
@@ -569,7 +576,8 @@ export class ProgramRepairHintComponent
       options: {
         indexAxis: 'y' as const, // This makes it horizontal
         responsive: true,
-        maintainAspectRatio: false,        elements: {
+        maintainAspectRatio: false,
+        elements: {
           bar: {
             borderRadius: 0,
             hoverBorderWidth: 1, // Prevent border width changes on hover

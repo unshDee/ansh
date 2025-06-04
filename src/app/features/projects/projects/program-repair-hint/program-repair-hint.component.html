@@ -113,8 +113,8 @@
       <div class="grid grid-cols-2 gap-2">
         <div class="col-span-2 font-serif text-xl text-justify">
           Generating multiple repair candidates and selecting the best solution
-      significantly improves performance, especially for smaller models.
-      Analysis shows diminishing returns beyond 5-10 candidates.
+          significantly improves performance, especially for smaller models.
+          Analysis shows diminishing returns beyond 5-10 candidates.
         </div>
         <app-window windowTitle="k=1" class="col-span-1">
           <div class="text-center">
@@ -355,7 +355,8 @@
           'P(\\texttt{repair\\_correct | buggy\\_code, context})' | safeLatex
         "
       ></span>
-      and hint quality as a multi-dimensional vector      <span
+      and hint quality as a multi-dimensional vector
+      <span
         class="text-sm"
         [innerHTML]="
           '\\vec{q} = \\begin{pmatrix} \\texttt{correctness} \\\\ \\texttt{informativeness} \\\\ \\texttt{concealment} \\\\ \\texttt{comprehensibility} \\end{pmatrix}'

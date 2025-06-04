@@ -16,7 +16,7 @@
   --color-green: #15803d;
   --color-orange: #ea580c;
   --color-amber: #d97706;
-  --color-yellow: #eab308; 
+  --color-yellow: #eab308;
 
   --font-sans:
     "Helvetica Neue", Helvetica, "Inter", sans-serif; /* Primary font for body */
@@ -42,7 +42,6 @@
   --color-orange: #fb923c;
   --color-amber: #fbbf24;
   --color-yellow: #facc15;
-
 }
 
 html,
