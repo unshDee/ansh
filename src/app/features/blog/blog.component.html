@@ -2,14 +2,14 @@
   <div class="mb-4">
     <h1 class="text-8xl md:text-9xl">blog</h1>
   </div>
-  <div class="grid gap-4">
-    <app-window windowTitle="2025" [initialMinimized]="false">
+  <div class="grid gap-4">    <app-window windowTitle="2025" [initialMinimized]="false">
       <ul class="list-disc list-inside">
         <li>
           <a
             href="javascript:void(0)"
             class="underline underline-offset-4"
             aria-disabled="true"
+            (click)="trackBlogPostClick('What are Embeddings?')"
             >What are Embeddings?</a
           >
         </li>
@@ -18,6 +18,7 @@
             href="https://anshdawda.notion.site/Transformers-without-Normalization-1c6579a2cd4080bba1aafe450db478c2?source=copy_link"
             class="underline underline-offset-4"
             aria-disabled="true"
+            (click)="trackExternalBlogLink('https://anshdawda.notion.site/Transformers-without-Normalization-1c6579a2cd4080bba1aafe450db478c2', 'Transformers without Normalization')"
             >Transformers without Normalization!?</a
           >
         </li>
@@ -26,6 +27,7 @@
             href="https://anshdawda.notion.site/Hmmm-Cache-or-Retrieval-AG-1c6579a2cd4080419d5ce7267336704d"
             class="underline underline-offset-4"
             aria-disabled="true"
+            (click)="trackExternalBlogLink('https://anshdawda.notion.site/Hmmm-Cache-or-Retrieval-AG-1c6579a2cd4080419d5ce7267336704d', 'Cache or Retrieval AG')"
             >Hmmm... Cache- or Retrieval- AG</a
           >
         </li>
@@ -34,6 +36,7 @@
             href="https://anshdawda.notion.site/Fonts-Fonts-Fonts-19b579a2cd4080f69b19c769139828af?pvs=4"
             target="_blank"
             class="underline underline-offset-4"
+            (click)="trackExternalBlogLink('https://anshdawda.notion.site/Fonts-Fonts-Fonts-19b579a2cd4080f69b19c769139828af', 'fonts, fonts, fonts')"
             >fonts, fonts, fonts</a
           >
         </li>
@@ -46,6 +49,7 @@
             href="https://anshdawda.notion.site/I-Built-a-Website-18f579a2cd4080ec8ac7cafe94aae790"
             target="_blank"
             class="underline underline-offset-4"
+            (click)="trackExternalBlogLink('https://anshdawda.notion.site/I-Built-a-Website-18f579a2cd4080ec8ac7cafe94aae790', 'i built a website')"
             >i built a website</a
           >
         </li>
