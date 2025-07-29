@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectTemplateComponent } from '../../shared/project-template/project-template.component';
 import { WindowComponent } from '../../../../shared/components/window/window.component';
