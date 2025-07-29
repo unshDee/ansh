@@ -1,32 +1,7 @@
 <div class="min-h-[calc(100vh-10rem)] flex flex-col justify-center">
-  <div class="mb-4">
+  <div class="mb-8">
     <h1 class="text-8xl md:text-9xl">projects</h1>
   </div>
-
-  <br />
-  <br />
-  <div class="italic text-(--color-primary) text-justify">
-    Please note that most pages are still empty (<a
-      routerLink="data-selection-peft"
-      class="underline underline-offset-2"
-      (click)="trackProjectClick('Data Selection Strategies')"
-      >Data Selection Strategies...</a
-    >
-    and
-    <a
-      routerLink="fact-check-liar"
-      class="underline underline-offset-2"
-      (click)="trackProjectClick('Fact Checking')"
-      >Fact Checking...</a
-    >
-    have some content but I'm looking into different options for visualizing
-    results instead of adding images), I'm in the process of creating them, but
-    it takes time. I'm working on it! Thanks for understanding!
-  </div>
-
-  <br />
-  <br />
-
   <div class="grid gap-4">
     <app-window windowTitle="This Year">
       <ul class="list-disc pl-4">
@@ -60,7 +35,7 @@
                 'LLM Fine-Tuning for Program Repair and Hint Generation'
               )
             "
-            >LLM Fine-Tuning for Program Repair ang Hint Generation</a
+            >LLM Fine-Tuning for Program Repairing Hint Generation</a
           >
         </li>
       </ul>
@@ -72,7 +47,7 @@
             class="underline underline-offset-2"
             routerLink="healthcare-utilization"
             (click)="trackProjectClick('Predicting Healthcare Utilization')"
-            >Predicting Healthcare Utilization</a
+            >Predicting Healthcare Utilization (<span class="italic">currently empty</span>)</a
           >
         </li>
         <li>

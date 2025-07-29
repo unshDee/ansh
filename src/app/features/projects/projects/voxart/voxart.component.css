@@ -1,0 +1,99 @@
+/* VoxArt specific styling */
+.content-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Enhanced window styling for VoxArt */
+app-window {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Feature highlight styling */
+.feature-highlight {
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .architecture-step::after {
+    content: "↓";
+    right: 50%;
+    top: 100%;
+    transform: translateX(50%);
+  }
+}
+
+/* Technical specifications styling */
+.tech-spec {
+  font-family: var(--font-mono);
+}
+
+/* Animation for content sections */
+.fade-in-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Chart container styling */
+canvas {
+  background-color: var(--color-bg);
+  transition: all 0.3s ease-in-out;
+}
+
+canvas:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px color-mix(in srgb, var(--color-text) 10%, transparent);
+}
+
+/* Ensure charts are responsive */
+.chart-container {
+  position: relative;
+  height: clamp(200px, 30vh, 300px);
+  width: 100%;
+}
+
+/* Custom styling for window components containing charts */
+app-window:has(canvas) {
+  transition: all 0.3s ease-in-out;
+}
+
+app-window:has(canvas):hover {
+  transform: translateY(-2px);
+}
+
+/* Enhanced metrics display */
+.metric-value {
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.metric-label {
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+/* Responsive grid adjustments for metrics */
+@media (max-width: 1024px) {
+  .chart-container {
+    height: clamp(180px, 25vh, 250px);
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: clamp(150px, 20vh, 200px);
+  }
+}
