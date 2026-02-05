@@ -49,6 +49,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'image-segmentation',
+        loadComponent: () =>
+          import('./features/projects/projects/image-segmentation/image-segmentation.component').then(
+            (m) => m.ImageSegmentationComponent,
+          ),
+      },
+      {
         path: 'fact-check-liar',
         loadComponent: () =>
           import('./features/projects/projects/fact-check-liar/fact-check-liar.component').then(

@@ -1,0 +1,43 @@
+/* Image Segmentation Component Styles */
+
+.equation-block {
+  font-size: 0.95rem;
+}
+
+app-window {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+app-window:hover {
+  transform: translateY(-2px);
+}
+
+/* Remove rounded corners across the page content */
+:host ::ng-deep .rounded,
+:host ::ng-deep .rounded-sm,
+:host ::ng-deep .rounded-md,
+:host ::ng-deep .rounded-lg,
+:host ::ng-deep .rounded-xl,
+:host ::ng-deep .rounded-2xl,
+:host ::ng-deep .rounded-3xl,
+:host ::ng-deep .rounded-full {
+  border-radius: 0 !important;
+}
+
+:host ::ng-deep app-window,
+:host ::ng-deep app-window * {
+  border-radius: 0 !important;
+}
+
+/* Chart container styling */
+canvas {
+  max-height: 400px;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Image comparison styling */
+img {
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+}

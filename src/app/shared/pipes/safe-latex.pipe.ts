@@ -5,10 +5,10 @@ import katex from 'katex';
 @Pipe({ name: 'safeLatex', standalone: true })
 export class SafeLatexPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
-  transform(latex: string, ...args: any[]): SafeHtml {
+  transform(latex: string, displayMode: boolean = true): SafeHtml {
     const html = katex.renderToString(latex, {
       throwOnError: false,
-      displayMode: true,
+      displayMode,
     });
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }

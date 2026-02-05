@@ -1,0 +1,1438 @@
+<app-project-template
+  projectTitle="Image Segmentation with Scribble Supervision"
+  note="Project - Image Segmentation"
+  [technologies]="[
+    'PyTorch',
+    'segmentation_models.pytorch',
+    'timm',
+    'EfficientNet-B2',
+    'U-Net',
+    'AdamW',
+    'Albumentations',
+  ]"
+>
+  <div description>
+    <span class="italic">End-to-end binary segmentation from sparse scribbles</span> using an
+    EfficientNet-B2 U-Net with region-based losses and careful augmentation for
+    weak supervision.
+  </div>
+
+  <div content>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="font-serif text-xl text-justify col-span-4">
+        <span class="text-4xl">B</span>inary image segmentation—dividing images
+        into foreground and background regions at the pixel level—is fundamental
+        in computer vision with applications in medical imaging, autonomous
+        driving, and interactive editing. This project addresses the challenge of
+        <span class="italic">sparse supervision</span>, where only limited
+        scribbles are provided instead of dense masks. By leveraging modern deep
+        learning architectures and carefully designed loss functions, we achieve
+        competitive segmentation performance while dramatically reducing
+        annotation costs. The approach combines a U-Net decoder with an
+        EfficientNet-B2 encoder, optimized using region-based losses (Dice/IoU)
+        blended with binary cross-entropy for stable training under weak
+        supervision.
+      </div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Project Overview</h2>
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Challenge"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        Predict dense binary segmentation masks from RGB images paired with
+        sparse scribble annotations, where only a tiny fraction of pixels are
+        labeled.
+      </app-window>
+      <app-window
+        windowTitle="Approach"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        End-to-end deep learning with early fusion of scribbles, region-based
+        composite losses, and synthetic scribble augmentation to maximize
+        generalization from limited supervision.
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Methodology Pipeline</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Five-Stage Workflow</h3>
+        <div class="font-serif text-lg text-justify mb-6">
+          The segmentation pipeline turns sparse scribbles into dense masks via
+          a structured five-stage process, moving from input preparation to
+          model selection and rigorous evaluation.
+        </div>
+        <div class="grid grid-cols-1 gap-3">
+          <div class="p-4 rounded border border-(--color-text)/20">
+            <div class="font-bold">Primary Goal</div>
+            <div class="text-sm text-(--color-text)">
+              Preserve alignment between images, scribbles, and masks while
+              maximizing mIoU under weak supervision.
+            </div>
+          </div>
+          <div class="p-4 rounded border border-(--color-text)/20">
+            <div class="font-bold">Outputs</div>
+            <div class="text-sm text-(--color-text)">
+              Dense binary masks with stable calibration across folds.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-1">
+        <div class="grid grid-cols-1 gap-1">
+          <div class="p-4 border border-(--color-text)/20">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 bg-(--color-text) text-(--color-bg) text-xs font-bold"
+                >1</span
+              >
+              <div class="font-sans font-bold text-lg">Input Encoding</div>
+            </div>
+            <div class="font-sans text-sm text-(--color-text) mt-2">
+              Scribble mapping, channel fusion, resizing, normalization
+            </div>
+          </div>
+          <div class="p-4 rounded border border-(--color-text)/20">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-(--color-text) text-(--color-bg) text-xs font-bold"
+                >2</span
+              >
+              <div class="font-sans font-bold text-lg">Architecture</div>
+            </div>
+            <div class="font-sans text-sm text-(--color-text) mt-2">
+              EfficientNet-B2 encoder, U-Net decoder, scSE attention
+            </div>
+          </div>
+          <div class="p-4 rounded border border-(--color-text)/20">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-(--color-text) text-(--color-bg) text-xs font-bold"
+                >3</span
+              >
+              <div class="font-sans font-bold text-lg">Loss Design</div>
+            </div>
+            <div class="font-sans text-sm text-(--color-text) mt-2">
+              Region-based (Dice/IoU) + BCE composite with class reweighting
+            </div>
+          </div>
+          <div class="p-4 rounded border border-(--color-text)/20">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-(--color-text) text-(--color-bg) text-xs font-bold"
+                >4</span
+              >
+              <div class="font-sans font-bold text-lg">Augmentation</div>
+            </div>
+            <div class="font-sans text-sm text-(--color-text) mt-2">
+              Geometric transforms, scribble synthesis, intensity variations
+            </div>
+          </div>
+          <div class="p-4 rounded border border-(--color-text)/20">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-(--color-text) text-(--color-bg) text-xs font-bold"
+                >5</span
+              >
+              <div class="font-sans font-bold text-lg">Evaluation</div>
+            </div>
+            <div class="font-sans text-sm text-(--color-text) mt-2">
+              5-fold CV, ensemble averaging, mIoU-based selection
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Problem Formulation</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div class="font-serif text-lg text-justify">
+        <div class="mb-3">
+          We observe an RGB image and a sparse scribble mask with three label
+          states. The goal is to predict a dense binary mask that maximizes
+          mean Intersection over Union (mIoU) against the ground truth.
+        </div>
+        <div class="font-sans grid grid-cols-1 gap-3">
+          <div class="p-3 rounded border border-(--color-text)/20">
+            <div class="font-bold mb-1">Label Semantics</div>
+            <div class="text-sm text-(--color-text)">
+              <span class="font-mono">0</span> = background,
+              <span class="font-mono">1</span> = foreground,
+              <span class="font-mono">∅</span> = unlabeled
+            </div>
+          </div>
+          <div class="p-3 rounded border border-(--color-text)/20">
+            <div class="font-bold mb-1">Optimization Target</div>
+            <div class="text-sm text-(--color-text)">
+              Maximize mIoU between prediction and ground truth over foreground
+              and background classes.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 py-3 rounded border border-(--color-text)/20 bg-(--color-bg)">
+        <div class="font-sans font-bold mb-3">Mathematical Setup</div>
+        <div class="grid grid-cols-1 gap-0 text-sm">
+          <div class="flex items-start justify-between gap-4">
+            <div class="text-(--color-text)">RGB image</div>
+            <div
+              class="equation-block text-right"
+              [innerHTML]="'b \\in \\mathbb{R}^{n_x \\times n_y \\times 3}' | safeLatex"
+            ></div>
+          </div>
+          <div class="flex items-start justify-between gap-4">
+            <div class="text-(--color-text)">Scribble mask</div>
+            <div
+              class="equation-block text-right"
+              [innerHTML]="'c \\in \\{0,1,\\emptyset\\}^{n_x \\times n_y}' | safeLatex"
+            ></div>
+          </div>
+          <div class="flex items-start justify-between gap-4">
+            <div class="text-(--color-text)">Prediction</div>
+            <div
+              class="equation-block text-right"
+              [innerHTML]="'\\hat{g} \\in \\{0,1\\}^{n_x \\times n_y}' | safeLatex"
+            ></div>
+          </div>
+          <div class="flex items-start justify-between gap-4">
+            <div class="text-(--color-text)">Ground truth</div>
+            <div
+              class="equation-block text-right"
+              [innerHTML]="'g \\in \\{0,1\\}^{n_x \\times n_y}' | safeLatex"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Intersection over Union (IoU)"
+        [initialMinimized]="true"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="font-serif text-lg mb-2">
+          IoU measures the overlap between predicted and ground truth regions:
+        </div>
+        <div
+          class="equation-block"
+          [innerHTML]="'\\text{IoU}_k = \\frac{|\\{g=k\\} \\cap \\{\\hat{g}=k\\}|}{|\\{g=k\\} \\cup \\{\\hat{g}=k\\}|}' | safeLatex"
+        ></div>
+        <div class="font-sans text-sm mt-3 text-(--color-text)">
+          Ranges from 0 (no overlap) to 1 (perfect match)
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Mean IoU (mIoU)"
+        [initialMinimized]="true"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="font-serif text-lg mb-2">
+          mIoU averages IoU across foreground and background classes:
+        </div>
+        <div
+          class="equation-block"
+          [innerHTML]="'\\text{mIoU} = \\frac{\\text{IoU}_{\\text{bg}} + \\text{IoU}_{\\text{fg}}}{2}' | safeLatex"
+        ></div>
+        <div class="font-sans text-sm mt-3 text-(--color-text)">
+          Provides balanced evaluation across both classes
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Input Processing & Encoding</h2>
+
+    <h3 class="font-sans text-2xl mb-4">Preprocessing Pipeline</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      Raw inputs undergo systematic transformations to prepare them for neural
+      network processing, including scribble encoding, spatial resizing,
+      channel-wise normalization, and early fusion of visual and annotation
+      information.
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <app-window
+        windowTitle="Step 1: Scribble Encoding & Resizing"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Mapping Sparse Annotations to Network Input
+            </div>
+            <div class="text-base">
+              Scribbles are encoded numerically and resized to match the network
+              architecture constraints while preserving annotation integrity.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Scribble Mapping</div>
+              <div class="text-sm space-y-1">
+                <div>
+                  <span class="font-bold">Background</span>: <span [innerHTML]="'0 \\rightarrow -1' | safeLatex:false"></span>
+                </div>
+                <div>
+                  <span class="font-bold">Foreground</span>: <span [innerHTML]="'1 \\rightarrow +1' | safeLatex:false"></span>
+                </div>
+                <div>
+                  <span class="font-bold">Unlabeled</span>: <span [innerHTML]="'\\emptyset \\rightarrow 0' | safeLatex:false"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Spatial Resizing</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Original: </strong> <span [innerHTML]="'500 \\times 375' | safeLatex:false"></span></div>
+                <div><strong>Resized: </strong> <span [innerHTML]="'480 \\times 352' | safeLatex:false"></span></div>
+                <div class="text-xs italic">
+                  Largest multiple of 32 below original resolution
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Interpolation Methods</div>
+              <div class="text-sm space-y-1">
+                <div>
+                  <strong>RGB Image:</strong> Lanczos (preserves edges)
+                </div>
+                <div>
+                  <strong>Masks:</strong> Nearest-neighbor (preserves labels)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Step 2: Normalization & Channel Fusion"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Early Fusion Strategy
+            </div>
+            <div class="text-base">
+              The scribble mask is concatenated as a fourth channel to the RGB
+              image, providing immediate access to annotation information
+              throughout the encoder hierarchy.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Channel-wise Normalization</div>
+              <div class="text-sm space-y-2">
+                <div>
+                  <strong>Mean:</strong>
+                  <span
+                    class="font-mono text-xs"
+                    [innerHTML]="'(0.4589, 0.4589, 0.4215)' | safeLatex"
+                  ></span>
+                </div>
+                <div>
+                  <strong>Std:</strong>
+                  <span
+                    class="font-mono text-xs"
+                    [innerHTML]="'(0.2618, 0.2633, 0.2822)' | safeLatex"
+                  ></span>
+                </div>
+                <div class="text-xs italic">
+                  Computed from training set RGB channels
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">4-Channel Input Tensor</div>
+              <div class="text-sm space-y-2">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div class="font-mono text-xs">
+                    Input = concat(RGB_norm, Scribble)
+                  </div>
+                  <div class="font-mono text-xs mt-1">
+                    Shape: [B, 4, 480, 352]
+                  </div>
+                </div>
+                <div class="text-xs italic">
+                  Enables contextual scribble interpretation
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Model Output & Thresholding</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Probabilistic Prediction</h3>
+        <div class="font-serif text-lg text-justify mb-4">
+          The network outputs a continuous probability map
+          <span
+            [innerHTML]="'\\hat{p} \\in (0,1)^{n_x \\times n_y}' | safeLatex"
+          ></span>
+          where each pixel value represents foreground probability.
+        </div>
+      </div>
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Binary Decision</h3>
+        <div class="font-serif text-lg text-justify mb-4">
+          A fixed threshold
+          <span [innerHTML]="'\\tau = 0.5' | safeLatex"></span>
+          converts probabilities to binary predictions without calibration.
+        </div>
+      </div>
+    </div>
+
+    <app-window windowTitle="Thresholding Function" [initialMinimized]="true">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="lg:col-span-2">
+          <div class="font-sans">
+            The binary mask is obtained by applying a fixed threshold to the
+            probability map.
+          </div>
+          <div class="text-(--color-text) mt-2">
+            This produces a hard decision used for evaluation and reporting.
+          </div>
+          <div class="text-(--color-text) mt-3">
+            Gradient descent optimizes the soft probabilities
+            <span [innerHTML]="'\\hat{p}' | safeLatex:false"></span>, not the
+            binarized masks
+            <span [innerHTML]="'\\hat{g}' | safeLatex:false"></span>.
+          </div>
+        </div>
+        <div class="p-3 border border-(--color-text)/20 bg-(--color-bg)">
+          <!-- <div class="text-xs text-(--color-text) mb-2">Decision rule</div> -->
+          <div
+            class="equation-block text-center"
+            [innerHTML]="'\\hat{g}_i = \\begin{cases}1 & \\text{if } \\hat{p}_i \\ge \\tau \\\\ 0 & \\text{otherwise}\\end{cases}' | safeLatex"
+          ></div>
+          <div class="text-xs text-center text-(--color-text) mt-2">
+            <span [innerHTML]="'\\tau = 0.5' | safeLatex:false"></span>
+          </div>
+        </div>
+      </div>
+    </app-window>
+
+    <h2 class="text-3xl my-4 mt-10">Loss Function Design</h2>
+
+    <h3 class="font-sans text-2xl mb-4">Composite Loss Strategy</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      Training optimizes a weighted combination of region-based and pixel-wise
+      objectives. Region-based losses (Dice, IoU) directly align with the mIoU
+      evaluation metric, while binary cross-entropy provides stable gradients
+      during early training and sparse supervision scenarios.
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <app-window
+        windowTitle="Region-Based Loss Functions"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Maximizing Overlap Metrics
+            </div>
+            <div class="text-base">
+              Dice and IoU losses operate on entire prediction regions,
+              providing strong supervision signal even when pixel-level labels
+              are sparse.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Dice Loss</div>
+              <div class="text-sm space-y-2">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div
+                    class="equation-block"
+                    [innerHTML]="'\\mathcal{L}_{\\text{Dice}} = 1 - \\frac{2 \\sum_i \\hat{p}_i g_i}{\\sum_i \\hat{p}_i + g_i}' | safeLatex"
+                  ></div>
+                </div>
+                <div class="text-xs">
+                  <strong>Properties:</strong> Numerically stable, balanced
+                  precision-recall
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">IoU Loss</div>
+              <div class="text-sm space-y-2">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div
+                    class="equation-block"
+                    [innerHTML]="'\\mathcal{L}_{\\text{IoU}} = 1 - \\frac{\\sum_i \\hat{p}_i g_i}{\\sum_i \\hat{p}_i + g_i - \\hat{p}_i g_i}' | safeLatex"
+                  ></div>
+                </div>
+                <div class="text-xs">
+                  <strong>Properties:</strong> Directly optimizes mIoU metric
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Composite Objective Function"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Blending Region and Pixel Losses
+            </div>
+            <div class="text-base">
+              The final objective combines region-based terms with binary
+              cross-entropy for improved gradient flow and training stability.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Weighted Combination</div>
+              <div class="text-sm space-y-2">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div
+                    class="equation-block"
+                    [innerHTML]="'\\mathcal{L}_{\\text{total}} = \\lambda_{\\text{REG}} \\mathcal{L}_{\\text{REG}} + \\lambda_{\\text{BCE}} \\mathcal{L}_{\\text{BCE}}' | safeLatex"
+                  ></div>
+                </div>
+                <div class="text-xs">
+                  REG ∈ {{ '{' }}Dice, IoU{{ '}' }} selected via cross-validation
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Hyperparameters</div>
+              <div class="text-sm space-y-2">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div class="font-mono text-xs">λ_REG = 1.0</div>
+                  <div class="font-mono text-xs mt-1">λ_BCE = 0.2</div>
+                </div>
+                <div class="text-xs italic">
+                  Fixed across all experiments
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Class Imbalance Handling</div>
+              <div class="text-sm space-y-2">
+                <div>
+                  <strong>Challenge:</strong> 3.88× more background pixels
+                </div>
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div
+                    class="equation-block text-xs"
+                    [innerHTML]="'\\mathcal{L}_{\\text{BCE}} = -\\sum_i p_c g_i \\log \\hat{p}_i + (1-g_i) \\log(1-\\hat{p}_i)' | safeLatex"
+                  ></div>
+                </div>
+                <div class="text-xs">
+                  Tested
+                  <span
+                    [innerHTML]="'p_c \\in \\{1, 2, 3, 3.8\\}' | safeLatex"
+                  ></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Rationale</div>
+              <div class="text-sm space-y-1">
+                <div>
+                  <strong>BCE:</strong> Reliable pixel-level guidance
+                </div>
+                <div>
+                  <strong>Region Loss:</strong> Captures global structure
+                </div>
+                <div class="text-xs italic">
+                  Gradients from region losses can be weak when overlap is low
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Data Augmentation</h2>
+
+    <h3 class="font-sans text-2xl mb-4">Augmentation Strategy</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      Data augmentation increases training set diversity and prevents
+      overfitting. We employ standard semantic segmentation transforms alongside
+      a novel synthetic scribble generation algorithm to simulate varied
+      annotation patterns.
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <app-window
+        windowTitle="Semantic Segmentation Augmentations"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Standard Geometric & Photometric Transforms
+            </div>
+            <div class="text-base">
+              Augmentations are applied jointly to image, scribble, and mask to
+              preserve spatial correspondence and annotation integrity.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Geometric</div>
+              <ul class="text-sm list-disc pl-4 space-y-1">
+                <li>Rotation</li>
+                <li>Translation</li>
+                <li>Scaling</li>
+                <li>Horizontal / vertical flips</li>
+              </ul>
+              <div class="text-xs text-(--color-text) mt-2">
+                Maintains spatial alignment across image, scribble, and mask.
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Photometric</div>
+              <ul class="text-sm list-disc pl-4 space-y-1">
+                <li>Color jitter</li>
+                <li>Brightness / contrast</li>
+                <li>Saturation</li>
+              </ul>
+              <div class="text-xs text-(--color-text) mt-2">
+                Applied to the RGB image only.
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Spatial Deformations</div>
+              <ul class="text-sm list-disc pl-4 space-y-1">
+                <li>Random crop</li>
+                <li>Elastic transform</li>
+                <li>Grid distortion</li>
+              </ul>
+              <div class="text-xs text-(--color-text) mt-2">
+                Aggressive deformations used for higher augmentation settings.
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Filtering</div>
+              <ul class="text-sm list-disc pl-4 space-y-1">
+                <li>Gaussian blur</li>
+              </ul>
+              <div class="text-xs text-(--color-text) mt-2">
+                Image-only smoothing to reduce high-frequency noise.
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Foreground-Aware</div>
+              <ul class="text-sm list-disc pl-4 space-y-1">
+                <li>Random crop with foreground bias</li>
+              </ul>
+              <div class="text-xs text-(--color-text) mt-2">
+                Prioritizes regions containing foreground pixels.
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Consistency Rule</div>
+              <ul class="text-sm list-disc pl-4 space-y-1">
+                <li>Same transform applied to image, scribble, and mask</li>
+                <li>Preserves label alignment under weak supervision</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Synthetic Scribble Generation"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Simulating Human Annotation Patterns
+            </div>
+            <div class="text-base">
+              An algorithmic pipeline generates realistic scribble annotations
+              from ground truth masks, enabling training on full segmentation
+              labels while simulating sparse supervision.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Foreground Scribbles</div>
+              <div class="text-sm space-y-2">
+                <div><strong>Step 1:</strong> Morphological closing of mask</div>
+                <div>
+                  <strong>Step 2:</strong> Extract connected components
+                </div>
+                <div>
+                  <strong>Step 3:</strong> Sample random line inside each region
+                </div>
+                <div><strong>Step 4:</strong> Dilate lines to match thickness</div>
+                <div class="text-xs italic mt-2">
+                  Only components above minimum area threshold are annotated
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Background Scribbles</div>
+              <div class="text-sm space-y-2">
+                <div>
+                  <strong>Step 1:</strong> Compute foreground bounding box
+                </div>
+                <div>
+                  <strong>Step 2:</strong> Define four background regions with
+                  margin
+                </div>
+                <div>
+                  <strong>Step 3:</strong> Randomly select one region
+                  (area-weighted)
+                </div>
+                <div>
+                  <strong>Step 4:</strong> Draw and dilate background line
+                </div>
+                <div class="text-xs italic mt-2">
+                  Encoded as -1 by subtracting from foreground scribbles
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4">Augmentation Configurations</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      Three augmentation intensity levels were systematically evaluated to
+      determine the optimal trade-off between diversity and label preservation.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window
+        windowTitle="Low Augmentation"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>Affine transforms</li>
+          <li>Flips</li>
+          <li>Color jitter</li>
+          <li>Scribble augmentation</li>
+        </ul>
+        <div class="mt-3 text-xs text-(--color-text)">
+          <strong>Focus:</strong> Basic geometric invariance
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Medium Augmentation"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>Low augmentation +</li>
+          <li>Random crop</li>
+        </ul>
+        <div class="mt-3 text-xs text-(--color-text)">
+          <strong>Focus:</strong> Spatial context variation
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="High Augmentation"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>Medium augmentation +</li>
+          <li>Elastic transform</li>
+          <li>Grid distortion</li>
+          <li>Gaussian blur</li>
+        </ul>
+        <div class="mt-3 text-xs text-(--color-text)">
+          <strong>Focus:</strong> Aggressive deformation robustness
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Model Architecture</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Encoder Selection</h3>
+        <div class="font-serif text-lg text-justify mb-4">
+          Multiple lightweight encoders were evaluated. EfficientNet-B2 emerged
+          as the optimal choice, balancing parameter efficiency with strong
+          feature representation capacity.
+        </div>
+      </div>
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Decoder Architecture</h3>
+        <div class="font-serif text-lg text-justify mb-4">
+          Standard U-Net decoder with scSE (Spatial and Channel Squeeze &
+          Excitation) attention blocks for refined feature recalibration at
+          multiple scales.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <app-window
+        windowTitle="Architecture Exploration"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Systematic Encoder Evaluation
+            </div>
+            <div class="text-base">
+              Initial experiments with MobileNetV3 and ResNet-18 revealed
+              insufficient capacity for the sparse supervision regime.
+              EfficientNet models provided superior performance through compound
+              scaling.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">MobileNetV3</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Pros:</strong> Extremely lightweight</div>
+                <div><strong>Cons:</strong> Limited representational power</div>
+                <div class="text-xs italic">
+                  Unable to achieve low training loss
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">ResNet-18</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Pros:</strong> Well-established architecture</div>
+                <div><strong>Cons:</strong> Suboptimal parameter efficiency</div>
+                <div class="text-xs italic">
+                  Decent but not optimal performance
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2 text-(--color-primary)">EfficientNet-B2</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Pros:</strong> Balanced efficiency & capacity</div>
+                <div><strong>Selected:</strong> Best validation mIoU</div>
+                <div class="text-xs italic">
+                  Optimal trade-off for this task
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Final Architecture Details"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              EfficientNet-B2 U-Net with scSE Attention
+            </div>
+            <div class="text-base">
+              The architecture combines efficient compound scaling with spatial
+              and channel attention mechanisms for precise multi-scale feature
+              refinement.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Encoder</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Backbone:</strong> EfficientNet-B2</div>
+                <div><strong>Initialization:</strong> From scratch</div>
+                <div><strong>Dropout:</strong> 0.2 per block</div>
+                <div class="text-xs italic">
+                  Depth-5 hierarchy, 32x downsampling
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Decoder</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Style:</strong> U-Net symmetric skip connections</div>
+                <div><strong>Attention:</strong> scSE blocks</div>
+                <div class="text-xs italic">
+                  Concurrent spatial and channel recalibration
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Implementation</div>
+              <div class="text-sm space-y-1">
+                <div>
+                  <strong>Framework:</strong>
+                  <span class="font-mono text-xs"
+                    >segmentation_models.pytorch</span
+                  >
+                </div>
+                <div>
+                  <strong>Encoder Source:</strong>
+                  <span class="font-mono text-xs">timm</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Training Configuration</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Optimization Strategy</h3>
+        <div class="font-serif text-lg text-justify mb-4">
+          AdamW optimizer with cosine annealing learning rate schedule and early
+          stopping based on validation mIoU plateau detection.
+        </div>
+      </div>
+      <div class="col-span-1">
+        <h3 class="font-sans text-2xl mb-4">Computational Efficiency</h3>
+        <div class="font-serif text-lg text-justify mb-4">
+          Mixed-precision training (bfloat16) on A100 GPUs enables larger batch
+          sizes and faster convergence without sacrificing numerical stability.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <app-window windowTitle="Hyperparameters" [initialMinimized]="true">
+        <div class="font-sans">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Optimization</div>
+              <div class="text-sm grid grid-cols-1 gap-2">
+                <div class="flex items-center justify-between">
+                  <span>Optimizer</span>
+                  <span class="font-mono text-xs">AdamW</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Learning rate</span>
+                  <span class="font-mono text-xs">5e-3</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Weight decay</span>
+                  <span class="font-mono text-xs">1e-4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Schedule</div>
+              <div class="text-sm grid grid-cols-1 gap-2">
+                <div class="flex items-center justify-between">
+                  <span>Policy</span>
+                  <span class="font-mono text-xs">Cosine annealing</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Min lr</span>
+                  <span class="font-mono text-xs">1e-7</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Training length</span>
+                  <span class="font-mono text-xs">8K–16K steps</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Batching</div>
+              <div class="text-sm grid grid-cols-1 gap-2">
+                <div class="flex items-center justify-between">
+                  <span>Batch sizes</span>
+                  <span class="font-mono text-xs">6, 8, 12</span>
+                </div>
+                <div class="text-xs italic text-(--color-text)">
+                  Evaluated across configurations
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20">
+              <div class="font-bold mb-2">Precision & Hardware</div>
+              <div class="text-sm grid grid-cols-1 gap-2">
+                <div class="flex items-center justify-between">
+                  <span>Precision</span>
+                  <span class="font-mono text-xs">bfloat16</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Accelerator</span>
+                  <span class="font-mono text-xs">A100 GPUs</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border border-(--color-text)/20 lg:col-span-2">
+              <div class="font-bold mb-2">Early Stopping</div>
+              <div class="text-sm grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div class="flex items-center justify-between">
+                  <span>Patience</span>
+                  <span class="font-mono text-xs">60 epochs</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Metric</span>
+                  <span class="font-mono text-xs">Validation mIoU</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Experimental Results</h2>
+
+    <h3 class="font-sans text-2xl mb-4">Evaluation Methodology</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      5-fold cross-validation was employed to robustly estimate performance and
+      select the optimal configuration. Final test predictions used an ensemble
+      of all five fold models to reduce variance and improve generalization.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window
+        windowTitle="Cross-Validation"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="text-sm space-y-2">
+          <div><strong>Folds:</strong> 5</div>
+          <div><strong>Strategy:</strong> Stratified split</div>
+          <div><strong>Selection:</strong> Max mean mIoU across folds</div>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Ensemble Prediction"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="text-sm space-y-2">
+          <div><strong>Method:</strong> Average probability maps</div>
+          <div><strong>Models:</strong> All 5 fold checkpoints</div>
+          <div><strong>Threshold:</strong> τ = 0.5</div>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Data Utilization"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="text-sm space-y-2">
+          <div><strong>Training set:</strong> ≈181 images</div>
+          <div><strong>Leakage:</strong> None (fold-based inference)</div>
+          <div><strong>Efficiency:</strong> All data used for final model</div>
+        </div>
+      </app-window>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4 mt-8">Performance Summary</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window
+        windowTitle="Test Set Performance"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="text-center">
+          <div class="text-5xl font-bold text-(--color-green) mb-2">
+            0.8569
+          </div>
+          <div class="text-sm text-(--color-text) mb-3">
+            mIoU on first test set
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <div class="font-bold">Background IoU</div>
+              <div class="text-lg text-(--color-amber)">0.9215</div>
+            </div>
+            <div>
+              <div class="font-bold">Foreground IoU</div>
+              <div class="text-lg text-(--color-amber)">0.7923</div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Cross-Validation mIoU"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="text-center">
+          <div class="text-5xl font-bold text-(--color-green) mb-2">
+            0.8758
+          </div>
+          <div class="text-sm text-(--color-text)">
+            Mean across 5 folds (best config)
+          </div>
+          <div class="text-xs mt-2 text-(--color-text)">
+            IoU Loss + Low Aug + Batch 8 + <span [innerHTML]="'p_c=3' | safeLatex:false"></span>
+          </div>
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Standard Deviation"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="text-center">
+          <div class="text-5xl font-bold text-(--color-green) mb-2">
+            ±0.0169
+          </div>
+          <div class="text-sm text-(--color-text)">
+            Fold variance (best config)
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4 mt-8">Segmentation Example</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      Visual comparison of model predictions on a test image demonstrates the
+      quality of dense mask recovery from sparse scribble annotations.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window
+        windowTitle="Original Image"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="flex justify-center items-center p-2">
+          <img
+            [src]="'/img/2010_002232.jpg'"
+            alt="Original sheep image"
+            class="w-full h-auto rounded"
+          />
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text)">
+            Input image with background and foreground objects
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Sparse Scribbles"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="flex justify-center items-center p-2 rounded">
+          <img
+            [src]="'/img/2010_002232.png'"
+            alt="Sparse scribble annotations"
+            class="w-full h-auto"
+          />
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text)">
+          Minimal supervision: only scribbles provided
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="Predicted Mask"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="flex justify-center items-center p-2 rounded">
+          <img
+            [src]="'/img/prediction.jpg'"
+            alt="Dense prediction from model"
+            class="w-full h-auto"
+          />
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text)">
+          Dense mask recovered from sparse input
+        </div>
+      </app-window>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4 mt-8">Ablation Studies</h3>
+    <div class="font-serif text-lg text-justify mb-6">
+      Systematic experiments across 72 configurations revealed the impact of
+      augmentation intensity, positive class weighting, batch size, and loss
+      function on final performance, particularly in the low-data regime.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Loss Function vs Augmentation"
+        [initialMinimized]="false"
+        class="col-span-1 lg:col-span-2"
+      >
+        <div class="p-4">
+          <canvas #augmentationChart></canvas>
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
+          IoU loss outperforms Dice loss across all augmentation levels. Lower
+          augmentation yields better results for this task.
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Positive Weight Sensitivity"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="p-4">
+          <canvas #posWeightChart></canvas>
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
+          Class weighting <span [innerHTML]="'p_c=3' | safeLatex:false"></span> provides optimal balance for foreground objects.
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Batch Size Impact"
+        [initialMinimized]="false"
+        class="col-span-1"
+      >
+        <div class="p-4">
+          <canvas #batchSizeChart></canvas>
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
+          Batch size 8 achieves best trade-off between stability and generalization.
+        </div>
+      </app-window>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-8">
+      <app-window
+        windowTitle="Augmentation Impact"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Effect on Validation mIoU
+            </div>
+            <div class="text-base">
+              Contrary to typical expectations, aggressive augmentation reduced
+              validation mIoU in this sparse supervision setting.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Observation</div>
+              <div class="text-sm space-y-1">
+                <div>
+                  Higher augmentation → <strong>Lower</strong> validation mIoU
+                </div>
+                <div class="text-xs italic">
+                  Averaged across loss functions and folds
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Hypothesis</div>
+              <div class="text-sm space-y-1">
+                <div>Small training set (≈181 images)</div>
+                <div>Challenging sparse annotation regime</div>
+                <div class="text-xs italic">
+                  Aggressive transforms may corrupt weak supervision signal
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Recommendation</div>
+              <div class="text-sm space-y-1">
+                <div><strong>Low augmentation</strong> performed best</div>
+                <div class="text-xs italic">
+                  Suggests careful augmentation design critical for scribble
+                  supervision
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window
+        windowTitle="Positive Weight Sensitivity"
+        [initialMinimized]="true"
+      >
+        <div class="font-sans">
+          <div class="pb-2 border-b-1 border-(--color-text)/20">
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Class Imbalance Reweighting
+            </div>
+            <div class="text-base">
+              Tested BCE positive weights
+              <span
+                [innerHTML]="'p_c \\in \\{1, 2, 3, 3.8\\}' | safeLatex"
+              ></span>
+              to address 3.88x background-to-foreground pixel ratio.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4">
+              <div class="font-bold mb-2">Finding</div>
+              <div class="text-sm space-y-2">
+                <div>
+                  <strong>Limited effect</strong> on validation mIoU across
+                  tested values
+                </div>
+                <div class="text-xs italic">
+                  Region-based losses may already handle imbalance effectively
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="font-bold mb-2">Interpretation</div>
+              <div class="text-sm space-y-2">
+                <div>
+                  Dice and IoU are inherently robust to class imbalance
+                </div>
+                <div class="text-xs">
+                  BCE contribution (λ=0.2) is secondary to region losses
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Key Findings</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Architecture Insights"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>
+            EfficientNet-B2 provides optimal efficiency-performance trade-off
+          </li>
+          <li>scSE attention enhances feature refinement at minimal cost</li>
+          <li>Early fusion of scribbles enables contextual interpretation</li>
+        </ul>
+      </app-window>
+      <app-window
+        windowTitle="Loss Design Insights"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>Region-based losses align well with mIoU evaluation</li>
+          <li>BCE stabilizes training under sparse supervision</li>
+          <li>IoU and Dice losses yield similar performance</li>
+        </ul>
+      </app-window>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Augmentation Insights"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>Low augmentation outperforms aggressive transforms</li>
+          <li>Small dataset regime requires careful augmentation design</li>
+          <li>Synthetic scribble generation adds training diversity</li>
+        </ul>
+      </app-window>
+      <app-window
+        windowTitle="Training Insights"
+        [initialMinimized]="false"
+        class="col-span-2 lg:col-span-1"
+      >
+        <ul class="list-disc pl-4 text-sm">
+          <li>Ensemble averaging improves test set stability</li>
+          <li>Early stopping prevents overfitting to validation set</li>
+          <li>Mixed-precision training enables efficient experimentation</li>
+        </ul>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Conclusion</h2>
+    <div class="font-serif text-xl text-justify mb-6">
+      The final system demonstrates that carefully designed loss functions and
+      strong encoder-decoder backbones can achieve competitive segmentation from
+      sparse scribbles. The approach reduces annotation burden while preserving
+      high-quality masks, making it viable for large datasets with limited
+      labeling budgets.
+    </div>
+  </div>
+</app-project-template>

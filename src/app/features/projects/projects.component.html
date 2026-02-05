@@ -3,8 +3,16 @@
     <h1 class="text-8xl md:text-9xl">projects</h1>
   </div>
   <div class="grid gap-4">
-    <app-window windowTitle="This Year">
+    <app-window windowTitle="Recent">
       <ul class="list-disc pl-4">
+        <li>
+          <a
+            class="underline underline-offset-2"
+            routerLink="image-segmentation"
+            (click)="trackProjectClick('Image Segmentation with Scribble Supervision')"
+            >Image Segmentation with Scribble Supervision</a
+          >
+        </li>
         <li>
           <a
             class="underline underline-offset-2"
@@ -26,6 +34,10 @@
             >Fact Checking Q&A Chatbot</a
           >
         </li>
+      </ul>
+    </app-window>
+    <app-window windowTitle="Older">
+      <ul class="list-disc pl-4">
         <li>
           <a
             class="underline underline-offset-2"
@@ -38,10 +50,6 @@
             >LLM Fine-Tuning for Program Repairing Hint Generation</a
           >
         </li>
-      </ul>
-    </app-window>
-    <app-window windowTitle="Older">
-      <ul class="list-disc pl-4">
         <li>
           <a
             class="underline underline-offset-2"
