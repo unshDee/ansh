@@ -198,7 +198,7 @@ export class ImageSegmentationComponent
         datasets: [
           {
             label: 'IoU + Low Aug',
-            data: [0.8673, 0.8656, 0.8720, 0.8683],
+            data: [0.8673, 0.8656, 0.872, 0.8683],
             borderColor: colors.primary,
             backgroundColor: `${colors.primary}30`,
             pointBackgroundColor: colors.primary,
@@ -208,7 +208,7 @@ export class ImageSegmentationComponent
           },
           {
             label: 'Dice + Low Aug',
-            data: [0.8666, 0.8681, 0.8690, 0.8704],
+            data: [0.8666, 0.8681, 0.869, 0.8704],
             borderColor: colors.amber,
             backgroundColor: `${colors.amber}30`,
             pointBackgroundColor: colors.amber,
@@ -303,7 +303,7 @@ export class ImageSegmentationComponent
           y: {
             beginAtZero: false,
             min: 0.865,
-            max: 0.870,
+            max: 0.87,
             ticks: { color: colors.text },
             grid: { color: colors.border },
             title: {

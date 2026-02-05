@@ -12,9 +12,11 @@
   ]"
 >
   <div description>
-    <span class="italic">End-to-end binary segmentation from sparse scribbles</span> using an
-    EfficientNet-B2 U-Net with region-based losses and careful augmentation for
-    weak supervision.
+    <span class="italic"
+      >End-to-end binary segmentation from sparse scribbles</span
+    >
+    using an EfficientNet-B2 U-Net with region-based losses and careful
+    augmentation for weak supervision.
   </div>
 
   <div content>
@@ -23,8 +25,8 @@
         <span class="text-4xl">B</span>inary image segmentation—dividing images
         into foreground and background regions at the pixel level—is fundamental
         in computer vision with applications in medical imaging, autonomous
-        driving, and interactive editing. This project addresses the challenge of
-        <span class="italic">sparse supervision</span>, where only limited
+        driving, and interactive editing. This project addresses the challenge
+        of <span class="italic">sparse supervision</span>, where only limited
         scribbles are provided instead of dense masks. By leveraging modern deep
         learning architectures and carefully designed loss functions, we achieve
         competitive segmentation performance while dramatically reducing
@@ -153,8 +155,8 @@
       <div class="font-serif text-lg text-justify">
         <div class="mb-3">
           We observe an RGB image and a sparse scribble mask with three label
-          states. The goal is to predict a dense binary mask that maximizes
-          mean Intersection over Union (mIoU) against the ground truth.
+          states. The goal is to predict a dense binary mask that maximizes mean
+          Intersection over Union (mIoU) against the ground truth.
         </div>
         <div class="font-sans grid grid-cols-1 gap-3">
           <div class="p-3 rounded border border-(--color-text)/20">
@@ -174,28 +176,36 @@
           </div>
         </div>
       </div>
-      <div class="p-4 py-3 rounded border border-(--color-text)/20 bg-(--color-bg)">
+      <div
+        class="p-4 py-3 rounded border border-(--color-text)/20 bg-(--color-bg)"
+      >
         <div class="font-sans font-bold mb-3">Mathematical Setup</div>
         <div class="grid grid-cols-1 gap-0 text-sm">
           <div class="flex items-start justify-between gap-4">
             <div class="text-(--color-text)">RGB image</div>
             <div
               class="equation-block text-right"
-              [innerHTML]="'b \\in \\mathbb{R}^{n_x \\times n_y \\times 3}' | safeLatex"
+              [innerHTML]="
+                'b \\in \\mathbb{R}^{n_x \\times n_y \\times 3}' | safeLatex
+              "
             ></div>
           </div>
           <div class="flex items-start justify-between gap-4">
             <div class="text-(--color-text)">Scribble mask</div>
             <div
               class="equation-block text-right"
-              [innerHTML]="'c \\in \\{0,1,\\emptyset\\}^{n_x \\times n_y}' | safeLatex"
+              [innerHTML]="
+                'c \\in \\{0,1,\\emptyset\\}^{n_x \\times n_y}' | safeLatex
+              "
             ></div>
           </div>
           <div class="flex items-start justify-between gap-4">
             <div class="text-(--color-text)">Prediction</div>
             <div
               class="equation-block text-right"
-              [innerHTML]="'\\hat{g} \\in \\{0,1\\}^{n_x \\times n_y}' | safeLatex"
+              [innerHTML]="
+                '\\hat{g} \\in \\{0,1\\}^{n_x \\times n_y}' | safeLatex
+              "
             ></div>
           </div>
           <div class="flex items-start justify-between gap-4">
@@ -220,7 +230,10 @@
         </div>
         <div
           class="equation-block"
-          [innerHTML]="'\\text{IoU}_k = \\frac{|\\{g=k\\} \\cap \\{\\hat{g}=k\\}|}{|\\{g=k\\} \\cup \\{\\hat{g}=k\\}|}' | safeLatex"
+          [innerHTML]="
+            '\\text{IoU}_k = \\frac{|\\{g=k\\} \\cap \\{\\hat{g}=k\\}|}{|\\{g=k\\} \\cup \\{\\hat{g}=k\\}|}'
+              | safeLatex
+          "
         ></div>
         <div class="font-sans text-sm mt-3 text-(--color-text)">
           Ranges from 0 (no overlap) to 1 (perfect match)
@@ -236,7 +249,10 @@
         </div>
         <div
           class="equation-block"
-          [innerHTML]="'\\text{mIoU} = \\frac{\\text{IoU}_{\\text{bg}} + \\text{IoU}_{\\text{fg}}}{2}' | safeLatex"
+          [innerHTML]="
+            '\\text{mIoU} = \\frac{\\text{IoU}_{\\text{bg}} + \\text{IoU}_{\\text{fg}}}{2}'
+              | safeLatex
+          "
         ></div>
         <div class="font-sans text-sm mt-3 text-(--color-text)">
           Provides balanced evaluation across both classes
@@ -278,13 +294,22 @@
               <div class="font-bold mb-2">Scribble Mapping</div>
               <div class="text-sm space-y-1">
                 <div>
-                  <span class="font-bold">Background</span>: <span [innerHTML]="'0 \\rightarrow -1' | safeLatex:false"></span>
+                  <span class="font-bold">Background</span>:
+                  <span
+                    [innerHTML]="'0 \\rightarrow -1' | safeLatex: false"
+                  ></span>
                 </div>
                 <div>
-                  <span class="font-bold">Foreground</span>: <span [innerHTML]="'1 \\rightarrow +1' | safeLatex:false"></span>
+                  <span class="font-bold">Foreground</span>:
+                  <span
+                    [innerHTML]="'1 \\rightarrow +1' | safeLatex: false"
+                  ></span>
                 </div>
                 <div>
-                  <span class="font-bold">Unlabeled</span>: <span [innerHTML]="'\\emptyset \\rightarrow 0' | safeLatex:false"></span>
+                  <span class="font-bold">Unlabeled</span>:
+                  <span
+                    [innerHTML]="'\\emptyset \\rightarrow 0' | safeLatex: false"
+                  ></span>
                 </div>
               </div>
             </div>
@@ -292,8 +317,18 @@
             <div class="p-4">
               <div class="font-bold mb-2">Spatial Resizing</div>
               <div class="text-sm space-y-1">
-                <div><strong>Original: </strong> <span [innerHTML]="'500 \\times 375' | safeLatex:false"></span></div>
-                <div><strong>Resized: </strong> <span [innerHTML]="'480 \\times 352' | safeLatex:false"></span></div>
+                <div>
+                  <strong>Original: </strong>
+                  <span
+                    [innerHTML]="'500 \\times 375' | safeLatex: false"
+                  ></span>
+                </div>
+                <div>
+                  <strong>Resized: </strong>
+                  <span
+                    [innerHTML]="'480 \\times 352' | safeLatex: false"
+                  ></span>
+                </div>
                 <div class="text-xs italic">
                   Largest multiple of 32 below original resolution
                 </div>
@@ -303,9 +338,7 @@
             <div class="p-4">
               <div class="font-bold mb-2">Interpolation Methods</div>
               <div class="text-sm space-y-1">
-                <div>
-                  <strong>RGB Image:</strong> Lanczos (preserves edges)
-                </div>
+                <div><strong>RGB Image:</strong> Lanczos (preserves edges)</div>
                 <div>
                   <strong>Masks:</strong> Nearest-neighbor (preserves labels)
                 </div>
@@ -415,19 +448,22 @@
           </div>
           <div class="text-(--color-text) mt-3">
             Gradient descent optimizes the soft probabilities
-            <span [innerHTML]="'\\hat{p}' | safeLatex:false"></span>, not the
+            <span [innerHTML]="'\\hat{p}' | safeLatex: false"></span>, not the
             binarized masks
-            <span [innerHTML]="'\\hat{g}' | safeLatex:false"></span>.
+            <span [innerHTML]="'\\hat{g}' | safeLatex: false"></span>.
           </div>
         </div>
         <div class="p-3 border border-(--color-text)/20 bg-(--color-bg)">
           <!-- <div class="text-xs text-(--color-text) mb-2">Decision rule</div> -->
           <div
             class="equation-block text-center"
-            [innerHTML]="'\\hat{g}_i = \\begin{cases}1 & \\text{if } \\hat{p}_i \\ge \\tau \\\\ 0 & \\text{otherwise}\\end{cases}' | safeLatex"
+            [innerHTML]="
+              '\\hat{g}_i = \\begin{cases}1 & \\text{if } \\hat{p}_i \\ge \\tau \\\\ 0 & \\text{otherwise}\\end{cases}'
+                | safeLatex
+            "
           ></div>
           <div class="text-xs text-center text-(--color-text) mt-2">
-            <span [innerHTML]="'\\tau = 0.5' | safeLatex:false"></span>
+            <span [innerHTML]="'\\tau = 0.5' | safeLatex: false"></span>
           </div>
         </div>
       </div>
@@ -472,7 +508,10 @@
                 >
                   <div
                     class="equation-block"
-                    [innerHTML]="'\\mathcal{L}_{\\text{Dice}} = 1 - \\frac{2 \\sum_i \\hat{p}_i g_i}{\\sum_i \\hat{p}_i + g_i}' | safeLatex"
+                    [innerHTML]="
+                      '\\mathcal{L}_{\\text{Dice}} = 1 - \\frac{2 \\sum_i \\hat{p}_i g_i}{\\sum_i \\hat{p}_i + g_i}'
+                        | safeLatex
+                    "
                   ></div>
                 </div>
                 <div class="text-xs">
@@ -490,7 +529,10 @@
                 >
                   <div
                     class="equation-block"
-                    [innerHTML]="'\\mathcal{L}_{\\text{IoU}} = 1 - \\frac{\\sum_i \\hat{p}_i g_i}{\\sum_i \\hat{p}_i + g_i - \\hat{p}_i g_i}' | safeLatex"
+                    [innerHTML]="
+                      '\\mathcal{L}_{\\text{IoU}} = 1 - \\frac{\\sum_i \\hat{p}_i g_i}{\\sum_i \\hat{p}_i + g_i - \\hat{p}_i g_i}'
+                        | safeLatex
+                    "
                   ></div>
                 </div>
                 <div class="text-xs">
@@ -529,11 +571,15 @@
                 >
                   <div
                     class="equation-block"
-                    [innerHTML]="'\\mathcal{L}_{\\text{total}} = \\lambda_{\\text{REG}} \\mathcal{L}_{\\text{REG}} + \\lambda_{\\text{BCE}} \\mathcal{L}_{\\text{BCE}}' | safeLatex"
+                    [innerHTML]="
+                      '\\mathcal{L}_{\\text{total}} = \\lambda_{\\text{REG}} \\mathcal{L}_{\\text{REG}} + \\lambda_{\\text{BCE}} \\mathcal{L}_{\\text{BCE}}'
+                        | safeLatex
+                    "
                   ></div>
                 </div>
                 <div class="text-xs">
-                  REG ∈ {{ '{' }}Dice, IoU{{ '}' }} selected via cross-validation
+                  REG ∈ {{ "{" }}Dice, IoU{{ "}" }} selected via
+                  cross-validation
                 </div>
               </div>
             </div>
@@ -547,9 +593,7 @@
                   <div class="font-mono text-xs">λ_REG = 1.0</div>
                   <div class="font-mono text-xs mt-1">λ_BCE = 0.2</div>
                 </div>
-                <div class="text-xs italic">
-                  Fixed across all experiments
-                </div>
+                <div class="text-xs italic">Fixed across all experiments</div>
               </div>
             </div>
 
@@ -564,7 +608,10 @@
                 >
                   <div
                     class="equation-block text-xs"
-                    [innerHTML]="'\\mathcal{L}_{\\text{BCE}} = -\\sum_i p_c g_i \\log \\hat{p}_i + (1-g_i) \\log(1-\\hat{p}_i)' | safeLatex"
+                    [innerHTML]="
+                      '\\mathcal{L}_{\\text{BCE}} = -\\sum_i p_c g_i \\log \\hat{p}_i + (1-g_i) \\log(1-\\hat{p}_i)'
+                        | safeLatex
+                    "
                   ></div>
                 </div>
                 <div class="text-xs">
@@ -579,9 +626,7 @@
             <div class="p-4">
               <div class="font-bold mb-2">Rationale</div>
               <div class="text-sm space-y-1">
-                <div>
-                  <strong>BCE:</strong> Reliable pixel-level guidance
-                </div>
+                <div><strong>BCE:</strong> Reliable pixel-level guidance</div>
                 <div>
                   <strong>Region Loss:</strong> Captures global structure
                 </div>
@@ -716,14 +761,16 @@
             <div class="p-4">
               <div class="font-bold mb-2">Foreground Scribbles</div>
               <div class="text-sm space-y-2">
-                <div><strong>Step 1:</strong> Morphological closing of mask</div>
                 <div>
-                  <strong>Step 2:</strong> Extract connected components
+                  <strong>Step 1:</strong> Morphological closing of mask
                 </div>
+                <div><strong>Step 2:</strong> Extract connected components</div>
                 <div>
                   <strong>Step 3:</strong> Sample random line inside each region
                 </div>
-                <div><strong>Step 4:</strong> Dilate lines to match thickness</div>
+                <div>
+                  <strong>Step 4:</strong> Dilate lines to match thickness
+                </div>
                 <div class="text-xs italic mt-2">
                   Only components above minimum area threshold are annotated
                 </div>
@@ -867,7 +914,9 @@
               <div class="font-bold mb-2">ResNet-18</div>
               <div class="text-sm space-y-1">
                 <div><strong>Pros:</strong> Well-established architecture</div>
-                <div><strong>Cons:</strong> Suboptimal parameter efficiency</div>
+                <div>
+                  <strong>Cons:</strong> Suboptimal parameter efficiency
+                </div>
                 <div class="text-xs italic">
                   Decent but not optimal performance
                 </div>
@@ -875,7 +924,9 @@
             </div>
 
             <div class="p-4">
-              <div class="font-bold mb-2 text-(--color-primary)">EfficientNet-B2</div>
+              <div class="font-bold mb-2 text-(--color-primary)">
+                EfficientNet-B2
+              </div>
               <div class="text-sm space-y-1">
                 <div><strong>Pros:</strong> Balanced efficiency & capacity</div>
                 <div><strong>Selected:</strong> Best validation mIoU</div>
@@ -923,7 +974,9 @@
             <div class="p-4">
               <div class="font-bold mb-2">Decoder</div>
               <div class="text-sm space-y-1">
-                <div><strong>Style:</strong> U-Net symmetric skip connections</div>
+                <div>
+                  <strong>Style:</strong> U-Net symmetric skip connections
+                </div>
                 <div><strong>Attention:</strong> scSE blocks</div>
                 <div class="text-xs italic">
                   Concurrent spatial and channel recalibration
@@ -1037,7 +1090,9 @@
               </div>
             </div>
 
-            <div class="p-4 rounded border border-(--color-text)/20 lg:col-span-2">
+            <div
+              class="p-4 rounded border border-(--color-text)/20 lg:col-span-2"
+            >
               <div class="font-bold mb-2">Early Stopping</div>
               <div class="text-sm grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div class="flex items-center justify-between">
@@ -1108,9 +1163,7 @@
         class="col-span-1"
       >
         <div class="text-center">
-          <div class="text-5xl font-bold text-(--color-green) mb-2">
-            0.8569
-          </div>
+          <div class="text-5xl font-bold text-(--color-green) mb-2">0.8569</div>
           <div class="text-sm text-(--color-text) mb-3">
             mIoU on first test set
           </div>
@@ -1132,14 +1185,13 @@
         class="col-span-1"
       >
         <div class="text-center">
-          <div class="text-5xl font-bold text-(--color-green) mb-2">
-            0.8758
-          </div>
+          <div class="text-5xl font-bold text-(--color-green) mb-2">0.8758</div>
           <div class="text-sm text-(--color-text)">
             Mean across 5 folds (best config)
           </div>
           <div class="text-xs mt-2 text-(--color-text)">
-            IoU Loss + Low Aug + Batch 8 + <span [innerHTML]="'p_c=3' | safeLatex:false"></span>
+            IoU Loss + Low Aug + Batch 8 +
+            <span [innerHTML]="'p_c=3' | safeLatex: false"></span>
           </div>
         </div>
       </app-window>
@@ -1179,7 +1231,7 @@
           />
         </div>
         <div class="text-xs text-center mt-2 text-(--color-text)">
-            Input image with background and foreground objects
+          Input image with background and foreground objects
         </div>
       </app-window>
       <app-window
@@ -1247,7 +1299,9 @@
           <canvas #posWeightChart></canvas>
         </div>
         <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
-          Class weighting <span [innerHTML]="'p_c=3' | safeLatex:false"></span> provides optimal balance for foreground objects.
+          Class weighting
+          <span [innerHTML]="'p_c=3' | safeLatex: false"></span> provides
+          optimal balance for foreground objects.
         </div>
       </app-window>
 
@@ -1260,16 +1314,14 @@
           <canvas #batchSizeChart></canvas>
         </div>
         <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
-          Batch size 8 achieves best trade-off between stability and generalization.
+          Batch size 8 achieves best trade-off between stability and
+          generalization.
         </div>
       </app-window>
     </div>
 
     <div class="grid grid-cols-1 gap-6 mb-8">
-      <app-window
-        windowTitle="Augmentation Impact"
-        [initialMinimized]="true"
-      >
+      <app-window windowTitle="Augmentation Impact" [initialMinimized]="true">
         <div class="font-sans">
           <div class="pb-2 border-b-1 border-(--color-text)/20">
             <div
@@ -1360,9 +1412,7 @@
             <div class="p-4">
               <div class="font-bold mb-2">Interpretation</div>
               <div class="text-sm space-y-2">
-                <div>
-                  Dice and IoU are inherently robust to class imbalance
-                </div>
+                <div>Dice and IoU are inherently robust to class imbalance</div>
                 <div class="text-xs">
                   BCE contribution (λ=0.2) is secondary to region losses
                 </div>
