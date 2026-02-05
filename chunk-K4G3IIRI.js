@@ -1,4 +1,4 @@
-import{a as h,b as x}from"./chunk-YJJZCYPS.js";import{a as f}from"./chunk-ARLT7E4K.js";import{a as k}from"./chunk-MBTDRT46.js";import"./chunk-CT3WOVP3.js";import"./chunk-KD5KPFK4.js";import{Ba as l,Ga as n,Oa as m,Xa as o,bb as i,cb as t,db as r,nb as e,qb as u,sb as s,tb as a}from"./chunk-M4WCLFPR.js";var g=()=>["MoleculeNet Lipophilicity","MolFormer","PyTorch","RDKit","DeepChem","Transformers"],y=class c{benzeneSvg=`
+import{a as h,b as x}from"./chunk-XTUVMJIF.js";import{a as f}from"./chunk-FJ5XCANI.js";import{a as k}from"./chunk-DZX3IOKV.js";import"./chunk-QYKDDTVU.js";import"./chunk-PNVBHQ5N.js";import{Ba as l,Ga as n,Oa as m,Xa as o,bb as i,cb as t,db as r,nb as e,rb as u,tb as s,ub as a}from"./chunk-YV7RGB6H.js";var g=()=>["MoleculeNet Lipophilicity","MolFormer","PyTorch","RDKit","DeepChem","Transformers"],y=class c{benzeneSvg=`
   <svg version='1.1' baseProfile='full'
               xmlns='http://www.w3.org/2000/svg'
                       xmlns:rdkit='http://www.rdkit.org/xml'
