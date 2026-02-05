@@ -17,12 +17,7 @@ import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-healthcare-utilization',
-  imports: [
-    NgIf,
-    ProjectTemplateComponent,
-    WindowComponent,
-    SafeLatexPipe,
-  ],
+  imports: [NgIf, ProjectTemplateComponent, WindowComponent, SafeLatexPipe],
   templateUrl: './healthcare-utilization.component.html',
   styleUrl: './healthcare-utilization.component.css',
 })

@@ -17,12 +17,7 @@ import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-program-repair-hint',
-  imports: [
-    NgIf,
-    ProjectTemplateComponent,
-    WindowComponent,
-    SafeLatexPipe,
-  ],
+  imports: [NgIf, ProjectTemplateComponent, WindowComponent, SafeLatexPipe],
   templateUrl: './program-repair-hint.component.html',
   styleUrl: './program-repair-hint.component.css',
 })
