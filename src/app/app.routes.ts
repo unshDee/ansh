@@ -20,12 +20,16 @@ export const routes: Routes = [
   {
     path: 'contact',
     loadComponent: () =>
-      import('./features/contact/contact.component').then((m) => m.ContactComponent),
+      import('./features/contact/contact.component').then(
+        (m) => m.ContactComponent,
+      ),
   },
   {
     path: 'resume',
     loadComponent: () =>
-      import('./features/resume/resume.component').then((m) => m.ResumeComponent),
+      import('./features/resume/resume.component').then(
+        (m) => m.ResumeComponent,
+      ),
   },
   {
     path: 'projects',
@@ -40,30 +44,30 @@ export const routes: Routes = [
       {
         path: 'data-selection-peft',
         loadComponent: () =>
-          import(
-            './features/projects/projects/data-selection-peft/data-selection-peft.component'
-          ).then((m) => m.DataSelectionPeftComponent),
+          import('./features/projects/projects/data-selection-peft/data-selection-peft.component').then(
+            (m) => m.DataSelectionPeftComponent,
+          ),
       },
       {
         path: 'fact-check-liar',
         loadComponent: () =>
-          import(
-            './features/projects/projects/fact-check-liar/fact-check-liar.component'
-          ).then((m) => m.FactCheckLiarComponent),
+          import('./features/projects/projects/fact-check-liar/fact-check-liar.component').then(
+            (m) => m.FactCheckLiarComponent,
+          ),
       },
       {
         path: 'program-repair-hint',
         loadComponent: () =>
-          import(
-            './features/projects/projects/program-repair-hint/program-repair-hint.component'
-          ).then((m) => m.ProgramRepairHintComponent),
+          import('./features/projects/projects/program-repair-hint/program-repair-hint.component').then(
+            (m) => m.ProgramRepairHintComponent,
+          ),
       },
       {
         path: 'healthcare-utilization',
         loadComponent: () =>
-          import(
-            './features/projects/projects/healthcare-utilization/healthcare-utilization.component'
-          ).then((m) => m.HealthcareUtilizationComponent),
+          import('./features/projects/projects/healthcare-utilization/healthcare-utilization.component').then(
+            (m) => m.HealthcareUtilizationComponent,
+          ),
       },
       {
         path: 'voxart',
