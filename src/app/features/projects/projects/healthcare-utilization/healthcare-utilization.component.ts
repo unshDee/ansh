@@ -358,8 +358,14 @@ export class HealthcareUtilizationComponent
           tooltip: {
             callbacks: {
               label: function (context) {
-                const total = (context.dataset.data as number[]).reduce((a: number, b: number) => a + b, 0);
-                const percentage = ((context.parsed as number) / (total as number) * 100).toFixed(1);
+                const total = (context.dataset.data as number[]).reduce(
+                  (a: number, b: number) => a + b,
+                  0,
+                );
+                const percentage = (
+                  ((context.parsed as number) / (total as number)) *
+                  100
+                ).toFixed(1);
                 return `${context.label}: ${context.parsed} (${percentage}%)`;
               },
             },

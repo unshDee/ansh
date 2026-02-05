@@ -12,10 +12,10 @@
   ]"
 >
   <div description>
-    <span class="italic">Predicting healthcare utilization</span> and 
-    <span class="italic">medical expenditure</span> using machine
-    learning models on a comprehensive dataset of 108 features from a nationwide
-    U.S. patient survey.
+    <span class="italic">Predicting healthcare utilization</span> and
+    <span class="italic">medical expenditure</span> using machine learning
+    models on a comprehensive dataset of 108 features from a nationwide U.S.
+    patient survey.
   </div>
   <div content>
     <div class="grid grid-cols-4 gap-4">
@@ -30,8 +30,8 @@
         comprehensive view of patient profiles. The project addresses both
         <span class="italic">regression</span> (predicting total medical
         expenditure) and <span class="italic">classification</span> (determining
-        low vs. high healthcare utilization) tasks through rigorous preprocessing
-        and feature engineering.
+        low vs. high healthcare utilization) tasks through rigorous
+        preprocessing and feature engineering.
       </div>
     </div>
 
@@ -60,24 +60,31 @@
       <div class="col-span-1">
         <h3 class="font-sans text-2xl mb-4">Four-Stage Pipeline</h3>
         <div class="font-serif text-lg text-justify mb-6">
-          The ML workflow is structured in four sequential stages, from raw data to final model selection and deployment readiness.
+          The ML workflow is structured in four sequential stages, from raw data
+          to final model selection and deployment readiness.
         </div>
         <app-window windowTitle="Task">
           <div class="space-y-4 font-sans">
             <div class="grid grid-cols-3 gap-2 items-center">
               <!-- Input -->
-              <div class="col-span-full p-3 border-2 border-(--color-text) rounded text-center">
+              <div
+                class="col-span-full p-3 border-2 border-(--color-text) rounded text-center"
+              >
                 <div class="font-bold text-sm">108 Features</div>
               </div>
 
               <!-- Regression -->
-              <div class="col-span-3 p-3 bg-(--color-primary)/20 border-2 border-(--color-primary) rounded text-center">
+              <div
+                class="col-span-3 p-3 bg-(--color-primary)/20 border-2 border-(--color-primary) rounded text-center"
+              >
                 <div class="font-bold text-sm">Regression</div>
                 <div class="text-xs">Medical Cost Prediction</div>
               </div>
 
               <!-- Classification -->
-              <div class="col-span-3 p-3 bg-(--color-primary)/20 border-2 border-(--color-primary) rounded text-center">
+              <div
+                class="col-span-3 p-3 bg-(--color-primary)/20 border-2 border-(--color-primary) rounded text-center"
+              >
                 <div class="font-bold text-sm">Classification</div>
                 <div class="text-xs">Utilization Category</div>
               </div>
@@ -87,21 +94,45 @@
       </div>
       <div class="col-span-1">
         <div class="grid grid-cols-1 gap-3">
-          <div class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded">
-            <div class="font-sans font-bold text-lg mb-1">Stage 1: Data Analysis</div>
-            <div class="font-sans text-sm text-(--color-text)">EDA, correlation matrix, statistical significance testing</div>
+          <div
+            class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded"
+          >
+            <div class="font-sans font-bold text-lg mb-1">
+              Stage 1: Data Analysis
+            </div>
+            <div class="font-sans text-sm text-(--color-text)">
+              EDA, correlation matrix, statistical significance testing
+            </div>
           </div>
-          <div class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded">
-            <div class="font-sans font-bold text-lg mb-1">Stage 2: Preprocessing</div>
-            <div class="font-sans text-sm text-(--color-text)">Encoding, scaling, transformation, feature engineering</div>
+          <div
+            class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded"
+          >
+            <div class="font-sans font-bold text-lg mb-1">
+              Stage 2: Preprocessing
+            </div>
+            <div class="font-sans text-sm text-(--color-text)">
+              Encoding, scaling, transformation, feature engineering
+            </div>
           </div>
-          <div class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded">
-            <div class="font-sans font-bold text-lg mb-1">Stage 3: Model Training</div>
-            <div class="font-sans text-sm text-(--color-text)">GridSearchCV tuning, cross-validation, parameter optimization</div>
+          <div
+            class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded"
+          >
+            <div class="font-sans font-bold text-lg mb-1">
+              Stage 3: Model Training
+            </div>
+            <div class="font-sans text-sm text-(--color-text)">
+              GridSearchCV tuning, cross-validation, parameter optimization
+            </div>
           </div>
-          <div class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded">
-            <div class="font-sans font-bold text-lg mb-1">Stage 4: Evaluation</div>
-            <div class="font-sans text-sm text-(--color-text)">Performance metrics, model comparison, best selection</div>
+          <div
+            class="bg-(--color-bg) border-2 border-(--color-text) p-3 rounded"
+          >
+            <div class="font-sans font-bold text-lg mb-1">
+              Stage 4: Evaluation
+            </div>
+            <div class="font-sans text-sm text-(--color-text)">
+              Performance metrics, model comparison, best selection
+            </div>
           </div>
         </div>
       </div>
@@ -113,41 +144,66 @@
       <div class="col-span-1">
         <h3 class="font-sans text-2xl mb-4">Exploratory Data Analysis</h3>
         <div class="font-serif text-lg text-justify mb-4">
-          Extensive EDA was conducted on all 108 features using statistical summaries, visualizations (boxplots, regression plots, heatmaps), correlation analysis, and statistical testing (ANOVA, T-tests, chi-square) to identify key predictors.
+          Extensive EDA was conducted on all 108 features using statistical
+          summaries, visualizations (boxplots, regression plots, heatmaps),
+          correlation analysis, and statistical testing (ANOVA, T-tests,
+          chi-square) to identify key predictors.
         </div>
       </div>
       <div class="col-span-1">
         <h3 class="font-sans text-2xl mb-4">Statistical Testing</h3>
         <div class="font-serif text-lg text-justify mb-4">
-          ANOVA, T-tests, and chi-square tests were used to assess the significance of categorical features in relation to target variables, guiding feature selection for model development.
+          ANOVA, T-tests, and chi-square tests were used to assess the
+          significance of categorical features in relation to target variables,
+          guiding feature selection for model development.
         </div>
       </div>
     </div>
 
     <h3 class="font-sans text-2xl mb-4">Data Preprocessing Pipeline</h3>
     <div class="font-serif text-lg text-justify mb-6">
-      The preprocessing pipeline transformed raw survey data through four critical stages, each addressing specific data quality and feature engineering challenges to prepare the 108 features for optimal model performance.
+      The preprocessing pipeline transformed raw survey data through four
+      critical stages, each addressing specific data quality and feature
+      engineering challenges to prepare the 108 features for optimal model
+      performance.
     </div>
 
     <div class="grid grid-cols-1 gap-6 mb-8">
       <!-- Step 1: Missing Value Handling -->
-      <app-window windowTitle="Step 1: Missing Value Handling" [initialMinimized]="true">
+      <app-window
+        windowTitle="Step 1: Missing Value Handling"
+        [initialMinimized]="true"
+      >
         <div class="font-sans">
           <div class="pb-2 border-b-1 border-(--color-text)/20">
-            <div class="text-lg font-bold mb-2" style="color: var(--color-primary);">Context-Aware Imputation Strategy</div>
-            <div class="text-base">Survey data contains special codes (-1, -2, -7) indicating "inapplicable", "don't know", and "refused" responses. Each code was interpreted in context before applying appropriate imputation methods.</div>
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Context-Aware Imputation Strategy
+            </div>
+            <div class="text-base">
+              Survey data contains special codes (-1, -2, -7) indicating
+              "inapplicable", "don't know", and "refused" responses. Each code
+              was interpreted in context before applying appropriate imputation
+              methods.
+            </div>
           </div>
-          
+
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="p-4">
               <div class="font-bold mb-2">Special Code Interpretation</div>
               <div class="text-sm space-y-1">
-                <div><span class="font-bold">-1</span>: Inapplicable (logical skip)</div>
-                <div><span class="font-bold">-2</span>: Don't know (true missing)</div>
+                <div>
+                  <span class="font-bold">-1</span>: Inapplicable (logical skip)
+                </div>
+                <div>
+                  <span class="font-bold">-2</span>: Don't know (true missing)
+                </div>
                 <div><span class="font-bold">-7</span>: Refused to answer</div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">Continuous Variables</div>
               <div class="text-sm space-y-1">
@@ -156,16 +212,18 @@
                 <div>Example: <span class="font-mono">INCOME, AGE</span></div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">Categorical Variables</div>
               <div class="text-sm space-y-1">
                 <div><strong>Mode</strong>: Most frequent value</div>
                 <div>Preserves distribution</div>
-                <div>Example: <span class="font-mono">REGION, MARITAL_STATUS</span></div>
+                <div>
+                  Example: <span class="font-mono">REGION, MARITAL_STATUS</span>
+                </div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">Value Interpretation</div>
               <div class="text-sm space-y-1">
@@ -179,45 +237,73 @@
       </app-window>
 
       <!-- Step 2: Feature Encoding -->
-      <app-window windowTitle="Step 2: Feature Encoding" [initialMinimized]="true">
+      <app-window
+        windowTitle="Step 2: Feature Encoding"
+        [initialMinimized]="true"
+      >
         <div class="font-sans">
           <div class="pb-2 border-b-1 border-(--color-text)/20">
-            <div class="text-lg font-bold mb-2" style="color: var(--color-primary);">Multi-Strategy Encoding Approach</div>
-            <div class="text-base">Different encoding techniques were applied based on feature cardinality and relationship to target variables, optimizing information retention while preventing dimensionality explosion.</div>
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Multi-Strategy Encoding Approach
+            </div>
+            <div class="text-base">
+              Different encoding techniques were applied based on feature
+              cardinality and relationship to target variables, optimizing
+              information retention while preventing dimensionality explosion.
+            </div>
           </div>
-          
+
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="p-4">
               <div class="font-bold mb-2">Label Encoding</div>
               <div class="text-sm space-y-2">
                 <div><strong>Used for:</strong> Binary features</div>
-                <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
                   <div class="font-mono text-xs">SEX: Male → 0, Female → 1</div>
-                  <div class="font-mono text-xs mt-1">MARRIED: No → 0, Yes → 1</div>
+                  <div class="font-mono text-xs mt-1">
+                    MARRIED: No → 0, Yes → 1
+                  </div>
                 </div>
                 <div class="text-xs italic">Preserves natural ordering</div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">One-Hot Encoding</div>
               <div class="text-sm space-y-2">
-                <div><strong>Used for:</strong> Nominal categories (≤10 values)</div>
-                <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
-                  <div class="font-mono text-xs">REGION: Northeast, Midwest,</div>
-                  <div class="font-mono text-xs">South, West → 4 binary cols</div>
+                <div>
+                  <strong>Used for:</strong> Nominal categories (≤10 values)
+                </div>
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
+                  <div class="font-mono text-xs">
+                    REGION: Northeast, Midwest,
+                  </div>
+                  <div class="font-mono text-xs">
+                    South, West → 4 binary cols
+                  </div>
                 </div>
                 <div class="text-xs italic">Prevents ordinal assumptions</div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">Target Encoding</div>
               <div class="text-sm space-y-2">
                 <div><strong>Used for:</strong> High-cardinality features</div>
-                <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
                   <div class="font-mono text-xs">Mean target per category</div>
-                  <div class="font-mono text-xs mt-1">+ smoothing to avoid overfitting</div>
+                  <div class="font-mono text-xs mt-1">
+                    + smoothing to avoid overfitting
+                  </div>
                 </div>
                 <div class="text-xs italic">Captures target relationship</div>
               </div>
@@ -227,62 +313,112 @@
       </app-window>
 
       <!-- Step 3: Transformation -->
-      <app-window windowTitle="Step 3: Transformation" [initialMinimized]="true">
+      <app-window
+        windowTitle="Step 3: Transformation"
+        [initialMinimized]="true"
+      >
         <div class="font-sans">
           <div class="pb-2 border-b-1 border-(--color-text)/20">
-            <div class="text-lg font-bold mb-2" style="color: var(--color-primary);">Distribution Normalization & Feature Engineering</div>
-            <div class="text-base">Applied mathematical transformations to address skewness, create meaningful feature groups, and improve model convergence by reshaping distributions closer to normal.</div>
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Distribution Normalization & Feature Engineering
+            </div>
+            <div class="text-base">
+              Applied mathematical transformations to address skewness, create
+              meaningful feature groups, and improve model convergence by
+              reshaping distributions closer to normal.
+            </div>
           </div>
-          
+
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="space-y-4">
               <div class="p-4 rounded">
                 <div class="font-bold mb-2">Logarithmic Transforms</div>
                 <div class="text-sm space-y-2">
-                  <div><strong>Target:</strong> Highly skewed features (income, expenditure)</div>
-                  <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
+                  <div>
+                    <strong>Target:</strong> Highly skewed features (income,
+                    expenditure)
+                  </div>
+                  <div
+                    class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                  >
+                    <div class="text-xs">
+                      <span
+                        [innerHTML]="
+                          '\\log(\\text{TOT\\_INCOME} + 1)' | safeLatex
+                        "
+                      ></span>
+                    </div>
+                    <div class="font-mono text-xs mt-1">
+                      Normalizes distribution for improved stability
+                    </div>
+                  </div>
                   <div class="text-xs">
-                    <span [innerHTML]="'\\log(\\text{TOT\\_INCOME} + 1)' | safeLatex"></span>
+                    <strong>Impact:</strong> Improved regression stability and
+                    reduced outlier influence
                   </div>
-                    <div class="font-mono text-xs mt-1">Normalizes distribution for improved stability</div>
-                  </div>
-                  <div class="text-xs"><strong>Impact:</strong> Improved regression stability and reduced outlier influence</div>
                 </div>
               </div>
-              
+
               <div class="p-4">
                 <div class="font-bold mb-2">Binning Strategies</div>
                 <div class="text-sm space-y-2">
-                  <div><strong>Created:</strong> Categorical age groups from continuous age</div>
-                  <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
-                    <div class="font-mono text-xs">0-17, 18-30, 31-45, 46-64, 65+</div>
+                  <div>
+                    <strong>Created:</strong> Categorical age groups from
+                    continuous age
                   </div>
-                  <div class="text-xs"><strong>Benefit:</strong> Captures non-linear age effects on healthcare utilization</div>
+                  <div
+                    class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                  >
+                    <div class="font-mono text-xs">
+                      0-17, 18-30, 31-45, 46-64, 65+
+                    </div>
+                  </div>
+                  <div class="text-xs">
+                    <strong>Benefit:</strong> Captures non-linear age effects on
+                    healthcare utilization
+                  </div>
                 </div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-3">Feature Engineering Examples</div>
               <div class="text-sm space-y-3">
                 <div>
                   <div class="font-bold mb-1">Income Consolidation</div>
-                  <div class="text-xs">Grouped TOT_INCOME and FAM_INCOME together to reduce dimensionality while preserving economic information</div>
+                  <div class="text-xs">
+                    Grouped TOT_INCOME and FAM_INCOME together to reduce
+                    dimensionality while preserving economic information
+                  </div>
                 </div>
                 <div>
                   <div class="font-bold mb-1">Chronic Condition Count</div>
-                  <div class="text-xs">Aggregated binary indicators (diabetes, hypertension, heart disease) into single numeric feature</div>
+                  <div class="text-xs">
+                    Aggregated binary indicators (diabetes, hypertension, heart
+                    disease) into single numeric feature
+                  </div>
                 </div>
                 <div>
                   <div class="font-bold mb-1">Healthcare Access Score</div>
-                  <div class="text-xs">Combined insurance status, regular provider, and visit frequency</div>
+                  <div class="text-xs">
+                    Combined insurance status, regular provider, and visit
+                    frequency
+                  </div>
                 </div>
                 <div>
                   <div class="font-bold mb-1">Socioeconomic Index</div>
-                  <div class="text-xs">Weighted combination of income, education, and employment</div>
+                  <div class="text-xs">
+                    Weighted combination of income, education, and employment
+                  </div>
                 </div>
-                <div class="text-xs mt-2 italic pt-2 border-t border-(--color-text)/20">
-                  <strong>Result:</strong> Domain-specific engineered features added to enhance model expressiveness
+                <div
+                  class="text-xs mt-2 italic pt-2 border-t border-(--color-text)/20"
+                >
+                  <strong>Result:</strong> Domain-specific engineered features
+                  added to enhance model expressiveness
                 </div>
               </div>
             </div>
@@ -291,58 +427,101 @@
       </app-window>
 
       <!-- Step 4: Scaling & Validation -->
-      <app-window windowTitle="Step 4: Scaling & Validation" [initialMinimized]="true">
+      <app-window
+        windowTitle="Step 4: Scaling & Validation"
+        [initialMinimized]="true"
+      >
         <div class="font-sans">
           <div class="pb-2 border-b-1 border-(--color-text)/20">
-            <div class="text-lg font-bold mb-2" style="color: var(--color-primary);">Normalization & Multicollinearity Check</div>
-            <div class="text-base">Final preprocessing stage ensuring features are on comparable scales and free from harmful collinearity that could destabilize model training and interpretation.</div>
+            <div
+              class="text-lg font-bold mb-2"
+              style="color: var(--color-primary)"
+            >
+              Normalization & Multicollinearity Check
+            </div>
+            <div class="text-base">
+              Final preprocessing stage ensuring features are on comparable
+              scales and free from harmful collinearity that could destabilize
+              model training and interpretation.
+            </div>
           </div>
-          
+
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="p-4">
               <div class="font-bold mb-2">Min-Max Scaling</div>
               <div class="text-sm space-y-2">
                 <div><strong>Range:</strong> [0, 1]</div>
-                <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
                   <div class="text-xs">
-                    <span [innerHTML]="'x\' = \\frac{x - \\min}{\\max - \\min}' | safeLatex"></span>
+                    <span
+                      [innerHTML]="
+                        'x\' = \\frac{x - \\min}{\\max - \\min}' | safeLatex
+                      "
+                    ></span>
                   </div>
                 </div>
-                <div class="text-xs"><strong>Applied to:</strong> Tree-based models (Random Forest, XGBoost)</div>
-                <div class="text-xs italic">Preserves zero values and distributional shape</div>
+                <div class="text-xs">
+                  <strong>Applied to:</strong> Tree-based models (Random Forest,
+                  XGBoost)
+                </div>
+                <div class="text-xs italic">
+                  Preserves zero values and distributional shape
+                </div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">Z-Score Normalization</div>
               <div class="text-sm space-y-2">
                 <div><strong>Mean:</strong> 0, <strong>Std:</strong> 1</div>
-                <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
                   <div class="text-xs">
-                    <span [innerHTML]="'z = \\frac{x - \\mu}{\\sigma}' | safeLatex"></span>
+                    <span
+                      [innerHTML]="'z = \\frac{x - \\mu}{\\sigma}' | safeLatex"
+                    ></span>
                   </div>
                 </div>
-                <div class="text-xs"><strong>Applied to:</strong> Linear models, Logistic Regression</div>
-                <div class="text-xs italic">Critical for gradient descent convergence</div>
+                <div class="text-xs">
+                  <strong>Applied to:</strong> Linear models, Logistic
+                  Regression
+                </div>
+                <div class="text-xs italic">
+                  Critical for gradient descent convergence
+                </div>
               </div>
             </div>
-            
+
             <div class="p-4">
               <div class="font-bold mb-2">VIF Analysis</div>
               <div class="text-sm space-y-2">
                 <div><strong>Threshold:</strong> VIF < 10</div>
-                <div class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30">
+                <div
+                  class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30"
+                >
                   <div class="font-mono text-xs">Removed features with</div>
                   <div class="font-mono text-xs">VIF > 10 threshold</div>
                 </div>
-                <div class="text-xs"><strong>Result:</strong> Eliminated multicollinearity, improved coefficient stability</div>
+                <div class="text-xs">
+                  <strong>Result:</strong> Eliminated multicollinearity,
+                  improved coefficient stability
+                </div>
               </div>
             </div>
           </div>
-          
-          <div class="mt-2 p-3 bg-(--color-primary)/15 border border-(--color-primary)">
+
+          <div
+            class="mt-2 p-3 bg-(--color-primary)/15 border border-(--color-primary)"
+          >
             <div class="text-sm font-bold mb-1">Outlier Handling Strategy</div>
-            <div class="text-xs">Winsorization at 1st and 99th percentiles for extreme values in expenditure and income features, preserving 98% of data while reducing leverage of statistical outliers on regression models.</div>
+            <div class="text-xs">
+              Winsorization at 1st and 99th percentiles for extreme values in
+              expenditure and income features, preserving 98% of data while
+              reducing leverage of statistical outliers on regression models.
+            </div>
           </div>
         </div>
       </app-window>
@@ -384,7 +563,9 @@
               <div class="text-sm">L1 + L2 penalties combined</div>
             </div>
             <div>
-              <div class="text-xl font-mono" style="color: var(--color-green);">10,964.77</div>
+              <div class="text-xl font-mono" style="color: var(--color-green)">
+                10,964.77
+              </div>
               <div class="">RMSE</div>
             </div>
           </div>
@@ -422,7 +603,9 @@
       </app-window>
     </div>
 
-    <h3 class="font-sans text-2xl mb-4">Classification Models (F1-Score Focus)</h3>
+    <h3 class="font-sans text-2xl mb-4">
+      Classification Models (F1-Score Focus)
+    </h3>
     <div class="grid grid-cols-1 mb-8">
       <app-window windowTitle="Model Comparison" class="col-span-1">
         <div class="h-80">
@@ -471,7 +654,9 @@
               <div class="text-sm">Multiple trees averaging</div>
             </div>
             <div>
-              <div class="text-xl font-mono" style="color: var(--color-green);">0.858</div>
+              <div class="text-xl font-mono" style="color: var(--color-green)">
+                0.858
+              </div>
               <div class="">F1 Score</div>
             </div>
           </div>
@@ -481,54 +666,57 @@
 
     <h2 class="text-3xl my-4 mt-10">Model Selection & Hyperparameter Tuning</h2>
     <div class="font-serif text-xl text-justify mb-6">
-      GridSearchCV was employed to systematically tune hyperparameters for each model, evaluating parameter combinations using cross-validation.
+      GridSearchCV was employed to systematically tune hyperparameters for each
+      model, evaluating parameter combinations using cross-validation.
     </div>
 
     <h3 class="font-sans text-2xl mb-4">Regression Configuration</h3>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
       <app-window windowTitle="Linear Regression" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
-          <div class="p-2">
-            <strong>fit_intercept:</strong> False
-          </div>
+          <div class="p-2"><strong>fit_intercept:</strong> False</div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            Reduces RMSE while maintaining interpretability. Balanced fit without forcing the line through origin.
+            Reduces RMSE while maintaining interpretability. Balanced fit
+            without forcing the line through origin.
           </div>
         </div>
       </app-window>
       <app-window windowTitle="ElasticNet (Best)" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
           <div class="p-2">
-            <strong>alpha:</strong> 0.1<br/>
+            <strong>alpha:</strong> 0.1<br />
             <strong>l1_ratio:</strong> 0.9
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            90% L1 + 10% L2 penalty. Optimal balance between feature selection and regularization.
+            90% L1 + 10% L2 penalty. Optimal balance between feature selection
+            and regularization.
           </div>
         </div>
       </app-window>
       <app-window windowTitle="Random Forest" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
           <div class="p-2">
-            <strong>max_depth:</strong> 10<br/>
-            <strong>min_samples_split:</strong> 5<br/>
+            <strong>max_depth:</strong> 10<br />
+            <strong>min_samples_split:</strong> 5<br />
             <strong>n_estimators:</strong> 200
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            Effective bias-variance trade-off. 200 trees with reasonable depth constraints.
+            Effective bias-variance trade-off. 200 trees with reasonable depth
+            constraints.
           </div>
         </div>
       </app-window>
       <app-window windowTitle="XGBoost" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
           <div class="p-2">
-            <strong>learning_rate:</strong> 0.1<br/>
-            <strong>max_depth:</strong> 3<br/>
-            <strong>n_estimators:</strong> 100<br/>
+            <strong>learning_rate:</strong> 0.1<br />
+            <strong>max_depth:</strong> 3<br />
+            <strong>n_estimators:</strong> 100<br />
             <strong>subsample:</strong> 0.8
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            Conservative settings. Shallow trees prevent overfitting while capturing patterns.
+            Conservative settings. Shallow trees prevent overfitting while
+            capturing patterns.
           </div>
         </div>
       </app-window>
@@ -539,8 +727,8 @@
       <app-window windowTitle="Logistic Regression" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
           <div class="p-2">
-            <strong>C:</strong> 0.1<br/>
-            <strong>penalty:</strong> 'l1'<br/>
+            <strong>C:</strong> 0.1<br />
+            <strong>penalty:</strong> 'l1'<br />
             <strong>solver:</strong> 'saga'
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
@@ -551,9 +739,9 @@
       <app-window windowTitle="XGBoost" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
           <div class="p-2">
-            <strong>learning_rate:</strong> 0.1<br/>
-            <strong>max_depth:</strong> 3<br/>
-            <strong>n_estimators:</strong> 200<br/>
+            <strong>learning_rate:</strong> 0.1<br />
+            <strong>max_depth:</strong> 3<br />
+            <strong>n_estimators:</strong> 200<br />
             <strong>subsample:</strong> 1.0
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
@@ -564,13 +752,14 @@
       <app-window windowTitle="Random Forest (Best)" class="col-span-1">
         <div class="space-y-3 font-mono text-md">
           <div class="p-2">
-            <strong>max_depth:</strong> None<br/>
-            <strong>min_samples_leaf:</strong> 2<br/>
-            <strong>min_samples_split:</strong> 2<br/>
+            <strong>max_depth:</strong> None<br />
+            <strong>min_samples_leaf:</strong> 2<br />
+            <strong>min_samples_split:</strong> 2<br />
             <strong>n_estimators:</strong> 100
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            Unconstrained tree growth. Minimal leaf requirements for flexibility.
+            Unconstrained tree growth. Minimal leaf requirements for
+            flexibility.
           </div>
         </div>
       </app-window>
@@ -585,25 +774,37 @@
           <app-window windowTitle="Best Model: ElasticNet">
             <div class="space-y-3 font-sans text-lg">
               <div class="p-3">
-                <div class="text-sm font-bold font-sans text-(--color-primary)">RMSE (Test Set)</div>
+                <div class="text-sm font-bold font-sans text-(--color-primary)">
+                  RMSE (Test Set)
+                </div>
                 <div class="text-2xl font-bold font-mono">10,964.77</div>
               </div>
               <div class="text-sm text-(--color-text)">
-                ElasticNet's combination of L1 and L2 regularization effectively balanced feature selection and generalization, achieving the best performance among all.
+                ElasticNet's combination of L1 and L2 regularization effectively
+                balanced feature selection and generalization, achieving the
+                best performance among all.
               </div>
             </div>
           </app-window>
           <app-window windowTitle="Model Comparison">
             <div class="space-y-2 font-sans text-md">
-              <div class="flex justify-between items-center pb-2 border-b border-(--color-text)/20">
+              <div
+                class="flex justify-between items-center pb-2 border-b border-(--color-text)/20"
+              >
                 <span>Linear Regression</span>
                 <span class="font-bold">11,131</span>
               </div>
-              <div class="flex justify-between items-center pb-2 border-b border-(--color-text)/20">
+              <div
+                class="flex justify-between items-center pb-2 border-b border-(--color-text)/20"
+              >
                 <span class="font-bold">ElasticNet</span>
-                <span class="font-bold" style="color: var(--color-green);">10,965</span>
+                <span class="font-bold" style="color: var(--color-green)"
+                  >10,965</span
+                >
               </div>
-              <div class="flex justify-between items-center pb-2 border-b border-(--color-text)/20">
+              <div
+                class="flex justify-between items-center pb-2 border-b border-(--color-text)/20"
+              >
                 <span>Random Forest</span>
                 <span class="font-bold">12,012</span>
               </div>
@@ -622,27 +823,37 @@
           <app-window windowTitle="Best Model: Random Forest">
             <div class="space-y-3 font-sans text-lg">
               <div class="p-3">
-                <div class="text-sm font-bold font-sans text-(--color-primary)">F1-Score / Accuracy</div>
+                <div class="text-sm font-bold font-sans text-(--color-primary)">
+                  F1-Score / Accuracy
+                </div>
                 <div class="text-2xl font-bold font-mono">0.858 / 86.4%</div>
               </div>
               <div class="text-sm text-(--color-text)">
-                Random Forest's ensemble approach achieved superior performance, with 95% recall on high-utilization patients (Class 1), enabling effective resource targeting.
+                Random Forest's ensemble approach achieved superior performance,
+                with 95% recall on high-utilization patients (Class 1), enabling
+                effective resource targeting.
               </div>
             </div>
           </app-window>
           <app-window windowTitle="Model Comparison">
             <div class="space-y-2 font-sans text-md">
-              <div class="flex justify-between items-center pb-2 border-b border-(--color-text)/20">
+              <div
+                class="flex justify-between items-center pb-2 border-b border-(--color-text)/20"
+              >
                 <span>Logistic Regression</span>
                 <span class="font-bold">0.711</span>
               </div>
-              <div class="flex justify-between items-center pb-2 border-b border-(--color-text)/20">
+              <div
+                class="flex justify-between items-center pb-2 border-b border-(--color-text)/20"
+              >
                 <span>XGBoost</span>
                 <span class="font-bold">0.853</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="font-bold">Random Forest</span>
-                <span class="font-bold" style="color: var(--color-green);">0.858</span>
+                <span class="font-bold" style="color: var(--color-green)"
+                  >0.858</span
+                >
               </div>
             </div>
           </app-window>
@@ -663,22 +874,30 @@
         (click)="toggleDetailedView()"
         class="px-4 py-2 border-2 border-(--color-text) bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-300 ease-in-out font-sans font-bold"
       >
-        {{ showDetailedView ? "↑ Hide Detailed Metrics" : "↓ Show Detailed Metrics" }}
+        {{
+          showDetailedView
+            ? "↑ Hide Detailed Metrics"
+            : "↓ Show Detailed Metrics"
+        }}
       </button>
 
       <div *ngIf="showDetailedView" class="my-8">
-        <h3 class="text-2xl font-sans mb-6 mt-6">Random Forest Classification Report</h3>
+        <h3 class="text-2xl font-sans mb-6 mt-6">
+          Random Forest Classification Report
+        </h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <!-- Metrics Table -->
           <app-window windowTitle="Precision, Recall & F1-Score">
             <div class="space-y-3 font-mono">
-              <div class="grid grid-cols-4 gap-2 font-bold pb-3 border-b-2 border-(--color-text)">
+              <div
+                class="grid grid-cols-4 gap-2 font-bold pb-3 border-b-2 border-(--color-text)"
+              >
                 <div class="text-sm font-sans">Metric</div>
                 <div class="text-center text-sm font-sans">Class 0</div>
                 <div class="text-center text-sm font-sans">Class 1</div>
                 <div class="text-center text-sm font-sans">Weighted</div>
               </div>
-              
+
               <div class="grid grid-cols-4 gap-2 pb-2">
                 <div class="font-bold text-sm font-sans">Precision</div>
                 <div class="text-center text-sm">0.76</div>
@@ -686,23 +905,36 @@
                 <div class="text-center text-sm">0.86</div>
               </div>
 
-              <div class="grid grid-cols-4 gap-2 pb-2 border-b border-(--color-text)/20">
+              <div
+                class="grid grid-cols-4 gap-2 pb-2 border-b border-(--color-text)/20"
+              >
                 <div class="font-bold text-sm font-sans">Recall</div>
                 <div class="text-center text-sm">0.54</div>
                 <div class="text-center text-sm">0.95</div>
                 <div class="text-center text-sm">0.86</div>
               </div>
 
-              <div class="grid grid-cols-4 gap-2 pb-3 border-b-2 border-(--color-text)">
+              <div
+                class="grid grid-cols-4 gap-2 pb-3 border-b-2 border-(--color-text)"
+              >
                 <div class="font-bold text-sm font-sans">F1-Score</div>
                 <div class="text-center text-sm font-bold">0.63</div>
-                <div class="text-center text-sm font-bold" style="color: var(--color-green);">0.92</div>
+                <div
+                  class="text-center text-sm font-bold"
+                  style="color: var(--color-green)"
+                >
+                  0.92
+                </div>
                 <div class="text-center text-sm font-bold">0.85</div>
               </div>
 
               <div class="mt-4 pt-4 border-t-2 border-(--color-text)">
-                <div class="font-bold text-lg">Accuracy: <span style="color: var(--color-green);">86.4%</span></div>
-                <div class="font-sans text-sm text-(--color-text) mt-2">Strong overall performance</div>
+                <div class="font-bold text-lg">
+                  Accuracy: <span style="color: var(--color-green)">86.4%</span>
+                </div>
+                <div class="font-sans text-sm text-(--color-text) mt-2">
+                  Strong overall performance
+                </div>
               </div>
             </div>
           </app-window>
@@ -711,17 +943,27 @@
           <app-window windowTitle="Per-Class Insights">
             <div class="space-y-0 font-sans text-sm">
               <div class="p-3">
-                <div class="font-bold mb-1 text-(--color-primary)">Class 0 (Low Utilization) - 647 samples</div>
-                <div> - Lower recall (54%) - some low-use patients misclassified as high</div>
-                <div> - Reasonable precision (76%) - fewer false positives</div>
-                <div> - Indicates data imbalance challenges this class</div>
+                <div class="font-bold mb-1 text-(--color-primary)">
+                  Class 0 (Low Utilization) - 647 samples
+                </div>
+                <div>
+                  - Lower recall (54%) - some low-use patients misclassified as
+                  high
+                </div>
+                <div>- Reasonable precision (76%) - fewer false positives</div>
+                <div>- Indicates data imbalance challenges this class</div>
               </div>
-              
+
               <div class="p-3">
-                <div class="font-bold mb-1 text-(--color-primary)">Class 1 (High Utilization) - 2353 samples</div>
-                <div> - Excellent recall (95%) - captures high-use patients effectively</div>
-                <div> - Strong precision (88%) - few false alarms</div>
-                <div> - Perfect for resource allocation targeting</div>
+                <div class="font-bold mb-1 text-(--color-primary)">
+                  Class 1 (High Utilization) - 2353 samples
+                </div>
+                <div>
+                  - Excellent recall (95%) - captures high-use patients
+                  effectively
+                </div>
+                <div>- Strong precision (88%) - few false alarms</div>
+                <div>- Perfect for resource allocation targeting</div>
               </div>
             </div>
           </app-window>
@@ -731,14 +973,22 @@
 
     <h2 class="text-3xl my-4 mt-10">Feature Selection Experiments</h2>
     <div class="font-serif text-xl text-justify mb-6">
-      Recursive Feature Elimination with Cross-Validation (RFECV) and Sequential Feature Selection (SFS) were tested. Unexpectedly, both methods degraded performance with higher RMSE and lower R² values. This indicated that seemingly unimportant features contributed significantly when combined with others. Therefore, the full 108-feature set was retained for optimal results.
+      Recursive Feature Elimination with Cross-Validation (RFECV) and Sequential
+      Feature Selection (SFS) were tested. Unexpectedly, both methods degraded
+      performance with higher RMSE and lower R² values. This indicated that
+      seemingly unimportant features contributed significantly when combined
+      with others. Therefore, the full 108-feature set was retained for optimal
+      results.
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
       <app-window windowTitle="RFECV Results" class="col-span-1">
         <div class="font-sans text-md">
-          <div class="mb-2"><strong>Finding:</strong> Feature selection degraded performance</div>
+          <div class="mb-2">
+            <strong>Finding:</strong> Feature selection degraded performance
+          </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
-            Removing features that appeared individually weak still reduced model accuracy. Complex feature interactions are crucial.
+            Removing features that appeared individually weak still reduced
+            model accuracy. Complex feature interactions are crucial.
           </div>
           <div class="bg-primary/10 dark:bg-primary/20 p-2 rounded text-sm">
             <strong>Decision:</strong> Retained full feature set
@@ -747,9 +997,12 @@
       </app-window>
       <app-window windowTitle="Feature Interactions" class="col-span-1">
         <div class="font-sans text-md">
-          <div class="mb-2"><strong>Implication:</strong> Non-linear combinations matter</div>
+          <div class="mb-2">
+            <strong>Implication:</strong> Non-linear combinations matter
+          </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
-            Individual feature importance doesn't capture synergistic effects in ensemble and regularized models.
+            Individual feature importance doesn't capture synergistic effects in
+            ensemble and regularized models.
           </div>
           <div class="bg-green/10 dark:bg-green/20 p-2 rounded text-sm">
             <strong>Result:</strong> 108 features optimal
@@ -761,7 +1014,9 @@
     <h2 class="text-3xl my-4 mt-10">Key Findings & Insights</h2>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
       <app-window windowTitle="Regression Insights" class="col-span-1">
-        <ul class="font-sans text-md text-justify space-y-2 list-disc list-inside">
+        <ul
+          class="font-sans text-md text-justify space-y-2 list-disc list-inside"
+        >
           <li>Regularized models outperform complex ensemble methods</li>
           <li>Medical expenditure highly variable</li>
           <li>Feature interactions critical to predictions</li>
@@ -769,7 +1024,9 @@
         </ul>
       </app-window>
       <app-window windowTitle="Classification Insights" class="col-span-1">
-        <ul class="font-sans text-md text-justify space-y-2 list-disc list-inside">
+        <ul
+          class="font-sans text-md text-justify space-y-2 list-disc list-inside"
+        >
           <li>Ensemble methods vastly superior (0.86 vs 0.71 F1)</li>
           <li>High recall for positive class (95%) is critical</li>
           <li>Imbalanced data handled well by models</li>
@@ -780,7 +1037,15 @@
 
     <h2 class="text-3xl my-4 mt-10">Conclusion</h2>
     <div class="font-serif text-xl text-justify mb-6">
-      This project successfully developed robust predictive models for healthcare utilization. ElasticNet emerged as the optimal regression model (RMSE: 10,965), while Random Forest proved most effective for classification (F1: 0.858, 86.4% accuracy). The comprehensive preprocessing pipeline, feature engineering, and rigorous hyperparameter tuning ensured models capable of supporting clinical decision-making. Results demonstrate the viability of these approaches for patient stratification, resource allocation, and operational efficiency in healthcare systems.
+      This project successfully developed robust predictive models for
+      healthcare utilization. ElasticNet emerged as the optimal regression model
+      (RMSE: 10,965), while Random Forest proved most effective for
+      classification (F1: 0.858, 86.4% accuracy). The comprehensive
+      preprocessing pipeline, feature engineering, and rigorous hyperparameter
+      tuning ensured models capable of supporting clinical decision-making.
+      Results demonstrate the viability of these approaches for patient
+      stratification, resource allocation, and operational efficiency in
+      healthcare systems.
     </div>
   </div>
 </app-project-template>
