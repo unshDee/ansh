@@ -1,39 +1,84 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './features/home/home.component';
-import { AboutComponent } from './features/about/about.component';
-import { BlogComponent } from './features/blog/blog.component';
-import { ContactComponent } from './features/contact/contact.component';
-import { ResumeComponent } from './features/resume/resume.component';
-import { ProjectsComponent } from './features/projects/projects.component';
-import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
-
-// projects
-import { DataSelectionPeftComponent } from './features/projects/projects/data-selection-peft/data-selection-peft.component';
-import { FactCheckLiarComponent } from './features/projects/projects/fact-check-liar/fact-check-liar.component';
-import { ProgramRepairHintComponent } from './features/projects/projects/program-repair-hint/program-repair-hint.component';
-import { HealthcareUtilizationComponent } from './features/projects/projects/healthcare-utilization/healthcare-utilization.component';
-import { VoxartComponent } from './features/projects/projects/voxart/voxart.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/home/home.component').then((m) => m.HomeComponent),
+  },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
-  { path: 'about', component: AboutComponent },
-  { path: 'blog', component: BlogComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'resume', component: ResumeComponent },
+  {
+    path: 'about',
+    loadComponent: () =>
+      import('./features/about/about.component').then((m) => m.AboutComponent),
+  },
+  {
+    path: 'blog',
+    loadComponent: () =>
+      import('./features/blog/blog.component').then((m) => m.BlogComponent),
+  },
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('./features/contact/contact.component').then((m) => m.ContactComponent),
+  },
+  {
+    path: 'resume',
+    loadComponent: () =>
+      import('./features/resume/resume.component').then((m) => m.ResumeComponent),
+  },
   {
     path: 'projects',
     children: [
-      { path: '', component: ProjectsComponent },
-      { path: 'data-selection-peft', component: DataSelectionPeftComponent },
-      { path: 'fact-check-liar', component: FactCheckLiarComponent },
-      { path: 'program-repair-hint', component: ProgramRepairHintComponent },
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/projects/projects.component').then(
+            (m) => m.ProjectsComponent,
+          ),
+      },
+      {
+        path: 'data-selection-peft',
+        loadComponent: () =>
+          import(
+            './features/projects/projects/data-selection-peft/data-selection-peft.component'
+          ).then((m) => m.DataSelectionPeftComponent),
+      },
+      {
+        path: 'fact-check-liar',
+        loadComponent: () =>
+          import(
+            './features/projects/projects/fact-check-liar/fact-check-liar.component'
+          ).then((m) => m.FactCheckLiarComponent),
+      },
+      {
+        path: 'program-repair-hint',
+        loadComponent: () =>
+          import(
+            './features/projects/projects/program-repair-hint/program-repair-hint.component'
+          ).then((m) => m.ProgramRepairHintComponent),
+      },
       {
         path: 'healthcare-utilization',
-        component: HealthcareUtilizationComponent,
+        loadComponent: () =>
+          import(
+            './features/projects/projects/healthcare-utilization/healthcare-utilization.component'
+          ).then((m) => m.HealthcareUtilizationComponent),
       },
-      { path: 'voxart', component: VoxartComponent },
+      {
+        path: 'voxart',
+        loadComponent: () =>
+          import('./features/projects/projects/voxart/voxart.component').then(
+            (m) => m.VoxartComponent,
+          ),
+      },
     ],
   },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./features/page-not-found/page-not-found.component').then(
+        (m) => m.PageNotFoundComponent,
+      ),
+  },
 ];
