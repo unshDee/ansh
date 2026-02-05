@@ -1,0 +1,26 @@
+/* Healthcare Utilization Component Styles */
+
+:host {
+  --color-success: #22c55e; /* Green for success states */
+}
+
+/* Light mode overrides */
+:host.light-theme {
+  --color-success: #16a34a; /* Darker green for light theme */
+}
+
+/* Dark mode overrides */
+:host.dark-theme {
+  --color-success: #4ade80; /* Lighter green for dark theme */
+}
+
+/* Success text styling */
+.text-success {
+  color: var(--color-success);
+}
+
+/* Configuration window styling with theme-aware colors */
+.config-window {
+  border-left: 4px solid var(--color-primary);
+  background-color: rgb(var(--color-primary-rgb) / 0.05);
+}
