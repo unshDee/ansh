@@ -7,7 +7,7 @@ import {
   OnDestroy,
   effect,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { ProjectTemplateComponent } from '../../shared/project-template/project-template.component';
 import { WindowComponent } from '../../../../shared/components/window/window.component';
 import { SafeLatexPipe } from '../../../../shared/pipes';
@@ -18,7 +18,7 @@ import { Chart, ChartConfiguration, registerables } from 'chart.js';
 @Component({
   selector: 'app-healthcare-utilization',
   imports: [
-    CommonModule,
+    NgIf,
     ProjectTemplateComponent,
     WindowComponent,
     SafeLatexPipe,
