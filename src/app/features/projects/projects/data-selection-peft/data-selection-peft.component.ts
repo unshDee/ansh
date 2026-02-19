@@ -100,10 +100,10 @@ export class DataSelectionPeftComponent
       if (chart.options.scales) {
         Object.values(chart.options.scales).forEach((scale: any) => {
           if (!scale) return;
-          if (scale.ticks)       scale.ticks.color       = colors.text;
-          if (scale.title)       scale.title.color       = colors.text;
-          if (scale.grid)        scale.grid.color        = colors.border;
-          if (scale.angleLines)  scale.angleLines.color  = colors.border;
+          if (scale.ticks) scale.ticks.color = colors.text;
+          if (scale.title) scale.title.color = colors.text;
+          if (scale.grid) scale.grid.color = colors.border;
+          if (scale.angleLines) scale.angleLines.color = colors.border;
           if (scale.pointLabels) scale.pointLabels.color = colors.text;
         });
       }
@@ -111,22 +111,62 @@ export class DataSelectionPeftComponent
       chart.data.datasets.forEach((dataset: any, di) => {
         if (index === 0) {
           // Fine-tuning bar — per-bar: secondary → amber → green (improving)
-          dataset.backgroundColor = [colors.primary, colors.amber, colors.green];
-          dataset.borderColor     = [colors.primary, colors.amber, colors.green];
+          dataset.backgroundColor = [
+            colors.primary,
+            colors.amber,
+            colors.green,
+          ];
+          dataset.borderColor = [colors.primary, colors.amber, colors.green];
         } else if (index === 1) {
           // Data selection horizontal bar — red→orange→amber→yellow→green gradient (worst→best)
-          dataset.backgroundColor = [colors.primary, colors.orange, colors.amber, colors.yellow, colors.green];
-          dataset.borderColor     = [colors.primary, colors.orange, colors.amber, colors.yellow, colors.green];
+          dataset.backgroundColor = [
+            colors.primary,
+            colors.orange,
+            colors.amber,
+            colors.yellow,
+            colors.green,
+          ];
+          dataset.borderColor = [
+            colors.primary,
+            colors.orange,
+            colors.amber,
+            colors.yellow,
+            colors.green,
+          ];
         } else if (index === 2) {
           // Radar — primary / amber / green per PEFT
-          if (di === 0) { dataset.borderColor = colors.primary; dataset.backgroundColor = `${colors.primary}30`; dataset.pointBackgroundColor = colors.primary; }
-          if (di === 1) { dataset.borderColor = colors.amber;   dataset.backgroundColor = `${colors.amber}30`;   dataset.pointBackgroundColor = colors.amber;   }
-          if (di === 2) { dataset.borderColor = colors.green;   dataset.backgroundColor = `${colors.green}30`;   dataset.pointBackgroundColor = colors.green;   }
+          if (di === 0) {
+            dataset.borderColor = colors.primary;
+            dataset.backgroundColor = `${colors.primary}30`;
+            dataset.pointBackgroundColor = colors.primary;
+          }
+          if (di === 1) {
+            dataset.borderColor = colors.amber;
+            dataset.backgroundColor = `${colors.amber}30`;
+            dataset.pointBackgroundColor = colors.amber;
+          }
+          if (di === 2) {
+            dataset.borderColor = colors.green;
+            dataset.backgroundColor = `${colors.green}30`;
+            dataset.pointBackgroundColor = colors.green;
+          }
         } else if (index === 3) {
           // Combined line — primary / amber / green per PEFT
-          if (di === 0) { dataset.borderColor = colors.primary; dataset.backgroundColor = `${colors.primary}15`; dataset.pointBackgroundColor = colors.primary; }
-          if (di === 1) { dataset.borderColor = colors.amber;   dataset.backgroundColor = `${colors.amber}15`;   dataset.pointBackgroundColor = colors.amber;   }
-          if (di === 2) { dataset.borderColor = colors.green;   dataset.backgroundColor = `${colors.green}15`;   dataset.pointBackgroundColor = colors.green;   }
+          if (di === 0) {
+            dataset.borderColor = colors.primary;
+            dataset.backgroundColor = `${colors.primary}15`;
+            dataset.pointBackgroundColor = colors.primary;
+          }
+          if (di === 1) {
+            dataset.borderColor = colors.amber;
+            dataset.backgroundColor = `${colors.amber}15`;
+            dataset.pointBackgroundColor = colors.amber;
+          }
+          if (di === 2) {
+            dataset.borderColor = colors.green;
+            dataset.backgroundColor = `${colors.green}15`;
+            dataset.pointBackgroundColor = colors.green;
+          }
         }
       });
 
@@ -148,7 +188,7 @@ export class DataSelectionPeftComponent
             label: 'Test MSE',
             data: [1.15, 0.538, 0.532],
             backgroundColor: [colors.primary, colors.amber, colors.green],
-            borderColor:     [colors.primary, colors.amber, colors.green],
+            borderColor: [colors.primary, colors.amber, colors.green],
             borderWidth: 0,
             borderRadius: 0,
           },
@@ -170,12 +210,17 @@ export class DataSelectionPeftComponent
             beginAtZero: true,
             max: 1.3,
             ticks: { color: colors.text },
-            grid:  { color: colors.border },
-            title: { display: true, text: 'Test MSE', color: colors.text, font: { size: 12 } },
+            grid: { color: colors.border },
+            title: {
+              display: true,
+              text: 'Test MSE',
+              color: colors.text,
+              font: { size: 12 },
+            },
           },
           x: {
             ticks: { color: colors.text },
-            grid:  { display: false },
+            grid: { display: false },
           },
         },
       },
@@ -202,9 +247,21 @@ export class DataSelectionPeftComponent
         datasets: [
           {
             label: 'Test MSE',
-            data: [0.576, 0.563, 0.548, 0.530, 0.510],
-            backgroundColor: [colors.primary, colors.orange, colors.amber, colors.yellow, colors.green],
-            borderColor:     [colors.primary, colors.orange, colors.amber, colors.yellow, colors.green],
+            data: [0.576, 0.563, 0.548, 0.53, 0.51],
+            backgroundColor: [
+              colors.primary,
+              colors.orange,
+              colors.amber,
+              colors.yellow,
+              colors.green,
+            ],
+            borderColor: [
+              colors.primary,
+              colors.orange,
+              colors.amber,
+              colors.yellow,
+              colors.green,
+            ],
             borderWidth: 0,
             borderRadius: 4,
           },
@@ -228,12 +285,17 @@ export class DataSelectionPeftComponent
             min: 0.48,
             max: 0.62,
             ticks: { color: colors.text },
-            grid:  { color: colors.border },
-            title: { display: true, text: 'Test MSE', color: colors.text, font: { size: 12 } },
+            grid: { color: colors.border },
+            title: {
+              display: true,
+              text: 'Test MSE',
+              color: colors.text,
+              font: { size: 12 },
+            },
           },
           y: {
             ticks: { color: colors.text, font: { size: 11 } },
-            grid:  { display: false },
+            grid: { display: false },
           },
         },
       },
@@ -257,7 +319,11 @@ export class DataSelectionPeftComponent
     const config: ChartConfiguration = {
       type: 'radar',
       data: {
-        labels: ['Parameter\nEfficiency', 'Predictive\nPerformance', 'Implementation\nSimplicity'],
+        labels: [
+          'Parameter\nEfficiency',
+          'Predictive\nPerformance',
+          'Implementation\nSimplicity',
+        ],
         datasets: [
           {
             label: 'BitFit',
@@ -297,11 +363,18 @@ export class DataSelectionPeftComponent
         plugins: {
           legend: {
             display: true,
-            labels: { color: colors.text, font: { size: 12 }, boxWidth: 12, padding: 16, usePointStyle: true },
+            labels: {
+              color: colors.text,
+              font: { size: 12 },
+              boxWidth: 12,
+              padding: 16,
+              usePointStyle: true,
+            },
           },
           tooltip: {
             callbacks: {
-              label: (ctx) => ` ${ctx.dataset.label}: ${(ctx.raw as number).toFixed(1)} / 10`,
+              label: (ctx) =>
+                ` ${ctx.dataset.label}: ${(ctx.raw as number).toFixed(1)} / 10`,
             },
           },
         },
@@ -310,8 +383,8 @@ export class DataSelectionPeftComponent
             min: 0,
             max: 10,
             ticks: { display: false, stepSize: 2 },
-            grid:        { color: colors.border },
-            angleLines:  { color: colors.border },
+            grid: { color: colors.border },
+            angleLines: { color: colors.border },
             pointLabels: { color: colors.text, font: { size: 11 } },
           },
         },
@@ -329,7 +402,13 @@ export class DataSelectionPeftComponent
     const config: ChartConfiguration = {
       type: 'line',
       data: {
-        labels: ['Full External', 'Random', 'Active Learning', 'Diversity', 'Influence'],
+        labels: [
+          'Full External',
+          'Random',
+          'Active Learning',
+          'Diversity',
+          'Influence',
+        ],
         datasets: [
           {
             label: 'BitFit',
@@ -379,11 +458,18 @@ export class DataSelectionPeftComponent
         plugins: {
           legend: {
             display: true,
-            labels: { color: colors.text, font: { size: 12 }, boxWidth: 12, padding: 16, usePointStyle: true },
+            labels: {
+              color: colors.text,
+              font: { size: 12 },
+              boxWidth: 12,
+              padding: 16,
+              usePointStyle: true,
+            },
           },
           tooltip: {
             callbacks: {
-              label: (ctx) => ` ${ctx.dataset.label}: ${(ctx.parsed.y ?? 0).toFixed(3)} MSE`,
+              label: (ctx) =>
+                ` ${ctx.dataset.label}: ${(ctx.parsed.y ?? 0).toFixed(3)} MSE`,
             },
           },
         },
@@ -393,12 +479,17 @@ export class DataSelectionPeftComponent
             min: 0.05,
             max: 0.6,
             ticks: { color: colors.text },
-            grid:  { color: colors.border },
-            title: { display: true, text: 'Test MSE', color: colors.text, font: { size: 12 } },
+            grid: { color: colors.border },
+            title: {
+              display: true,
+              text: 'Test MSE',
+              color: colors.text,
+              font: { size: 12 },
+            },
           },
           x: {
             ticks: { color: colors.text, font: { size: 11 } },
-            grid:  { color: colors.border },
+            grid: { color: colors.border },
           },
         },
       },
