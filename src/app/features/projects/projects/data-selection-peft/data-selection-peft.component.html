@@ -1,8 +1,8 @@
 <app-project-template
   projectTitle="Data Selection and PEFT"
   note="Course Project - Neural Networks: Theory & Implementation"
-  demo="Google Colab"
-  demoLink="https://colab.research.google.com/"
+  demo="Presentation Slides"
+  demoLink="https://drive.google.com/file/d/1NhdlThoa11bkA3tDl32nnOwEyzkYRxSn/view?usp=sharing"
   [technologies]="[
     'MoleculeNet Lipophilicity',
     'MolFormer',
@@ -238,20 +238,605 @@
       </div>
 
       <h3 class="text-2xl my-4 mt-8">Observations</h3>
-      <div class="font-serif text-xl"></div>
+      <div class="font-serif text-xl text-justify">
+        The scaffold-based splitting strategy was selected as it ensures that
+        no overlapping scaffolds exist between train, validation, and test
+        sets. This prevents data leakage from structurally similar molecules
+        and ensures the model generalizes to novel molecular scaffolds. The
+        final split achieves approximately 80/10/10 train/validation/test
+        distribution.
+      </div>
     </div>
 
-    <h2 class="text-3xl my-4 mt-8">MolFormer</h2>
+    <h2 class="text-3xl my-4 mt-8">
+      <a
+        href="https://research.ibm.com/blog/molecular-transformer-discovery"
+        target="_blank"
+        class="group"
+        >MolFormer<sup
+          class="font-extralight transform duration-300 ease-in-out group-hover:text-(--color-primary) group-hover:translate-3"
+          >↗</sup
+        ></a
+      >
+    </h2>
     <div class="font-serif text-xl text-justify">
       <a
         href="https://research.ibm.com/blog/molecular-transformer-discovery"
         class="underline underline-offset-4 decoration-1 italic"
         >MolFormer</a
       >
-      is a transformer-based model for molecular property prediction. It is
-      pre-trained on a large corpus of molecular data and fine-tuned on specific
-      datasets to predict various molecular properties. MolFormer uses SMILES
-      strings as input and predicts the corresponding property values.
+      is a transformer-based model for molecular property prediction, pre-trained
+      on a large corpus of ~1.1 billion unlabelled SMILES strings. It uses a
+      linear attention mechanism to efficiently process molecular
+      representations and can be fine-tuned for specific downstream tasks.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4 mb-8">
+      <app-window windowTitle="Architecture" [initialMinimized]="true">
+        <div class="font-sans">
+          <div class="grid grid-cols-1 gap-3">
+            <div class="p-3 border-b border-(--color-text)/20">
+              <div class="font-bold mb-1">Model</div>
+              <div class="text-sm">MoLFormer-XL-both-10pct</div>
+            </div>
+            <div class="p-3 border-b border-(--color-text)/20">
+              <div class="font-bold mb-1">Hidden Size</div>
+              <div class="text-sm">768</div>
+            </div>
+            <div class="p-3 border-b border-(--color-text)/20">
+              <div class="font-bold mb-1">Attention</div>
+              <div class="text-sm">Linear attention mechanism</div>
+            </div>
+            <div class="p-3">
+              <div class="font-bold mb-1">Pre-training Data</div>
+              <div class="text-sm">~1.1B unlabelled SMILES strings</div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+      <app-window windowTitle="Regression Head" [initialMinimized]="true">
+        <div class="font-sans">
+          <div class="text-base mb-2">
+            A linear layer added on top of the pooler output for predicting
+            continuous lipophilicity values.
+          </div>
+          <div class="grid grid-cols-1 gap-2 text-sm">
+            <div class="flex justify-between">
+              <span>Classifier Dropout</span>
+              <span class="font-mono">0.5</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Embedding Dropout</span>
+              <span class="font-mono">0.2</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Hidden Dropout</span>
+              <span class="font-mono">0.2</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Output</span>
+              <span class="font-mono">1 (scalar)</span>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Fine-Tuning Pipeline</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      The fine-tuning process follows a two-stage approach: first,
+      <span class="italic">unsupervised</span> fine-tuning using Masked
+      Language Modeling (MLM) to adapt the model to the domain-specific
+      molecular distribution, followed by <span class="italic">supervised</span>
+      fine-tuning with the regression head for lipophilicity prediction.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div class="col-span-1">
+        <app-window windowTitle="Stage 1: Unsupervised MLM">
+          <div class="font-sans">
+            <div class="text-sm mb-3">
+              Masked Language Modeling adapts the pre-trained model to the
+              chemical language patterns specific to the Lipophilicity
+              training set, without using any labels.
+            </div>
+            <div class="grid grid-cols-1 gap-2 text-sm">
+              <div class="flex justify-between">
+                <span>Objective</span>
+                <span class="font-mono">CrossEntropyLoss</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Masking Probability</span>
+                <span class="font-mono">15%</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Optimizer</span>
+                <span class="font-mono">AdamW</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Learning Rate</span>
+                <span
+                  class="font-mono"
+                  [innerHTML]="'1 \\times 10^{-4}' | safeLatex: false"
+                ></span>
+              </div>
+              <div class="flex justify-between">
+                <span>Early Stopping</span>
+                <span class="font-mono">Patience = 2</span>
+              </div>
+            </div>
+          </div>
+        </app-window>
+      </div>
+      <div class="col-span-1">
+        <app-window windowTitle="Stage 2: Supervised Regression">
+          <div class="font-sans">
+            <div class="text-sm mb-3">
+              Fine-tuning with the regression head on labeled
+              lipophilicity values, starting from the unsupervised-adapted
+              checkpoint.
+            </div>
+            <div class="grid grid-cols-1 gap-2 text-sm">
+              <div class="flex justify-between">
+                <span>Loss Function</span>
+                <span class="font-mono">MSELoss</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Evaluation Metric</span>
+                <span class="font-mono">MAE</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Optimizer</span>
+                <span class="font-mono">AdamW</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Learning Rate</span>
+                <span
+                  class="font-mono"
+                  [innerHTML]="'1 \\times 10^{-4}' | safeLatex: false"
+                ></span>
+              </div>
+              <div class="flex justify-between">
+                <span>Batch Size</span>
+                <span class="font-mono">64</span>
+              </div>
+            </div>
+          </div>
+        </app-window>
+      </div>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4">Fine-Tuning Comparison</h3>
+    <div class="font-serif text-lg text-justify mb-4">
+      The two-stage approach (unsupervised MLM + supervised regression)
+      outperforms direct supervised fine-tuning, demonstrating the benefit
+      of domain adaptation before task-specific training.
+    </div>
+    <div class="grid grid-cols-1 mb-8">
+      <app-window windowTitle="Fine-Tuning Results (Test Set)">
+        <div class="h-72">
+          <canvas #finetuningChart></canvas>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">
+      <a
+        href="https://arxiv.org/abs/1703.04730"
+        target="_blank"
+        class="group"
+        >Influence Functions<sup
+          class="font-extralight transform duration-300 ease-in-out group-hover:text-(--color-primary) group-hover:translate-3"
+          >↗</sup
+        ></a
+      >
+    </h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Influence functions approximate the effect of each training point on model
+      predictions. By computing the inverse Hessian-vector product (iHVP)
+      through <span class="italic">LiSSA (Linear time Stochastic Second-order
+      Algorithm)</span>, we estimate how including or removing each external
+      data point would affect the test loss.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window
+        windowTitle="Influence Score Formula"
+        [initialMinimized]="true"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="font-serif text-lg mb-2">
+          The influence of a training point on the test loss:
+        </div>
+        <div
+          class="equation-block"
+          [innerHTML]="
+            '\\mathcal{I}(z_i) = -\\nabla_\\theta \\mathcal{L}_{\\text{test}}^\\top \\, H_\\theta^{-1} \\, \\nabla_\\theta \\mathcal{L}(z_i)'
+              | safeLatex
+          "
+        ></div>
+        <div class="font-sans text-sm mt-3 text-(--color-text)">
+          Where <span [innerHTML]="'H_\\theta' | safeLatex: false"></span> is the
+          Hessian of the training loss
+        </div>
+      </app-window>
+      <app-window
+        windowTitle="LiSSA Approximation"
+        [initialMinimized]="true"
+        class="col-span-2 lg:col-span-1"
+      >
+        <div class="font-serif text-lg mb-2">
+          The iHVP is iteratively estimated:
+        </div>
+        <div
+          class="equation-block"
+          [innerHTML]="
+            '\\tilde{v}_{t+1} = v + (I - \\delta H_\\theta) \\tilde{v}_t'
+              | safeLatex
+          "
+        ></div>
+        <div class="font-sans text-sm mt-3 text-(--color-text)">
+          Recursion depth = 200, damping = 0.01, scale = 0.04
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Data Selection Strategies</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Four strategies were used to select approximately 185 data points from the
+      300-point external dataset for augmenting the training set. Each strategy
+      captures different properties of the data.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window windowTitle="Random Selection" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Uniform Sampling Baseline
+          </div>
+          <div class="text-sm mb-3">
+            Randomly samples 185 data points from the external dataset
+            uniformly without replacement. Serves as the baseline strategy.
+          </div>
+          <div class="text-xs italic text-(--color-text)">
+            Selected: 185 points
+          </div>
+        </div>
+      </app-window>
+      <app-window windowTitle="Active Learning" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Monte Carlo Dropout Uncertainty
+          </div>
+          <div class="text-sm mb-3">
+            Uses MC Dropout (100 forward passes) to estimate prediction
+            uncertainty. Points with uncertainty above a threshold are selected,
+            targeting samples where the model is least confident.
+          </div>
+          <div class="text-xs italic text-(--color-text)">
+            Selected: 183 points
+          </div>
+        </div>
+      </app-window>
+      <app-window windowTitle="Diversity (MaxMin)" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Structural Diversity Maximization
+          </div>
+          <div class="text-sm mb-3">
+            Uses the MaxMin diversity algorithm from DeepChem to select
+            the most structurally diverse molecules based on molecular
+            fingerprints, maximizing coverage of chemical space.
+          </div>
+          <div class="text-xs italic text-(--color-text)">
+            Selected: 185 points
+          </div>
+        </div>
+      </app-window>
+      <app-window windowTitle="Influence Score" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Gradient-Based Selection
+          </div>
+          <div class="text-sm mb-3">
+            Selects points with positive influence scores (computed via LiSSA),
+            meaning their inclusion is estimated to reduce the test loss.
+            Points with negative influence are excluded.
+          </div>
+          <div class="text-xs italic text-(--color-text)">
+            Selected: 185 points
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4">Strategy Comparison (Full Fine-Tuning)</h3>
+    <div class="font-serif text-lg text-justify mb-4">
+      Each selection strategy was combined with the full training set and used
+      to fine-tune from the best checkpoint. Lower RMSE indicates better
+      predictive performance.
+    </div>
+    <div class="grid grid-cols-1 mb-8">
+      <app-window windowTitle="Data Selection Results (Test MSE)">
+        <div class="h-80">
+          <canvas #selectionChart></canvas>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Parameter-Efficient Fine-Tuning</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Instead of updating all ~44.4M parameters during fine-tuning, PEFT
+      techniques freeze most of the model and train only a small subset.
+      Three PEFT methods were applied with each data selection strategy to
+      evaluate their combined effectiveness.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window windowTitle="BitFit" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Bias-Term Fine-Tuning
+          </div>
+          <div class="text-sm mb-3">
+            Only bias terms and the regression head are trainable. All
+            weight matrices remain frozen, providing the simplest form of
+            parameter-efficient adaptation.
+          </div>
+          <div
+            class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30 text-sm"
+          >
+            <div class="font-mono text-xs">Trainable: ~75K / 44.4M</div>
+            <div class="font-mono text-xs mt-1">Ratio: 0.17%</div>
+          </div>
+          <div class="mt-2 grid grid-cols-1 gap-1 text-xs">
+            <div class="flex justify-between">
+              <span>Learning Rate</span>
+              <span
+                class="font-mono"
+                [innerHTML]="'1 \\times 10^{-3}' | safeLatex: false"
+              ></span>
+            </div>
+            <div class="flex justify-between">
+              <span>Classifier Dropout</span>
+              <span class="font-mono">0.2</span>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-center" [innerHTML]="bitfitSvg | safeHTML"></div>
+        </div>
+      </app-window>
+      <app-window windowTitle="LoRA" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Low-Rank Adaptation
+          </div>
+          <div class="text-sm mb-3">
+            Injects trainable low-rank decomposition matrices into attention
+            layers (Q, K, V) and FFN intermediate layers while keeping the
+            original weights frozen.
+          </div>
+          <div
+            class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30 text-sm"
+          >
+            <div class="font-mono text-xs">Trainable: ~16.6M / 45M</div>
+            <div class="font-mono text-xs mt-1">Ratio: 37.4%</div>
+          </div>
+          <div class="mt-2 grid grid-cols-1 gap-1 text-xs">
+            <div class="flex justify-between">
+              <span>Rank</span>
+              <span class="font-mono">8</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Alpha</span>
+              <span class="font-mono">16</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Learning Rate</span>
+              <span
+                class="font-mono"
+                [innerHTML]="'1 \\times 10^{-4}' | safeLatex: false"
+              ></span>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-center" [innerHTML]="loraSvg | safeHTML"></div>
+        </div>
+      </app-window>
+      <app-window windowTitle="(IA)³" class="col-span-1">
+        <div class="font-sans">
+          <div
+            class="text-lg font-bold mb-2"
+            style="color: var(--color-primary)"
+          >
+            Learned Rescaling Vectors
+          </div>
+          <div class="text-sm mb-3">
+            Introduces per-layer learned scaling vectors that multiply the
+            outputs of attention key, value, and FFN intermediate layers.
+            The most parameter-efficient method tested.
+          </div>
+          <div
+            class="bg-(--color-bg) p-2 rounded border border-(--color-text)/30 text-sm"
+          >
+            <div class="font-mono text-xs">Trainable: ~28K / 44.4M</div>
+            <div class="font-mono text-xs mt-1">Ratio: 0.06%</div>
+          </div>
+          <div class="mt-2 grid grid-cols-1 gap-1 text-xs">
+            <div class="flex justify-between">
+              <span>Learning Rate</span>
+              <span
+                class="font-mono"
+                [innerHTML]="'1 \\times 10^{-3}' | safeLatex: false"
+              ></span>
+            </div>
+            <div class="flex justify-between">
+              <span>Initialization</span>
+              <span class="font-mono">Ones</span>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-center" [innerHTML]="ia3Svg | safeHTML"></div>
+        </div>
+      </app-window>
+    </div>
+
+    <h3 class="font-sans text-2xl mb-4">PEFT Trade-off Overview</h3>
+    <div class="grid grid-cols-1 mb-8">
+      <app-window windowTitle="Efficiency vs. Performance vs. Simplicity">
+        <div class="h-96">
+          <canvas #paramChart></canvas>
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
+          Scores are normalised 0–10. Higher is better on each axis.
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Combined Results</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Each PEFT technique was combined with each data selection strategy,
+      resulting in 15 experiment configurations (3 PEFT × 5 selection methods).
+      The combined training data consists of the original training set augmented
+      with the selected external data points.
+    </div>
+
+    <div class="grid grid-cols-1 mb-8">
+      <app-window windowTitle="PEFT × Data Selection (Test MSE)">
+        <div class="h-80">
+          <canvas #combinedChart></canvas>
+        </div>
+        <div class="text-xs text-center mt-2 text-(--color-text) px-4 pb-2">
+          Lower MSE is better. Lines show how each PEFT method responds to different data selection strategies.
+        </div>
+      </app-window>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window windowTitle="Best BitFit" class="col-span-1">
+        <div class="space-y-2 font-sans text-lg">
+          <div class="flex justify-between">
+            <div>
+              <strong>Strategy:</strong>
+              <div>Random Selection</div>
+              <div class="text-sm">0.17% trainable parameters</div>
+            </div>
+            <div>
+              <div class="text-xl font-mono">0.477</div>
+              <div class="">MSE</div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+      <app-window windowTitle="Best LoRA" class="col-span-1">
+        <div class="space-y-2 font-sans text-lg">
+          <div class="flex justify-between">
+            <div>
+              <strong>Strategy:</strong>
+              <div>Random Selection</div>
+              <div class="text-sm">37.4% trainable parameters</div>
+            </div>
+            <div>
+              <div class="text-xl font-mono" style="color: var(--color-green)">
+                0.083
+              </div>
+              <div class="">MSE</div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+      <app-window windowTitle="Best (IA)³" class="col-span-1">
+        <div class="space-y-2 font-sans text-lg">
+          <div class="flex justify-between">
+            <div>
+              <strong>Strategy:</strong>
+              <div>Random Selection</div>
+              <div class="text-sm">0.06% trainable parameters</div>
+            </div>
+            <div>
+              <div class="text-xl font-mono">0.522</div>
+              <div class="">MSE</div>
+            </div>
+          </div>
+        </div>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Key Findings</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window windowTitle="Data Selection" class="col-span-2 lg:col-span-1">
+        <ul
+          class="font-sans text-md text-justify space-y-2 list-disc list-inside"
+        >
+          <li>
+            Random selection unexpectedly yields the best MSE across all
+            PEFT methods, likely influenced by seed-specific subset selection
+          </li>
+          <li>
+            Active learning (MC Dropout) is the second-best strategy for
+            BitFit and LoRA, reinforcing the value of uncertainty-based
+            selection
+          </li>
+          <li>
+            Influence-based selection performs worst for (IA)³, highlighting
+            method-specific sensitivity to data selection strategies
+          </li>
+          <li>
+            Structured data selection provides more reliable improvements
+            than random selection due to lower variability across different runs
+          </li>
+        </ul>
+      </app-window>
+      <app-window windowTitle="PEFT Techniques" class="col-span-2 lg:col-span-1">
+        <ul
+          class="font-sans text-md text-justify space-y-2 list-disc list-inside"
+        >
+          <li>
+            LoRA achieves near full-fine-tuning performance with 37.4%
+            trainable parameters
+          </li>
+          <li>
+            BitFit offers a good efficiency-performance trade-off with
+            minimal implementation complexity
+          </li>
+          <li>
+            (IA)³ is the most parameter-efficient (0.06%) but shows the
+            largest performance gap
+          </li>
+          <li>
+            Unsupervised pre-training (MLM) provides consistent improvement
+            across all configurations
+          </li>
+        </ul>
+      </app-window>
+    </div>
+
+    <h2 class="text-3xl my-4 mt-10">Conclusion</h2>
+    <div class="font-serif text-xl text-justify mb-6">
+      This project demonstrates that combining data selection
+      with parameter-efficient fine-tuning enables effective molecular property
+      prediction with significantly reduced computational requirements.
+      Random selection paired with LoRA achieves the best
+      performance overall (MSE 0.083), while BitFit and (IA)³ provide
+      competitive alternatives with only 0.17% and 0.06% of trainable parameters
+      respectively on carefully selected subsets of external data. These findings suggest
+      practical pathways for resource-conscious adaptation of large pre-trained
+      chemical language models to specific molecular prediction tasks.
     </div>
   </div>
 </app-project-template>
