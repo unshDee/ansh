@@ -1,4 +1,10 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { WindowComponent } from '../../shared/components/window/window.component';
 import { AnalyticsService } from '../../core/services/analytics.service';
 
@@ -30,8 +36,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (prefersReducedMotion) {
       return;
     }
-
-    
 
     setTimeout(() => {
       this.ribbonAnimate?.nativeElement.beginElement();
