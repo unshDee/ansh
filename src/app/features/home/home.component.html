@@ -1,59 +1,40 @@
-<div class="min-h-[calc(100vh-10rem)] flex flex-col justify-center">
-  <div>
-    <h1 class="text-8xl md:text-9xl">hello</h1>
-    <br />
-    <p class="text-md md:text-xl font-mono">
-      i'm <span class="font-bold text-xl md:text-3xl">Ansh</span>
-      <br />
-      exploring agentic ai, information retrieval, and natural language
-      processing.
-    </p>
-  </div>
-  <div class="mt-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <app-window windowTitle="@saarland university" class="font-bold">
-        student
-      </app-window>
-      <app-window windowTitle="masters" class="font-bold">
-        data science & ai
-      </app-window>
-      <app-window windowTitle="location" class="font-bold">
-        saarbrücken, germany
-      </app-window>
-      <app-window windowTitle="interests" class="font-bold">
-        <ul class="list-disc list-inside">
-          <li>machine learning</li>
-          <li>natural language processing</li>
-          <li>web development</li>
-        </ul>
-      </app-window>
-      <app-window windowTitle="updates">
-        <ul class="list-disc list-inside">
-          <li>currently working on a few projects</li>
-          <li>learning new things everyday</li>
-          <li>open to collaborations</li>
-        </ul>
-      </app-window>
-      <app-window windowTitle="interesting articles" [initialMinimized]="true">
-        <ul class="list-disc pl-4">
-          <li>
-            <a
-              href="https://www.inverse.com/article/40113-arc-protein-ancient-mouse-brain-rna-capsid"
-              target="_blank"
-            >
-              all your memories are stored by one weird, ancient molecule ⎋
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.nytimes.com/2018/12/21/style/glitter-factory.html"
-              target="_blank"
-            >
-              what is glitter? ⎋
-            </a>
-          </li>
-        </ul>
-      </app-window>
+<div class="relative min-h-[calc(100vh-10rem)] flex flex-col overflow-hidden">
+  <svg viewBox="210 0 1000 1000" class="fixed w-full h-full inset-0 pointer-events-none" preserveAspectRatio="xMidYMid slice">
+    <path id="ribbon-path"
+          d="M -200,600 
+            C 400,-200 300,1000 700,400 
+            C 1100,-200 1000,1000 1600,200"
+          fill="none" stroke="transparent" stroke-width="1" />
+
+    <text font-size="32" fill="currentColor" class="font-mono tracking-widest opacity-20 mix-blend-difference">
+      <textPath href="#ribbon-path">
+        agentic ai • information retrieval • large language models • reasoning systems • retrieval-augmented generation • autonomous agents • machine learning • applied artificial intelligence • search systems • ml engineering • generative ai • human-ai interaction • agentic ai • information retrieval • large language models • reasoning systems • retrieval-augmented generation • autonomous agents • machine learning • applied artificial intelligence • search systems • ml engineering • generative ai • human-ai interaction • agentic ai • information retrieval • large language models • reasoning systems • retrieval-augmented generation • autonomous agents • machine learning • applied artificial intelligence • search systems • ml engineering • generative ai • human-ai interaction • agentic ai • information retrieval • large language models • reasoning systems • retrieval-augmented generation • autonomous agents • machine learning • applied artificial intelligence • search systems • ml engineering • generative ai • human-ai interaction • 
+        <animate attributeName="startOffset" from="-2%" to="-100%" dur="90s" repeatCount="indefinite" />
+      </textPath>
+    </text>
+  </svg>
+
+  <!-- Main Content -->
+  <div class="relative z-10 flex flex-col-reverse grow w-full py-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
+      <div class="lg:col-span-2 xl:col-span-3">
+        <p class="text-4xl md:text-5xl lg:text-6xl">Hey, I'm Ansh — <br> and I build systems that think.</p>
+        <div class="grid grid-cols-1 xl:grid-cols-2">
+          <p class="text-justify">Most of my time goes into exploring ideas around intelligent systems, experimenting with new approaches, and figuring out how machines can reason and work with information. I enjoy working somewhere between research and engineering — learning by building, breaking, and rebuilding systems. <br> Currently working on agentic systems, exploring LLM reasoning, and preparing for full-time AI engineering roles.</p>
+        </div>
+      </div>
+      <div class="lg:col-span-2 xl:col-span-1 flex flex-col-reverse gap-y-1">
+        <app-window windowTitle="location" class="">
+          saarbrücken, germany
+        </app-window>
+        <app-window windowTitle="masters" class="">
+          data science & ai
+        </app-window>
+        <app-window windowTitle="@saarland university" class="">
+          student
+        </app-window>
+      </div>
     </div>
   </div>
 </div>
