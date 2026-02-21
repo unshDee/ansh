@@ -1,23 +1,13 @@
 <div class="min-h-[calc(100vh-10rem)] flex flex-col justify-center">
-  <div class="mb-8">
+  <div class="my-8">
     <h1 class="text-8xl md:text-9xl">projects</h1>
   </div>
-  <div class="grid gap-4">
-    <app-window windowTitle="Recent">
+  <div class="grid gap-y-4">
+    <app-window windowTitle="NLP & LLMs">
       <ul class="list-disc pl-4">
         <li>
           <a
-            class="underline underline-offset-2"
-            routerLink="image-segmentation"
-            (click)="
-              trackProjectClick('Image Segmentation with Scribble Supervision')
-            "
-            >Image Segmentation with Scribble Supervision</a
-          >
-        </li>
-        <li>
-          <a
-            class="underline underline-offset-2"
+            class="underline underline-offset-2 decoration-1"
             routerLink="data-selection-peft"
             (click)="
               trackProjectClick(
@@ -30,19 +20,7 @@
         </li>
         <li>
           <a
-            class="underline underline-offset-2"
-            routerLink="fact-check-liar"
-            (click)="trackProjectClick('Fact Checking QA Chatbot')"
-            >Fact Checking Q&A Chatbot</a
-          >
-        </li>
-      </ul>
-    </app-window>
-    <app-window windowTitle="Older">
-      <ul class="list-disc pl-4">
-        <li>
-          <a
-            class="underline underline-offset-2"
+            class="underline underline-offset-2 decoration-1"
             routerLink="program-repair-hint"
             (click)="
               trackProjectClick(
@@ -54,15 +32,51 @@
         </li>
         <li>
           <a
-            class="underline underline-offset-2"
+            class="underline underline-offset-2 decoration-1"
+            routerLink="fact-check-liar"
+            (click)="trackProjectClick('Fact Checking QA Chatbot')"
+            >Fact Checking Q&A Chatbot</a
+          >
+        </li>
+      </ul>
+    </app-window>
+    <app-window windowTitle="Applied Machine Learning">
+      <ul class="list-disc pl-4">
+        <li>
+          <a
+            class="underline underline-offset-2 decoration-1"
+            routerLink="image-segmentation"
+            (click)="
+              trackProjectClick('Image Segmentation with Scribble Supervision')
+            "
+            >Image Segmentation with Scribble Supervision</a
+          >
+        </li>
+        <li>
+          <a
+            class="underline underline-offset-2 decoration-1"
             routerLink="healthcare-utilization"
             (click)="trackProjectClick('Predicting Healthcare Utilization')"
             >Predicting Healthcare Utilization
           </a>
         </li>
+      </ul>
+    </app-window>
+    <app-window windowTitle="Systems & Applications">
+      <ul class="list-disc pl-4">
         <li>
           <a
-            class="underline underline-offset-2"
+            class="underline underline-offset-2 decoration-1 cursor-not-allowed"
+            routerLink="/projects"
+            (click)="
+              trackProjectClick('Hukka Bukka: A Real-Time Multiplayer Party Game')
+            "
+            >Hukka Bukka: A Real-Time Multiplayer Party Game (Coming Soon)</a
+          >
+        </li>
+        <li>
+          <a
+            class="underline underline-offset-2 decoration-1"
             routerLink="voxart"
             (click)="
               trackProjectClick(
