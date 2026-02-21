@@ -1,0 +1,10 @@
+ @import "tailwindcss";
+ /* Website Logo */
+ @layer components {
+   .logo {
+     @apply text-xl tracking-tight font-bold transform duration-200 ease-in-out border-2 px-2 py-1 text-center;
+     @apply hover:font-black hover:bg-[var(--color-text)] hover:text-[var(--color-bg)];
+     /*@apply hover:underline decoration-(--color-primary) underline-offset-8;*/
+     /*@apply text-[var(--color-bg)] bg-[var(--color-text)];*/
+   }
+ }
