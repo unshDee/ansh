@@ -50,26 +50,33 @@
 
   <!-- Main Content -->
   <div class="relative z-10 flex flex-col-reverse grow w-full lg:py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
+    <p class="font-medium pt-4 lg:p-0"><span class="opacity-60">Based in </span> Saarbrücken, Germany.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
       <div class="lg:col-span-2 xl:col-span-3">
         <p class="text-3xl md:text-3xl lg:text-4xl font-normal">
           Hey, I'm Ansh — <br />
           and I build systems that think.
         </p>
         <div class="grid grid-cols-1 xl:grid-cols-2">
-          <p class="text-justify font-medium opacity-60">
-            Most of my time goes into building and experimenting with
-            intelligent systems, exploring how machines reason and work with
-            information. I enjoy working between research and engineering —
-            designing, testing, and improving systems through iteration. <br /> <br /> 
-            Currently working on agentic systems, exploring LLM reasoning and
-            interal biases, and preparing for full-time AI engineering roles.
-          </p>
+          <div class="text-justify font-medium opacity-60">
+            <p>
+              Most of my time goes into building and experimenting with
+              intelligent systems, exploring how LLMs reason and interact with
+              information. I enjoy working between research and engineering —
+              designing, testing, and improving systems through iteration.
+            </p>
+            <p>
+              Currently working in Applied AI Development at DHC Business Solutions, focusing on agentic RAG systems and LLM evaluation, while preparing for full-time AI engineering roles in 2026.
+            </p>
+          </div>
         </div>
       </div>
       <div class="lg:col-span-2 xl:col-span-1 flex flex-col-reverse gap-y-1">
-        <app-window windowTitle="location" class="">
-          saarbrücken, germany
+        <app-window windowTitle="check out" class="hidden lg:block">
+          <div class="flex justify-between">
+            [ <a routerLink="/resume" class="cursor-pointer font-semibold hover:font-bold hover:text-[var(--color-primary)] transition-all duration-100">resume</a> ]
+            [ <a routerLink="/projects" class="cursor-pointer font-semibold hover:font-bold hover:text-[var(--color-primary)] transition-all duration-100">projects</a> ]
+          </div>
         </app-window>
         <app-window windowTitle="masters" class="">
           data science & ai

@@ -5,12 +5,13 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { WindowComponent } from '../../shared/components/window/window.component';
 import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-home',
-  imports: [WindowComponent],
+  imports: [WindowComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
