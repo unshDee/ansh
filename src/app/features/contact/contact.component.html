@@ -5,11 +5,11 @@
   <div class="grid md:grid-cols-2 gap-4">
     <app-window windowTitle="email" class="font-mono">
       <a
-        href="mailto:ansh.dawda@gmail.com"
+        [href]="'mailto:' + getEmail()"
         class="hover:underline underline-offset-4 decoration-(--color-primary)"
-        (click)="trackContactMethod('email', 'ansh.dawda@gmail.com')"
+        (click)="trackContactMethod('email', getEmail())"
       >
-        ansh[dot]dawda[at]gmail[dot]com
+        {{ getEmail() }}
       </a>
     </app-window>
     <app-window windowTitle="linkedin" class="font-mono">

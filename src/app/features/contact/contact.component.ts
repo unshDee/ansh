@@ -19,6 +19,11 @@ export class ContactComponent implements OnInit {
     });
   }
 
+  // Decode email to prevent scraping while allowing user display
+  getEmail(): string {
+    return atob('YW5zaC5kYXdkYUBnbWFpbC5jb20=');
+  }
+
   trackContactMethod(method: string, value: string) {
     this.analyticsService.trackEvent('contact_interaction', {
       event_category: 'engagement',
