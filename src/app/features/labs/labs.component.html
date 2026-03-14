@@ -17,7 +17,7 @@
       @for (node of displayNodes; track node.id; let idx = $index; let isFirst = $first; let isLast = $last) {
         <div class="relative flex flex-col transition-all duration-300 transform-gpu z-0 mx-auto"
              [style.width.%]="displayNodes.length > 1 ? 83 + (idx / (displayNodes.length + 2)) * 18 : 100"
-             [ngClass]="!isFirst ? '-mt-12 sm:-mt-16 md:-mt-18' : ''"
+             [ngClass]="!isFirst ? '-mt-12 md:-mt-18' : ''"
              [class.cursor-pointer]="node.type === 'post'"
              [class.group]="node.type === 'post'"
              [class.hover:-translate-y-2]="node.type === 'post'"
@@ -72,7 +72,7 @@
       }
 
       <!-- Bottom Drawer Face & Sticker -->
-      <div class="relative w-full border border-[var(--color-text)] bg-[color-mix(in_srgb,var(--color-bg)_94%,var(--color-text))] h-16 sm:h-24 rounded-b-xl sm:rounded-b-2xl flex justify-center items-center shadow-md shadow-black/5 -mt-px pointer-events-none" [style.zIndex]="displayNodes.length">
+      <div class="relative w-full border border-[var(--color-text)] bg-[color-mix(in_srgb,var(--color-bg)_94%,var(--color-text))] h-16 sm:h-24 rounded-b-xl sm:rounded-b-2xl flex justify-center items-center shadow-md shadow-black/5 -mt-4 md:-mt-12 pointer-events-none" [style.zIndex]="displayNodes.length">
         <div class="bg-[#ffeb85] px-4 py-1.5 sm:px-6 sm:py-2 rounded-sm border border-[var(--color-text)] text-black font-mono text-xs sm:text-sm tracking-widest font-bold rotate-[2deg] shadow-sm pointer-events-auto">
           ansh's misc files
         </div>

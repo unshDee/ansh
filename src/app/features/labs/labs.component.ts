@@ -123,7 +123,16 @@ export class LabsComponent implements OnInit {
     ];
 
     categories.forEach((category) => {
-      // Post Nodes (White tabs) under this category go FIRST (appearing "behind/above" the category)
+      // Category Node (Black tab) goes FIRST (appearing "behind/above" the posts)
+      nodes.push({
+        id: `cat-${category}`,
+        type: 'category',
+        label: category,
+        tabClass: positions[tabIndex % positions.length],
+      });
+      tabIndex++;
+
+      // Post Nodes (White tabs) under this category go LAST (appearing "in front/below" the category)
       const catEntries = this.entries
         .filter((e) => e.category === category)
         .sort((a, b) => b.id - a.id);
@@ -138,15 +147,6 @@ export class LabsComponent implements OnInit {
         });
         tabIndex++;
       });
-
-      // Category Node (Black tab) goes LAST (appearing "in front/below" the posts)
-      nodes.push({
-        id: `cat-${category}`,
-        type: 'category',
-        label: category,
-        tabClass: positions[tabIndex % positions.length],
-      });
-      tabIndex++;
     });
 
     return nodes;
