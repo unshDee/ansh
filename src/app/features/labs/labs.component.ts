@@ -39,7 +39,8 @@ export class LabsComponent implements OnInit {
       category: 'Projects',
       type: 'post',
       // url: 'https://anshdawda.notion.site/I-Built-a-Website-18f579a2cd4080ec8ac7cafe94aae790',
-      description: 'welcome to my new personal website! it\'s been a fun project to work on. this is my first time using angular, and i\'m really enjoying it so far. i too k some inspiration from swiss web design, which is known for its grid systems, typography, and minimalist aesthetic. i hope you like it!'
+      description:
+        "welcome to my new personal website! it's been a fun project to work on. this is my first time using angular, and i'm really enjoying it so far. i too k some inspiration from swiss web design, which is known for its grid systems, typography, and minimalist aesthetic. i hope you like it!",
     },
     // {
     //   id: 2,
@@ -80,7 +81,8 @@ export class LabsComponent implements OnInit {
       date: '2025.09',
       category: 'Updates',
       type: 'brief',
-      description: 'a few friends took me for meditation sessions recently, and it was a really interesting experience. i\'ve always been skeptical about meditation and its benefits, but i was surprised by how calming and refreshing it felt. it\'s not something i see myself doing regularly, but it was a nice change of pace and a good reminder to take breaks and clear my mind every now and then.',
+      description:
+        "a few friends took me for meditation sessions recently, and it was a really interesting experience. i've always been skeptical about meditation and its benefits, but i was surprised by how calming and refreshing it felt. it's not something i see myself doing regularly, but it was a nice change of pace and a good reminder to take breaks and clear my mind every now and then.",
     },
     {
       id: 7,
@@ -88,7 +90,8 @@ export class LabsComponent implements OnInit {
       date: '2026.01',
       category: 'Thoughts',
       type: 'brief',
-      description: 'meditation, initially, felt like a waste of time to me. but after doing it regularly (for the most part) for a few months, i can say that it\'s been surprisingly beneficial. i feel calmer, relaxed and more focussed overall!',
+      description:
+        "meditation, initially, felt like a waste of time to me. but after doing it regularly (for the most part) for a few months, i can say that it's been surprisingly beneficial. i feel calmer, relaxed and more focussed overall!",
     },
     {
       id: 8,
@@ -96,7 +99,8 @@ export class LabsComponent implements OnInit {
       date: '2026.02',
       category: 'Thoughts',
       type: 'brief',
-      description: 'it\'s more painful when you put in so much effort and energy into something and the results are underwhelming. been through a lot of that recently, and it sucks so much. staying motivated is hard... :-(',
+      description:
+        "it's more painful when you put in so much effort and energy into something and the results are underwhelming. been through a lot of that recently, and it sucks so much. staying motivated is hard... :-(",
     },
     {
       id: 9,
@@ -104,22 +108,23 @@ export class LabsComponent implements OnInit {
       date: '2026.02',
       category: 'Projects',
       type: 'post',
-      description: 'my friends and i have been regularly playing a fun multiplayer game called \'Psych\' - it\'s a game where you make up fake answers to real trivia questions and try to guess the correct one among the fakes. it\'s a blast, and we\'ve been playing it a lot. so we decided to build our own version with country specific trivia questions, and it\'s been a really fun project to work on together. check it out here: https://hukka-bukka.anshdawda.me - it\'s still a work in progress, but we\'re excited about how it\'s coming along!',
-    }
+      description:
+        "my friends and i have been regularly playing a fun multiplayer game called 'Psych' - it's a game where you make up fake answers to real trivia questions and try to guess the correct one among the fakes. it's a blast, and we've been playing it a lot. so we decided to build our own version with country specific trivia questions, and it's been a really fun project to work on together. check it out here: https://hukka-bukka.anshdawda.me - it's still a work in progress, but we're excited about how it's coming along!",
+    },
   ];
 
   get displayNodes(): DisplayNode[] {
     const nodes: DisplayNode[] = [];
     const categories = [...new Set(this.entries.map((e) => e.category))];
     let tabIndex = 0;
-    
+
     // Instead of absolute positioning that overflows mobile, use flex distributions.
     // Anchoring to edges using flex 'justify-start/end' prevents off-screen tabs.
     const positions = [
-      'justify-start pl-2 sm:pl-8',           // Far left
-      'justify-start pl-[15%] sm:pl-[28%]',   // Mid left
-      'justify-end pr-[15%] sm:pr-[28%]',     // Mid right (anchored right)
-      'justify-end pr-2 sm:pr-8'              // Far right
+      'justify-start pl-2 sm:pl-8', // Far left
+      'justify-start pl-[15%] sm:pl-[28%]', // Mid left
+      'justify-end pr-[15%] sm:pr-[28%]', // Mid right (anchored right)
+      'justify-end pr-2 sm:pr-8', // Far right
     ];
 
     categories.forEach((category) => {
