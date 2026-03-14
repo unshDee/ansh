@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WindowComponent } from '../../shared/components/window/window.component';
 import { RouterLink } from '@angular/router';
-import { ProjectTemplateComponent } from './shared/project-template/project-template.component';
 import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
