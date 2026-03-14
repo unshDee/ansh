@@ -1,0 +1,32 @@
+/* ── Type tag colors ────────────────────────────────────────────────────── */
+.type-thought {
+  color: var(--color-primary);
+}
+.type-post {
+  color: var(--color-text);
+}
+.type-snippet {
+  color: var(--color-green);
+}
+.type-gist {
+  color: var(--color-amber);
+}
+.type-program {
+  color: var(--color-orange);
+}
+
+/* ── Expand description animation ───────────────────────────────────────── */
+.desc-expand {
+  animation: descFadeIn 0.15s ease forwards;
+}
+
+@keyframes descFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}

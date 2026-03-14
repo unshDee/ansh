@@ -1,0 +1,68 @@
+<div class="min-h-screen flex flex-col justify-center py-24 pb-32">
+  <div class="mb-16 w-full max-w-4xl mx-auto px-4">
+    <h1 class="text-8xl md:text-9xl">labs</h1>
+  </div>
+
+  <!-- Perspective Wrapper: origin bottom anchors it so it doesn't float away. overflow-hidden to prevent 3d pop-outs -->
+  <div class="w-full max-w-4xl mx-auto px-2 relative overflow-visible pb-4">
+    <div class="flex flex-col [transform:perspective(1400px)_rotateX(12deg)] origin-bottom [transform-style:preserve-3d] pt-8 lg:pt-16 w-full">
+      
+      @for (node of displayNodes; track node.id; let idx = $index; let isFirst = $first; let isLast = $last) {
+        <div class="relative w-full flex flex-col transition-all duration-300 transform-gpu z-0"
+             [ngClass]="!isFirst ? '-mt-2 sm:-mt-6' : ''"
+             [class.cursor-pointer]="node.type === 'post'"
+             [class.group]="node.type === 'post'"
+             [class.hover:-translate-y-1]="node.type === 'post'"
+             [class.md:hover:-translate-y-3]="node.type === 'post'"
+             [style.zIndex]="idx"
+             (click)="handleNodeClick(node)">
+             
+          <!-- The Tab Row -->
+          <div class="w-full flex relative z-10" [ngClass]="node.tabClass">
+            
+            <div class="border-t border-x border-[var(--color-text)] rounded-tl-lg rounded-tr-lg -mb-px pb-px px-4 sm:px-6 flex items-center h-8 sm:h-10 transition-colors max-w-full bg-[var(--color-bg)]"
+                 [ngClass]="node.type === 'category' 
+                    ? 'bg-[var(--color-text)] text-[var(--color-bg)] shadow-[0_2px_0_var(--color-text)]' 
+                    : 'text-[var(--color-text)] group-hover:bg-[color-mix(in_srgb,var(--color-text)_4%,var(--color-bg))] pointer-events-auto'">
+                 
+              @if (node.type === 'category') {
+                <span class="font-mono text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.15em] shrink-0 truncate">{{ node.label }}</span>
+              } @else if (node.entry) {
+                <span class="font-mono text-[0.65rem] opacity-50 mr-2 sm:mr-3 font-bold shrink-0">{{ formatId(node.entry.id) }}</span>
+                <span class="font-mono text-xs sm:text-sm font-semibold truncate">{{ node.label }}</span>
+                @if (node.entry.url) {
+                  <span class="ml-2 sm:ml-3 opacity-40 text-[0.65rem] sm:text-xs shrink-0">↗</span>
+                } @else {
+                  <span class="ml-2 sm:ml-3 text-sm leading-none opacity-40 shrink-0">{{ isExpanded(node.entry.id) ? '-' : '+' }}</span>
+                }
+              }
+            </div>
+
+          </div>
+
+          <!-- The Base Horizontal Folder Line & Body -->
+          <!-- Inherits background nicely for hover effect without visual double borders -->
+          <div class="w-full border-t border-[var(--color-text)] bg-[var(--color-bg)] group-hover:bg-[color-mix(in_srgb,var(--color-text)_4%,var(--color-bg))] transition-colors duration-200 relative z-0 min-h-12 sm:min-h-16 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+            
+            @if (node.type === 'post' && node.entry && !node.entry.url && isExpanded(node.entry.id)) {
+              <div class="px-4 sm:px-8 pb-8 pt-4 flex flex-col justify-end min-h-32">
+                <div class="font-mono text-[0.65rem] sm:text-xs opacity-50 mb-3 ml-2">{{ node.entry.date }} • {{ node.entry.type | uppercase }}</div>
+                <div class="text-xs sm:text-sm opacity-80 leading-relaxed border-l-2 border-[var(--color-text)]/30 pl-4 ml-2 desc-expand max-w-2xl">
+                  {{ node.entry.description }}
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Bottom Drawer Face & Sticker -->
+      <div class="relative w-full border border-[var(--color-text)] bg-[color-mix(in_srgb,var(--color-bg)_94%,var(--color-text))] h-16 sm:h-24 rounded-b-xl sm:rounded-b-2xl flex justify-center items-center shadow-sm -mt-px pointer-events-none" [style.zIndex]="displayNodes.length">
+        <div class="bg-[#ffeb85] px-4 py-1.5 sm:px-6 sm:py-2 rounded-sm border border-[var(--color-text)] text-black font-mono text-xs sm:text-sm tracking-widest font-bold rotate-[2deg] shadow-sm pointer-events-auto">
+          ansh's secret files
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
