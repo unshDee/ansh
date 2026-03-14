@@ -1,10 +1,7 @@
-<div class="min-h-screen flex flex-col justify-center py-24 pb-32">
-  <!-- <div class="mb-16 w-full max-w-4xl mx-auto px-4">
-    <h1 class="text-8xl md:text-9xl">labs</h1>
-  </div> -->
+<div class="min-h-[calc(100vh-10rem)] flex flex-col justify-center">
 
   <!-- 2D Isometric Wrapper for the true filing cabinet staircase effect -->
-  <div class="w-full max-w-4xl mx-auto px-2 relative overflow-visible pb-4 pt-8 lg:pt-16">
+  <div class="w-full max-w-4xl mx-auto px-2 relative overflow-visible pb-4 pt-4 lg:pt-14">
     <!-- SVG Drawer Walls -->
     <div class="absolute top-8 lg:top-16 bottom-20 left-2 right-2 z-[-1] pointer-events-none">
       <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -52,14 +49,21 @@
           </div>
 
           <!-- The Base Horizontal Folder Line & Body -->
-          <!-- We add rounded-t-lg to represent the top corners of the files, along with left/right borders -->
-          <div class="w-full border-t border-x border-[var(--color-text)] rounded-t-sm bg-[var(--color-bg)] group-hover:bg-[color-mix(in_srgb,var(--color-text)_4%,var(--color-bg))] transition-colors duration-200 relative z-0 min-h-12 sm:min-h-16 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+          <div class="w-full border-t border-x border-[var(--color-text)] rounded-t-sm transition-colors duration-200 relative z-0 min-h-12 sm:min-h-16 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]"
+               [ngClass]="node.type === 'category' 
+                  ? 'bg-[color-mix(in_srgb,var(--color-text)_12%,var(--color-bg))]' 
+                  : 'bg-[var(--color-bg)] group-hover:bg-[color-mix(in_srgb,var(--color-text)_4%,var(--color-bg))]'">
             
-            @if (node.type === 'post' && node.entry && !node.entry.url && isExpanded(node.entry.id)) {
-              <div class="px-4 sm:px-8 pb-20 pt-4 flex flex-col justify-end min-h-32">
-                <div class="font-mono text-[0.65rem] sm:text-xs opacity-50 mb-3 ml-2">{{ node.entry.date }} • {{ node.entry.type | uppercase }}</div>
-                <div class="text-xs sm:text-sm opacity-80 leading-relaxed border-l-2 border-[var(--color-text)]/30 pl-4 ml-2 desc-expand max-w-2xl">
-                  {{ node.entry.description }}
+            @if (node.type === 'post' && node.entry && !node.entry.url) {
+              <div class="grid transition-all duration-300 ease-in-out"
+                   [ngClass]="isExpanded(node.entry.id) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
+                <div class="overflow-hidden">
+                  <div class="px-4 sm:px-8 pb-20 pt-4 flex flex-col justify-end min-h-32">
+                    <div class="font-mono text-[0.65rem] sm:text-xs opacity-50 mb-3 ml-2">{{ node.entry.date }} • {{ node.entry.type | uppercase }}</div>
+                    <div class="text-xs sm:text-sm opacity-80 leading-relaxed border-l-2 border-[var(--color-text)]/30 pl-4 ml-2 max-w-2xl">
+                      {{ node.entry.description }}
+                    </div>
+                  </div>
                 </div>
               </div>
             }
@@ -70,10 +74,16 @@
       <!-- Bottom Drawer Face & Sticker -->
       <div class="relative w-full border border-[var(--color-text)] bg-[color-mix(in_srgb,var(--color-bg)_94%,var(--color-text))] h-16 sm:h-24 rounded-b-xl sm:rounded-b-2xl flex justify-center items-center shadow-md shadow-black/5 -mt-px pointer-events-none" [style.zIndex]="displayNodes.length">
         <div class="bg-[#ffeb85] px-4 py-1.5 sm:px-6 sm:py-2 rounded-sm border border-[var(--color-text)] text-black font-mono text-xs sm:text-sm tracking-widest font-bold rotate-[2deg] shadow-sm pointer-events-auto">
-          ansh's secret files
+          ansh's misc files
         </div>
       </div>
       
     </div>
+  </div>
+
+  <div class="flex flex-row-reverse text-right pt-32">
+    <p>
+      ps: found <a href="https://x.com/samdape/status/1846447101779018087?s=20" class="underline pointer-events-auto">Sam Peitz</a>'s work and had to make my own
+    </p>
   </div>
 </div>
