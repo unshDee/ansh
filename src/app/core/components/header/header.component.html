@@ -18,10 +18,10 @@
       >
     }
 
-    <!-- Blog -->
-    @if (!isCurrentRoute("/blog")) {
-      <a class="nav-link group" routerLink="/blog"
-        ><span class="group-hover:text-(--color-primary)">↝</span> blog</a
+    <!-- Labs -->
+    @if (!isCurrentRoute("/labs")) {
+      <a class="nav-link group" routerLink="/labs"
+        ><span class="group-hover:text-(--color-primary)">↝</span> labs</a
       >
     } @else {
       <a class="nav-link group text-(--color-primary) italic" routerLink="/home"
