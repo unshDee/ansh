@@ -74,7 +74,7 @@
 
   /* inline code */
   & code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 0.88em;
     @apply px-1 rounded;
     background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-bg));
@@ -102,11 +102,13 @@
   }
   & th {
     @apply font-bold pb-1;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 35%, transparent);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-text) 35%, transparent);
   }
   & td {
     @apply py-1 pr-4;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-text) 12%, transparent);
   }
   & tr:last-child td {
     border-bottom: none;
@@ -147,7 +149,7 @@
 
   /* clearfix so floated images don't escape the container */
   &::after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
   }

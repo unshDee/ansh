@@ -18,7 +18,7 @@ export const LABS_ENTRIES: LabsEntry[] = [
     category: 'AI Concepts',
     type: 'post',
     description:
-      "transformers have long relied on normalization layers like LayerNorm to stabilize training and improve performance. however, a groundbreaking study challenges this paradigm by demonstrating that transformers can achieve equal or better results without any normalization layers. the key lies in a surprisingly simple operation called dynamic tanh (DyT), which re-imagines how neural networks process information.\n\n[read more on notion](https://anshdawda.notion.site/Transformers-without-Normalization-1c6579a2cd4080bba1aafe450db478c2)",
+      'transformers have long relied on normalization layers like LayerNorm to stabilize training and improve performance. however, a groundbreaking study challenges this paradigm by demonstrating that transformers can achieve equal or better results without any normalization layers. the key lies in a surprisingly simple operation called dynamic tanh (DyT), which re-imagines how neural networks process information.\n\n[read more on notion](https://anshdawda.notion.site/Transformers-without-Normalization-1c6579a2cd4080bba1aafe450db478c2)',
   },
   {
     id: 4,
@@ -27,7 +27,7 @@ export const LABS_ENTRIES: LabsEntry[] = [
     category: 'AI Architecture',
     type: 'post',
     description:
-      "large language models (LLMs) are powerful but have inherent limitations like hallucination and lacking up-to-date knowledge. to mitigate these issues, two popular approaches have emerged: Cache-Augmented Generation (CAG) and Retrieval-Augmented Generation (RAG). while both enhance LLM performance, they serve different use cases and have distinct advantages and trade-offs.\n\n[read more on notion](https://anshdawda.notion.site/Hmmm-Cache-or-Retrieval-AG-1c6579a2cd4080419d5ce7267336704d)",
+      'large language models (LLMs) are powerful but have inherent limitations like hallucination and lacking up-to-date knowledge. to mitigate these issues, two popular approaches have emerged: Cache-Augmented Generation (CAG) and Retrieval-Augmented Generation (RAG). while both enhance LLM performance, they serve different use cases and have distinct advantages and trade-offs.\n\n[read more on notion](https://anshdawda.notion.site/Hmmm-Cache-or-Retrieval-AG-1c6579a2cd4080419d5ce7267336704d)',
   },
   {
     id: 5,
@@ -64,5 +64,5 @@ export const LABS_ENTRIES: LabsEntry[] = [
     type: 'post',
     description:
       "after much contemplation, i've decided to remove the blogs section from my website (rarely updated) and replace it with this. \nthe labs section felt more interesting, and the content presentation with this 'filing cabinet' design felt more fun. \n\n instead of posting 'articles', i post 'entries' here - whcih can be anything i want to share.",
-  }
+  },
 ];
