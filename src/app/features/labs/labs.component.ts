@@ -43,8 +43,12 @@ export class LabsComponent implements OnInit {
     // Anchoring to edges using flex 'justify-start/end' prevents off-screen tabs.
     const positions = [
       'justify-start pl-2 sm:pl-8', // Far left
+      'justify-start pl-[8%] sm:pl-[20%]', // Mid left (anchored left)
       'justify-start pl-[15%] sm:pl-[28%]', // Mid left
+      'justify-start pl-[20%] sm:pl-[32%]', // Center (anchored center)
+      'justify-end pr-[20%] sm:pr-[32%]', // Center (anchored center)
       'justify-end pr-[15%] sm:pr-[28%]', // Mid right (anchored right)
+      'justify-end pr-[8%] sm:pr-[20%]', // Mid right
       'justify-end pr-2 sm:pr-8', // Far right
     ];
 
