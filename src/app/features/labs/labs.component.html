@@ -121,10 +121,9 @@
                       {{ node.entry.date }} • {{ node.entry.type | uppercase }}
                     </div>
                     <div
-                      class="text-xs sm:text-sm opacity-80 leading-relaxed border-l-2 border-[var(--color-text)]/30 pl-4 ml-2 max-w-2xl"
-                    >
-                      {{ node.entry.description }}
-                    </div>
+                      class="text-xs sm:text-sm opacity-80 leading-relaxed border-l-2 border-[var(--color-text)]/30 pl-4 ml-2 max-w-2xl labs-md"
+                      [innerHTML]="node.entry.description | markdown | safeHTML"
+                    ></div>
                   </div>
                 </div>
               </div>

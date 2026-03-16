@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* ── Type tag colors ────────────────────────────────────────────────────── */
 .type-thought {
   color: var(--color-primary);
@@ -13,6 +15,142 @@
 }
 .type-program {
   color: var(--color-orange);
+}
+
+/* ── Markdown content (::ng-deep to reach [innerHTML]) ──────────────────── */
+:host ::ng-deep .labs-md {
+  /* paragraphs */
+  & p {
+    @apply mb-2 leading-relaxed;
+  }
+  & p:last-child {
+    @apply mb-0;
+  }
+
+  /* headings — em-based so they scale with parent text-xs/sm, never huge */
+  & h1 {
+    font-size: 1.3em;
+    @apply font-bold mt-4 mb-1;
+  }
+  & h2 {
+    font-size: 1.2em;
+    @apply font-bold mt-3 mb-1;
+  }
+  & h3 {
+    font-size: 1.1em;
+    @apply font-bold mt-2 mb-1;
+  }
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    @apply font-bold mt-2 mb-0.5;
+  }
+
+  /* links */
+  & a {
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+    color: inherit;
+  }
+  & a:hover {
+    opacity: 0.6;
+  }
+
+  /* lists */
+  & ul {
+    @apply list-disc pl-5 mb-2;
+  }
+  & ol {
+    @apply list-decimal pl-5 mb-2;
+  }
+  & li {
+    @apply mb-0.5;
+  }
+  & li > ul,
+  & li > ol {
+    @apply mt-0.5 mb-0;
+  }
+
+  /* inline code */
+  & code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    @apply px-1 rounded;
+    background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-bg));
+  }
+
+  /* code blocks */
+  & pre {
+    @apply rounded p-3 mb-2 overflow-x-auto;
+    background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-bg));
+  }
+  & pre code {
+    background: transparent;
+    @apply p-0 text-[0.88em];
+  }
+
+  /* blockquote */
+  & blockquote {
+    @apply border-l-2 pl-3 mb-2 opacity-60;
+    border-color: var(--color-text);
+  }
+
+  /* tables */
+  & table {
+    @apply w-full mb-2 border-collapse text-left;
+  }
+  & th {
+    @apply font-bold pb-1;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 35%, transparent);
+  }
+  & td {
+    @apply py-1 pr-4;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+  }
+  & tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* hr */
+  & hr {
+    @apply my-3 border-0 h-px;
+    background-color: color-mix(in srgb, var(--color-text) 20%, transparent);
+  }
+
+  /* images — default full width, block */
+  & img {
+    @apply max-w-full h-auto rounded my-2;
+    display: block;
+  }
+  & .md-img-small {
+    max-width: 30%;
+  }
+  & .md-img-medium {
+    max-width: 60%;
+  }
+  & .md-img-large {
+    max-width: 90%;
+  }
+  & .md-img-left {
+    float: left;
+    @apply mr-3 mb-1;
+  }
+  & .md-img-right {
+    float: right;
+    @apply ml-3 mb-1;
+  }
+  & .md-img-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* clearfix so floated images don't escape the container */
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
 }
 
 /* ── Expand description animation ───────────────────────────────────────── */

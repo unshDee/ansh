@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgClass, UpperCasePipe } from '@angular/common';
 import { AnalyticsService } from '../../core/services/analytics.service';
 import { LABS_ENTRIES } from './labs.data';
+import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
+import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 export type LabsEntryType = 'post' | 'snippet' | 'gist' | 'brief' | 'program';
 
@@ -25,7 +27,7 @@ export interface DisplayNode {
 
 @Component({
   selector: 'app-labs',
-  imports: [NgClass, UpperCasePipe],
+  imports: [NgClass, UpperCasePipe, MarkdownPipe, SafeHtmlPipe],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css',
 })
