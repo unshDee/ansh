@@ -1,5 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Database, ref, runTransaction, onValue, Unsubscribe } from '@angular/fire/database';
+import {
+  Database,
+  ref,
+  runTransaction,
+  onValue,
+  Unsubscribe,
+} from '@angular/fire/database';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

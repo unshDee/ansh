@@ -2,7 +2,9 @@
 <div class="group">
   @if (viewCount$ | async; as count) {
     <div class="flex justify-end">
-      <span class="text-xs opacity-40 font-mono tabular-nums">[{{ count | number }} views]</span>
+      <span class="text-xs opacity-40 font-mono tabular-nums"
+        >[{{ count | number }} views]</span
+      >
     </div>
   }
   <div
@@ -51,7 +53,7 @@
       />
     </svg>
   </div>
-  
+
   <div class="border-t bottom-0">
     <div class="flex justify-between items-start">
       @if (isCurrentRoute("/resume")) {
