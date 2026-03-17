@@ -1,5 +1,10 @@
 <!-- app-footer.component.html -->
 <div class="group">
+  @if (viewCount$ | async; as count) {
+    <div class="flex justify-end">
+      <span class="text-xs opacity-40 font-mono tabular-nums">[{{ count | number }} views]</span>
+    </div>
+  }
   <div
     class="flex -mt-6 group-hover:animate-bounce group-hover:px-8 transform duration-500 ease-in-out"
   >
@@ -46,6 +51,7 @@
       />
     </svg>
   </div>
+  
   <div class="border-t bottom-0">
     <div class="flex justify-between items-start">
       @if (isCurrentRoute("/resume")) {

@@ -5,7 +5,7 @@ export const LABS_ENTRIES: LabsEntry[] = [
     id: 1,
     title: 'i built a website',
     date: '2024.11',
-    category: 'Projects',
+    category: 'code',
     type: 'post',
     // url: 'https://anshdawda.notion.site/I-Built-a-Website-18f579a2cd4080ec8ac7cafe94aae790',
     description:
@@ -51,10 +51,19 @@ export const LABS_ENTRIES: LabsEntry[] = [
     id: 9,
     title: 'building a game for fun',
     date: '2026.02',
-    category: 'Projects',
+    category: 'code',
     type: 'post',
     description:
       "my friends and i have been regularly playing a fun multiplayer game called 'Psych' - it's a game where you make up fake answers to real trivia questions and try to guess the correct one among the fakes. it's a blast, and we've been playing it a lot. so we decided to build our own version with country specific trivia questions, and it's been a really fun project to work on together. check it out here: [Hukka Bukka (click here)](https://hukka-bukka.anshdawda.me) - it's still a work in progress, but we're excited about how it's coming along!\n\nusing firebase's realtime database for game state management, and next.js for the frontend.",
+  },
+  {
+    id: 11,
+    title: 'adding a view counter',
+    date: '2026.03',
+    category: 'code',
+    type: 'post',
+    description:
+      "i added a little view counter to the bottom of my website — it shows the total number of page visits since i set it up.\n\nthe tricky part is that this site is hosted on **github pages**, which is purely static. there's no server to store state, so i needed an external service. i went with **firebase realtime database** (free spark plan) — each page navigation fires an atomic `runTransaction` to increment a counter, and `onValue` keeps the displayed number in sync in real-time.\n\nthe security rules are set to only allow incrementing by exactly 1 per write, so the count can't be reset or inflated arbitrarily. the number you see in the footer is the real thing.",
   },
   {
     id: 10,
