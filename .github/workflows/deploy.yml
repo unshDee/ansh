@@ -67,6 +67,6 @@ jobs:
           EOF
 
       - name: Deploy to GitHub Pages
-        run: npx ng deploy --no-build=false
+        run: npx ng deploy
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
