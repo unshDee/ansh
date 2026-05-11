@@ -68,7 +68,9 @@ function sense(
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────────
-export async function createEngine(config: SlimeConfig): Promise<{ frame(): string }> {
+export async function createEngine(
+  config: SlimeConfig,
+): Promise<{ frame(): string }> {
   const {
     agentCount,
     sensorDistance: SENS_DIST,
