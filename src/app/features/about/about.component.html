@@ -8,7 +8,11 @@
       <app-slime-ascii
         [posterPath]="'/posters/about.txt'"
         [config]="bgSlimeConfig"
-        style="transform: scale(1.5); transform-origin: center; --slime-font-size: 8px;"
+        style="
+          transform: scale(1.5);
+          transform-origin: center;
+          --slime-font-size: 8px;
+        "
       />
     } @placeholder {
       <div></div>
@@ -39,7 +43,9 @@
         >.
       </p>
     </div>
-    <div class="flex items-center justify-center -translate-y-6 md:translate-y-0">
+    <div
+      class="flex items-center justify-center -translate-y-6 md:translate-y-0"
+    >
       <img
         [src]="'/img/self.jpg'"
         width="250"
