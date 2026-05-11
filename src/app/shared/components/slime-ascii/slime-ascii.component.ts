@@ -29,6 +29,7 @@ export class SlimeAsciiComponent implements OnInit, OnDestroy {
 
   private rafId = 0;
   private running = false;
+  private destroyed = false;
 
   ngOnInit(): void {
     this.applyDimensions();
@@ -36,6 +37,7 @@ export class SlimeAsciiComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroyed = true;
     this.stop();
     document.removeEventListener('visibilitychange', this.onVisibility);
   }
@@ -66,8 +68,9 @@ export class SlimeAsciiComponent implements OnInit, OnDestroy {
     if (!this.animate) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    import('./slime-engine').then(({ createEngine }) => {
-      const engine = createEngine(this.config);
+    import('./slime-engine').then(async ({ createEngine }) => {
+      const engine = await createEngine(this.config);
+      if (this.destroyed) return;
       this.running = true;
       document.addEventListener('visibilitychange', this.onVisibility);
       this.scheduleFrame(engine);
@@ -79,9 +82,10 @@ export class SlimeAsciiComponent implements OnInit, OnDestroy {
       this.stop();
     } else {
       // Re-import is a no-op after first load (module cached)
-      import('./slime-engine').then(({ createEngine }) => {
-        if (this.running) return; // already restarted
-        const engine = createEngine(this.config);
+      import('./slime-engine').then(async ({ createEngine }) => {
+        if (this.running || this.destroyed) return;
+        const engine = await createEngine(this.config);
+        if (this.running || this.destroyed) return;
         this.running = true;
         this.scheduleFrame(engine);
       });

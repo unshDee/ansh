@@ -9,9 +9,9 @@
     "minChem": 0.0001,
     "deposit": 1,
     "textureRows": ["  ``^@", " ..„v0"],
-    "gridWidth": 350,
-    "gridHeight": 350,
-    "simIterations": 800,
+    "gridWidth": 200,
+    "gridHeight": 200,
+    "simIterations": 0,
     "seed": 22,
     "scatterPeriod": 150,
     "scatterThreshold": 0.5

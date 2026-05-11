@@ -68,7 +68,7 @@ function sense(
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────────
-export function createEngine(config: SlimeConfig): { frame(): string } {
+export async function createEngine(config: SlimeConfig): Promise<{ frame(): string }> {
   const {
     agentCount,
     sensorDistance: SENS_DIST,
@@ -187,8 +187,14 @@ export function createEngine(config: SlimeConfig): { frame(): string } {
     }
   }
 
-  // Fast-forward to match pre-rendered poster state
-  for (let i = 0; i < simIterations; i++) step(i);
+  // Fast-forward to match pre-rendered poster state, yielding every ~8 ms
+  // so the main thread stays responsive and LCP can paint first.
+  let fi = 0;
+  while (fi < simIterations) {
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    const deadline = performance.now() + 8;
+    while (fi < simIterations && performance.now() < deadline) step(fi++);
+  }
 
   // Live frame counter continues from where the poster left off
   let liveFrame = simIterations;
