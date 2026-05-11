@@ -1,7 +1,20 @@
 <div
-  class="pb-4 min-h-[calc(100vh-10rem)] flex flex-col justify-center text-justify"
+  class="pb-4 min-h-[calc(100vh-10rem)] flex flex-col justify-center text-justify relative overflow-hidden"
 >
-  <div class="grid md:grid-cols-2 gap-4">
+  <div
+    class="absolute inset-0 pointer-events-none opacity-15 z-0 overflow-hidden flex items-center justify-center bg-slime-mask"
+  >
+    @defer (on viewport) {
+      <app-slime-ascii
+        [posterPath]="'/posters/about.txt'"
+        [config]="bgSlimeConfig"
+        style="transform: scale(1.5); transform-origin: center; --slime-font-size: 8px;"
+      />
+    } @placeholder {
+      <div></div>
+    }
+  </div>
+  <div class="grid md:grid-cols-2 gap-4 relative z-10">
     <div class="self-center">
       <div class="mb-4">
         <h1 class="text-8xl md:text-9xl">about</h1>
@@ -26,24 +39,16 @@
         >.
       </p>
     </div>
-    <div
-      class="group transform-3d perspective-midrange perspective-origin-center flex flex-col items-center -translate-y-1/6 md:translate-y-0 hover:scale-110 transition-transform duration-500 ease-in-out"
-    >
+    <div class="flex items-center justify-center -translate-y-6 md:translate-y-0">
       <img
         [src]="'/img/self.jpg'"
         width="250"
         height="400"
-        class="rotate-z-5 -rotate-y-2 -rotate-x-5 translate-y-1/8 -translate-z-8 shadow-sm rounded-md group-hover:shadow-xl hover:translate-z-20 transition-all duration-500 ease-in-out"
-      />
-      <img
-        [src]="'/img/doodles.jpg'"
-        width="250"
-        height="200"
-        class="-rotate-z-5 rotate-y-10 rotate-x-40 translate-y-0 translate-z-18 shadow-sm rounded-md group-hover:shadow-xl hover:translate-z-30 transition-all duration-500 ease-in-out"
+        class="pointer-events-none"
       />
     </div>
   </div>
-  <p class="md:invisible">
+  <p class="mt-4 md:invisible relative z-10">
     Feel free to look around, and if you want to connect,
     <a routerLink="/contact" class="underline underline-offset-4 decoration-1"
       >reach out</a

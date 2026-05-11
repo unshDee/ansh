@@ -1,0 +1,10 @@
+.bg-slime-mask {
+  mask-image:
+    linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-composite: source-in;
+}

@@ -1,0 +1,20 @@
+:host {
+  display: block;
+}
+
+.slime-pre {
+  font-family: inherit;
+  font-size: var(--slime-font-size, 11px);
+  line-height: 1.05;
+  white-space: pre;
+  text-align: center;
+  color: inherit;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  /* Reserve space matching grid dimensions to prevent layout shift. */
+  width: calc(var(--slime-cols, 80) * 1ch);
+  min-height: calc(var(--slime-rows, 30) * 1.05em);
+  overflow: hidden;
+}
