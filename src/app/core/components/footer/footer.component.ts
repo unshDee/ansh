@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { filter } from 'rxjs';
@@ -18,6 +18,7 @@ export class FooterComponent {
 
   constructor(
     private router: Router,
+    private cdr: ChangeDetectorRef,
     viewCounter: ViewCounterService,
   ) {
     this.viewCount$ = viewCounter.count$;
@@ -26,6 +27,7 @@ export class FooterComponent {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentUrl = event.urlAfterRedirects;
+        this.cdr.markForCheck();
       });
 
     this.currentUrl = this.router.url;
