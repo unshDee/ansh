@@ -38,8 +38,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    setTimeout(() => {
-      this.ribbonAnimate?.nativeElement.beginElement();
-    }, 0);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.ribbonAnimate?.nativeElement.beginElement();
+      });
+    });
   }
 }
