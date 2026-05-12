@@ -57,9 +57,11 @@ export class HealthcareUtilizationComponent
   }
 
   ngAfterViewInit() {
-    this.createRegressionChart();
-    this.createClassificationChart();
-    this.createClassificationReportChart();
+    setTimeout(() => {
+      this.createRegressionChart();
+      this.createClassificationChart();
+      this.createClassificationReportChart();
+    }, 0);
   }
 
   toggleDetailedView() {

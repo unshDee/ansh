@@ -58,9 +58,11 @@ export class ImageSegmentationComponent
   }
 
   ngAfterViewInit() {
-    this.createAugmentationChart();
-    this.createPosWeightChart();
-    this.createBatchSizeChart();
+    setTimeout(() => {
+      this.createAugmentationChart();
+      this.createPosWeightChart();
+      this.createBatchSizeChart();
+    }, 0);
   }
 
   ngOnDestroy() {

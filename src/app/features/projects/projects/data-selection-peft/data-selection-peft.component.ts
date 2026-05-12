@@ -63,10 +63,12 @@ export class DataSelectionPeftComponent
   }
 
   ngAfterViewInit() {
-    this.createFinetuningChart();
-    this.createSelectionChart();
-    this.createParamChart();
-    this.createCombinedChart();
+    setTimeout(() => {
+      this.createFinetuningChart();
+      this.createSelectionChart();
+      this.createParamChart();
+      this.createCombinedChart();
+    }, 0);
   }
 
   ngOnDestroy() {

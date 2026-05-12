@@ -61,10 +61,12 @@ export class ProgramRepairHintComponent
     });
   }
   ngAfterViewInit() {
-    this.createBaselineChart();
-    this.createSamplingChart();
-    this.createLoRAChart();
-    this.createLoRAResourceChart();
+    setTimeout(() => {
+      this.createBaselineChart();
+      this.createSamplingChart();
+      this.createLoRAChart();
+      this.createLoRAResourceChart();
+    }, 0);
   }
 
   private getThemeColors() {
