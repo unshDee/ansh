@@ -27,6 +27,10 @@ export class AboutComponent implements OnInit {
     seed: 22,
     scatterPeriod: 150,
     scatterThreshold: 0.5,
+    boundaryRadius: 0.48,
+    charAspect: 0.55,
+    gamma: 0.333,
+    targetFps: 12,
   };
 
   constructor(private analyticsService: AnalyticsService) {}

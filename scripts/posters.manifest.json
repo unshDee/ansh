@@ -1,19 +1,22 @@
 {
-  "about": {
-    "agentCount": 1500,
+  "contact": {
+    "agentCount": 800,
     "sensorDistance": 9,
-    "sensorAngle": 0.75,
-    "agentAngle": 0.75,
-    "agentSpeed": 2,
-    "decay": 0.8,
-    "minChem": 0.0001,
+    "sensorAngle": 0.85,
+    "agentAngle": 0.85,
+    "agentSpeed": 1.5,
+    "decay": 0.9,
+    "minChem": 0.155,
     "deposit": 1,
     "textureRows": ["  ``^@", " ..„v0"],
-    "gridWidth": 200,
-    "gridHeight": 200,
-    "simIterations": 0,
-    "seed": 22,
-    "scatterPeriod": 150,
-    "scatterThreshold": 0.5
+    "gridWidth": 150,
+    "gridHeight": 50,
+    "simIterations": 500,
+    "seed": 2002,
+    "scatterPeriod": 200,
+    "scatterThreshold": 0.45,
+    "boundaryRadius": 0.88,
+    "charAspect": 0.55,
+    "gamma": 0.433
   }
 }

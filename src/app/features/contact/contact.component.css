@@ -1,0 +1,22 @@
+.slime-container {
+  container-type: inline-size;
+}
+
+.slime-mask {
+  mask-image:
+    linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-composite: source-in;
+}
+
+.contact-slime {
+  transform-origin: left top;
+  /* JetBrains Mono: 1ch ≈ font-size × 0.6
+     font-size = containerWidth / (gridWidth × 0.6)
+     → element width = gridWidth × 1ch = containerWidth exactly */
+  --slime-font-size: calc(100cqw / (var(--slime-cols) * 0.6));
+}

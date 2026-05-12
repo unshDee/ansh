@@ -44,3 +44,15 @@ Thumbs.db
 # Environment files (contain secrets — keep locally, never commit)
 src/environments/environment.ts
 src/environments/environment.prod.ts
+.env
+.env.*
+!.env.example
+
+# Slime sim internals
+src/app/shared/components/slime-ascii/README.md
+
+# Editor artifacts
+*.swp
+*.swo
+*~
+*.orig

@@ -44,8 +44,12 @@ export class SlimeAsciiComponent implements OnInit, OnDestroy {
 
   private applyDimensions(): void {
     const pre = this.preRef.nativeElement;
+    const host = this.el.nativeElement;
     pre.style.setProperty('--slime-cols', String(this.config.gridWidth));
     pre.style.setProperty('--slime-rows', String(this.config.gridHeight));
+    // Expose on host so parent CSS can derive responsive font-size via cqw
+    host.style.setProperty('--slime-cols', String(this.config.gridWidth));
+    host.style.setProperty('--slime-rows', String(this.config.gridHeight));
   }
 
   private loadPoster(): void {
@@ -93,7 +97,7 @@ export class SlimeAsciiComponent implements OnInit, OnDestroy {
   };
 
   private scheduleFrame(engine: { frame(): string }): void {
-    const TARGET_FPS = 12;
+    const TARGET_FPS = this.config.targetFps ?? 12;
     const INTERVAL = 1000 / TARGET_FPS;
     let last = 0;
 

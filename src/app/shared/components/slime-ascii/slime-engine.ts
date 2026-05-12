@@ -35,14 +35,19 @@ function randCircle(rng: () => number): { x: number; y: number } {
   return { x: r * Math.cos(theta), y: r * Math.sin(theta) };
 }
 
-// ── Circular boundary (correct for char aspect) — must match exactly ──────────
-const CHAR_ASPECT = 0.55;
-
-function bounded(x: number, y: number, W: number, H: number): boolean {
+// ── Circular boundary ──────────────────────────────────────────────────────────
+function bounded(
+  x: number,
+  y: number,
+  W: number,
+  H: number,
+  charAspect: number,
+  boundaryRadius: number,
+): boolean {
   const cx = W / 2;
   const cy = H / 2;
-  const R = Math.min(W * CHAR_ASPECT, H) * 0.48;
-  const dx = (x - cx) * CHAR_ASPECT;
+  const R = Math.min(W * charAspect, H) * boundaryRadius;
+  const dx = (x - cx) * charAspect;
   const dy = y - cy;
   return dx * dx + dy * dy <= R * R;
 }
@@ -57,12 +62,14 @@ function sense(
   heading: number,
   angleOffset: number,
   dist: number,
+  charAspect: number,
+  boundaryRadius: number,
 ): number {
   const sx = x + dist * Math.cos(heading + angleOffset);
   const sy = y + dist * Math.sin(heading + angleOffset);
   const col = Math.floor(sx);
   const row = Math.floor(sy);
-  if (!bounded(sx, sy, W, H)) return -1;
+  if (!bounded(sx, sy, W, H, charAspect, boundaryRadius)) return -1;
   if (col < 0 || col >= W || row < 0 || row >= H) return -1;
   return trail[row * W + col];
 }
@@ -87,6 +94,9 @@ export async function createEngine(
     seed,
     scatterPeriod,
     scatterThreshold,
+    boundaryRadius: BOUNDARY_R = 0.48,
+    charAspect: CHAR_ASPECT = 0.55,
+    gamma: GAMMA = 1 / 3,
   } = config;
 
   const rng = mulberry32(seed);
@@ -100,7 +110,7 @@ export async function createEngine(
 
   const cx = W / 2;
   const cy = H / 2;
-  const R = Math.min(W * CHAR_ASPECT, H) * 0.48;
+  const R = Math.min(W * CHAR_ASPECT, H) * BOUNDARY_R;
   const Rx = R / CHAR_ASPECT;
   const Ry = R;
 
@@ -141,9 +151,9 @@ export async function createEngine(
       let y = ay[i];
       let h = ah[i];
 
-      let fwd = sense(trail, W, H, x, y, h, 0, SENS_DIST);
-      let lft = sense(trail, W, H, x, y, h, -SENS_ANGLE, SENS_DIST);
-      let rgt = sense(trail, W, H, x, y, h, SENS_ANGLE, SENS_DIST);
+      let fwd = sense(trail, W, H, x, y, h, 0, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
+      let lft = sense(trail, W, H, x, y, h, -SENS_ANGLE, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
+      let rgt = sense(trail, W, H, x, y, h, SENS_ANGLE, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
 
       if (isScattering) {
         if (fwd >= 0) fwd = 1 - fwd;
@@ -169,7 +179,7 @@ export async function createEngine(
       const nx = x + Math.cos(h) * AGT_SPEED;
       const ny = y + Math.sin(h) * AGT_SPEED;
 
-      if (bounded(nx, ny, W, H)) {
+      if (bounded(nx, ny, W, H, CHAR_ASPECT, BOUNDARY_R)) {
         x = nx;
         y = ny;
       } else {
@@ -212,7 +222,7 @@ export async function createEngine(
       for (let row = 0; row < H; row++) {
         let line = '';
         for (let col = 0; col < W; col++) {
-          const v = Math.pow(trail[row * W + col], 1 / 3);
+          const v = Math.pow(trail[row * W + col], GAMMA);
           const texRow = (col + row) % numTex;
           const texCol = Math.min(rampLen - 1, Math.ceil(v * (rampLen - 1)));
           line += textureRows[texRow][texCol];

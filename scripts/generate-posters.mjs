@@ -46,28 +46,23 @@ function randCircle(rng) {
   return { x: r * Math.cos(theta), y: r * Math.sin(theta) };
 }
 
-// ── Circular boundary (correct for char aspect so it appears circular) ─────────
-// monospace chars are ~0.55× as wide as tall; the boundary is an ellipse in
-// grid space that maps to a circle in screen-pixel space.
-const CHAR_ASPECT = 0.55;
-
-function bounded(x, y, W, H) {
+// ── Circular boundary ──────────────────────────────────────────────────────────
+function bounded(x, y, W, H, charAspect, boundaryRadius) {
   const cx = W / 2;
   const cy = H / 2;
-  // Radius in rows = half the screen height expressed in char-height units
-  const R = Math.min(W * CHAR_ASPECT, H) * 0.48;
-  const dx = (x - cx) * CHAR_ASPECT;
+  const R = Math.min(W * charAspect, H) * boundaryRadius;
+  const dx = (x - cx) * charAspect;
   const dy = y - cy;
   return dx * dx + dy * dy <= R * R;
 }
 
 // ── Sensing ────────────────────────────────────────────────────────────────────
-function sense(trail, W, H, x, y, heading, angleOffset, dist) {
+function sense(trail, W, H, x, y, heading, angleOffset, dist, charAspect, boundaryRadius) {
   const sx = x + dist * Math.cos(heading + angleOffset);
   const sy = y + dist * Math.sin(heading + angleOffset);
   const col = Math.floor(sx);
   const row = Math.floor(sy);
-  if (!bounded(sx, sy, W, H)) return -1;
+  if (!bounded(sx, sy, W, H, charAspect, boundaryRadius)) return -1;
   if (col < 0 || col >= W || row < 0 || row >= H) return -1;
   return trail[row * W + col];
 }
@@ -90,6 +85,9 @@ function runSim(config) {
     seed,
     scatterPeriod,
     scatterThreshold,
+    boundaryRadius: BOUNDARY_R = 0.48,
+    charAspect: CHAR_ASPECT = 0.55,
+    gamma: GAMMA = 1 / 3,
   } = config;
 
   const rng = mulberry32(seed);
@@ -103,7 +101,7 @@ function runSim(config) {
 
   const cx = W / 2;
   const cy = H / 2;
-  const R = Math.min(W * CHAR_ASPECT, H) * 0.48;
+  const R = Math.min(W * CHAR_ASPECT, H) * BOUNDARY_R;
   const Rx = R / CHAR_ASPECT;
   const Ry = R;
 
@@ -145,9 +143,9 @@ function runSim(config) {
       let y = ay[i];
       let h = ah[i];
 
-      let fwd = sense(trail, W, H, x, y, h, 0, SENS_DIST);
-      let lft = sense(trail, W, H, x, y, h, -SENS_ANGLE, SENS_DIST);
-      let rgt = sense(trail, W, H, x, y, h, SENS_ANGLE, SENS_DIST);
+      let fwd = sense(trail, W, H, x, y, h, 0, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
+      let lft = sense(trail, W, H, x, y, h, -SENS_ANGLE, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
+      let rgt = sense(trail, W, H, x, y, h, SENS_ANGLE, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
 
       if (isScattering) {
         // Invert: flee trails
@@ -175,7 +173,7 @@ function runSim(config) {
       const nx = x + Math.cos(h) * AGT_SPEED;
       const ny = y + Math.sin(h) * AGT_SPEED;
 
-      if (bounded(nx, ny, W, H)) {
+      if (bounded(nx, ny, W, H, CHAR_ASPECT, BOUNDARY_R)) {
         x = nx;
         y = ny;
       } else {
@@ -207,7 +205,7 @@ function runSim(config) {
     let line = '';
     for (let col = 0; col < W; col++) {
       const raw = trail[row * W + col];
-      const v = Math.pow(raw, 1 / 3);
+      const v = Math.pow(raw, GAMMA);
       const texRow = (col + row) % numTex;
       const texCol = Math.min(rampLen - 1, Math.ceil(v * (rampLen - 1)));
       line += textureRows[texRow][texCol];
