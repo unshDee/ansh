@@ -66,6 +66,15 @@ export const LABS_ENTRIES: LabsEntry[] = [
       "i added a little view counter to the bottom of my website — it shows the total number of page visits since i set it up.\n\nthe tricky part is that this site is hosted on **github pages**, which is purely static. there's no server to store state, so i needed an external service. i went with **firebase realtime database** (free spark plan) — each page navigation fires an atomic `runTransaction` to increment a counter, and `onValue` keeps the displayed number in sync in real-time.\n\nthe security rules are set to only allow incrementing by exactly 1 per write, so the count can't be reset or inflated arbitrarily. the number you see in the footer is the real thing.",
   },
   {
+    id: 12,
+    title: 'slime mold sim',
+    date: '2026.05',
+    category: 'code',
+    type: 'post',
+    description:
+      "i built a **physarum slime mold simulation** rendered entirely in ascii characters, and added it to the site as a background decoration on the contact page.\n\nthe simulation models [physarum polycephalum](https://en.wikipedia.org/wiki/Physarum_polycephalum) - the single-celled organism famous for solving mazes. agents follow a simple rule: sense pheromone trails ahead, turn toward the strongest signal, deposit more trail. from those few rules, a branching vascular network emerges.\n\nthe tricky part was making it feel fast without blocking the page. a static poster is pre-rendered at build time (deterministic seed, 500 sim steps), served as a `.txt` file, and painted instantly at LCP. the live engine only loads when the element enters the viewport, fast-forwards to match the poster frame, then resumes seamlessly, so the animation looks continuous even though the heavy work was done ahead of time.\n\nthe character ramp (`  \\`\\`^@` / ` ..„v0`) gives it that alternating diagonal texture. gamma remapping boosts faint trails so the low-density edges don't just disappear into whitespace.",
+  },
+  {
     id: 10,
     title: 'switch: blogs to labs',
     date: '2026.03',
