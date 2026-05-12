@@ -84,6 +84,13 @@ export const routes: Routes = [
             (m) => m.VoxartComponent,
           ),
       },
+      {
+        path: 'llm-sampling-bias',
+        loadComponent: () =>
+          import('./features/projects/projects/llm-sampling-bias/llm-sampling-bias.component').then(
+            (m) => m.LlmSamplingBiasComponent,
+          ),
+      },
     ],
   },
   {

@@ -1,0 +1,352 @@
+<app-project-template
+  projectTitle="Prescriptive Bias in LLM Sampling"
+  note="Work in Progress"
+  [technologies]="[
+    'pydantic-ai',
+    'Python',
+    'OpenAI GPT-5-nano',
+    'Logfire',
+  ]"
+>
+  <div description>
+    Do language models sample from
+    <span class="italic">statistical reality</span>, or from their sense of
+    <span class="italic">how things ought to be?</span>
+  </div>
+
+  <div content>
+    <div class="font-serif text-xl text-justify mb-6">
+      There's a paper by Sivaprasad et al.,
+      <a
+        href="https://arxiv.org/abs/2402.11005"
+        target="_blank"
+        class="underline underline-offset-4 decoration-1 group"
+        >A Theory of LLM Sampling: Part Descriptive and Part Prescriptive<sup
+          class="font-extralight transform duration-300 ease-in-out group-hover:text-(--color-primary) group-hover:translate-3"
+          >↗</sup
+        ></a
+      >,
+      that makes a pretty interesting claim: when you ask a language model to
+      give you a "typical" value for something, it doesn't just draw from a
+      statistical distribution. It gets pulled toward an implicit ideal of what
+      that thing <em>should</em> be. So instead of telling you how many hours
+      people actually sleep, it nudges toward how many hours they
+      <em>ought</em> to sleep.
+    </div>
+
+    <div class="font-serif text-xl text-justify mb-8">
+      These experiments replicate and extend that idea. Three experiments so far:
+      a baseline across everyday concepts, a cross-lingual test in English vs.
+      German, and a persona injection test to see if telling the model to "be a
+      statistician" actually changes anything.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+      <app-window windowTitle="Key Quantities">
+        <div class="font-mono text-sm space-y-2">
+          <div class="flex justify-between gap-2">
+            <span class="font-bold" [innerHTML]="'A(C)' | safeLatex : false"></span>
+            <span class="text-right">Average the model reports for concept C</span>
+          </div>
+          <div class="flex justify-between gap-2">
+            <span class="font-bold" [innerHTML]="'I(C)' | safeLatex : false"></span>
+            <span class="text-right">Ideal the model reports for concept C</span>
+          </div>
+          <div class="flex justify-between gap-2">
+            <span class="font-bold" [innerHTML]="'S(C)' | safeLatex : false"></span>
+            <span class="text-right">Sample the model draws for concept C</span>
+          </div>
+          <div class="border-t border-(--color-text) pt-2 mt-2">
+            <div class="flex justify-between gap-2">
+              <span class="font-bold" [innerHTML]="'\\alpha' | safeLatex : false"></span>
+              <span class="text-right">Deviation of S(C) from A(C) toward I(C)</span>
+            </div>
+            <div class="flex justify-between gap-2 mt-1">
+              <span class="font-bold" [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span>
+              <span class="text-right">Normalized <span [innerHTML]="'\\alpha' | safeLatex : false"></span> so |A−I| = 1</span>
+            </div>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window windowTitle="Formula" class="col-span-1 lg:col-span-2">
+        <div class="text-sm space-y-3">
+          <div [innerHTML]="'\\alpha = (A(C) - S(C)) \\times \\text{sign}(A(C) - I(C))' | safeLatex"></div>
+          <div [innerHTML]="'\\hat{\\alpha} = \\alpha \\,/\\, |A(C) - I(C)|' | safeLatex"></div>
+          <p class="text-xs mt-3">
+            Positive <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> means the sample landed closer to the ideal than
+            the average. Each probe runs in an independent context (n = 10)
+            so the model can't trivially condition on prior answers.
+          </p>
+        </div>
+      </app-window>
+    </div>
+
+    <!-- Experiment 1 -->
+    <h2 class="text-3xl my-4 mt-10">Experiment 1: Baseline</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      First question: does this effect show up at all on a different model than
+      the ones in the paper? 25 everyday concepts across health, behavior,
+      technology, and social life, each probed 10 times at temperature 0.8.
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+      <app-window windowTitle="Run Details">
+        <div class="font-mono text-sm space-y-2">
+          <div class="flex justify-between">
+            <span>Model:</span>
+            <span class="font-bold">openai:gpt-5-nano</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Concepts:</span>
+            <span class="font-bold">25</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Temperature:</span>
+            <span class="font-bold">0.8</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Runs per concept:</span>
+            <span class="font-bold">10</span>
+          </div>
+          <div class="border-t border-(--color-text) pt-2 mt-2">
+            <div class="flex justify-between items-center">
+              <span>Positive <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span>:</span>
+              <span class="font-bold">13 / 25</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs mt-3 text-justify">
+          13/25 isn't statistically meaningful on its own, but the
+          <em>magnitude</em> tells a clearer story. Value-laden concepts
+          (smoking, calories, sugary drinks) pull hard toward the ideal,
+          while neutral ones sit near zero.
+        </p>
+        <a
+          href="https://logfire-eu.pydantic.dev/public-trace/454a1cdc-4178-4485-b133-c28b58059747?spanId=5cc9e26dfdd59c5a"
+          target="_blank"
+          class="block mt-4 border border-(--color-text) p-2 font-mono text-xs hover:bg-(--color-text) hover:text-(--color-bg) transition-colors duration-200 group"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-bold">logfire</span>
+            <span class="opacity-50">/ trace</span>
+          </div>
+          <div class="opacity-60 truncate">454a1cdc-4178-4485-b133-c28b58059747</div>
+          <div class="mt-2 font-bold group-hover:translate-x-1 transition-transform duration-200">→ open trace</div>
+        </a>
+      </app-window>
+
+      <app-window windowTitle="α̂ per Concept" class="col-span-1 lg:col-span-2">
+        <div style="height: 600px; position: relative">
+          <canvas #alphaChart></canvas>
+        </div>
+        <p class="text-xs mt-2">
+          <span class="inline-block w-3 h-3 bg-green-700 dark:bg-green-400 mr-1 align-middle"></span>positive <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> (sample pulled toward ideal)
+          <span class="inline-block w-3 h-3 bg-red-700 dark:bg-red-400 ml-3 mr-1 align-middle"></span>negative <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> (pulled away or no effect)
+        </p>
+      </app-window>
+    </div>
+
+    <app-window windowTitle="Notes" [initialMinimized]="true">
+      <ul class="list-disc pl-4 space-y-1 text-sm text-justify">
+        <li>
+          Concepts with clear social norms like smoking, calories, and sugary drinks
+          show large positive <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span>. The model clearly has a sense of "too much."
+        </li>
+        <li>
+          Screen-time concepts like social media minutes and phone checks go negative.
+          The model seems inconsistent or pulls in the wrong direction entirely.
+        </li>
+        <li>
+          Rare or morally neutral events like drunk driving and parking tickets
+          cluster near zero. There's no meaningful ideal to pull toward.
+        </li>
+        <li>
+          Some outliers are wild (1440 minutes on social media, i.e., all day) and
+          inflate the <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> values. Variance is a real issue here.
+        </li>
+      </ul>
+    </app-window>
+
+    <!-- Experiment 2 -->
+    <h2 class="text-3xl my-4 mt-10">Experiment 2: English vs. German</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      If prescriptive pull is baked into the model's training, you might expect it
+      to be relatively stable across languages. But cultural norms vary, so does
+      the model's implicit ideal shift when you prompt in German?
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+      <app-window windowTitle="Run Details">
+        <div class="font-mono text-sm space-y-2">
+          <div class="flex justify-between">
+            <span>Languages:</span>
+            <span class="font-bold">EN, DE</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Concepts:</span>
+            <span class="font-bold">15</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Runs per concept:</span>
+            <span class="font-bold">10</span>
+          </div>
+          <div class="border-t border-(--color-text) pt-2 mt-2">
+            <div class="flex justify-between">
+              <span>Direction flips:</span>
+              <span class="font-bold">8 / 15</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs mt-3 text-justify">
+          More than half the concepts flip the sign of <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> between
+          English and German. That's a lot. It suggests the model's
+          "ideal" isn't universal, it's entangled with language.
+        </p>
+        <a
+          href="https://logfire-eu.pydantic.dev/public-trace/5aa4abbb-2da2-4041-b2cd-edab16f60af0?spanId=5cbabfeda49b21a5"
+          target="_blank"
+          class="block mt-4 border border-(--color-text) p-2 font-mono text-xs hover:bg-(--color-text) hover:text-(--color-bg) transition-colors duration-200 group"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-bold">logfire</span>
+            <span class="opacity-50">/ trace</span>
+          </div>
+          <div class="opacity-60 truncate">5aa4abbb-2da2-4041-b2cd-edab16f60af0</div>
+          <div class="mt-2 font-bold group-hover:translate-x-1 transition-transform duration-200">→ open trace</div>
+        </a>
+      </app-window>
+
+      <app-window windowTitle="EN vs DE" class="col-span-1 lg:col-span-2">
+        <div style="height: 500px; position: relative">
+          <canvas #crosslingualChart></canvas>
+        </div>
+        <p class="text-xs mt-2">
+          Concepts where EN and DE bars point in opposite directions are direction flips.
+        </p>
+      </app-window>
+    </div>
+
+    <app-window windowTitle="Notes" [initialMinimized]="true">
+      <ul class="list-disc pl-4 space-y-1 text-sm text-justify">
+        <li>
+          Sleep hours is the starkest case: EN <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> = +2.0, DE <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> = −5.0.
+          In English the sample nudges toward the ideal; in German it goes the other way.
+        </li>
+        <li>
+          Adults who smoke also flips: EN −0.68, DE +0.65. Possibly different
+          associations with what "typical" means in each language context.
+        </li>
+        <li>
+          Concepts like sugary drinks and books read stay consistent across languages,
+          probably because those ideals are more culturally universal.
+        </li>
+        <li>
+          The 53% flip rate is hard to explain away as noise.
+          It points toward language-specific cultural priors being encoded during training.
+        </li>
+      </ul>
+    </app-window>
+
+    <!-- Experiment 3 -->
+    <h2 class="text-3xl my-4 mt-10">Experiment 3: Persona Injection</h2>
+    <div class="font-serif text-xl text-justify mb-4">
+      Can you talk the model out of it? Three system-prompt personas were tested
+      across 8 medical and 8 financial concepts: a baseline helpful assistant,
+      a statistician (meant to push toward empirical responses), and a domain
+      expert (clinician or financial analyst).
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+      <app-window windowTitle="Run Details">
+        <div class="font-mono text-sm space-y-2">
+          <div class="flex justify-between">
+            <span>Medical concepts:</span>
+            <span class="font-bold">8</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Financial concepts:</span>
+            <span class="font-bold">8</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Personas:</span>
+            <span class="font-bold">3-4</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Runs per concept:</span>
+            <span class="font-bold">10</span>
+          </div>
+        </div>
+        <a
+          href="https://logfire-eu.pydantic.dev/public-trace/219e505c-3d34-4d27-aeec-bb86610edf78?spanId=0383858d24e60337"
+          target="_blank"
+          class="block mt-4 border border-(--color-text) p-2 font-mono text-xs hover:bg-(--color-text) hover:text-(--color-bg) transition-colors duration-200 group"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-bold">logfire</span>
+            <span class="opacity-50">/ trace</span>
+          </div>
+          <div class="opacity-60 truncate">219e505c-3d34-4d27-aeec-bb86610edf78</div>
+          <div class="mt-2 font-bold group-hover:translate-x-1 transition-transform duration-200">→ open trace</div>
+        </a>
+      </app-window>
+      <div class="col-span-1 lg:col-span-2 grid grid-cols-1 gap-4">
+      <app-window windowTitle="Medical Concepts: α̂ by Persona">
+        <div style="height: 400px; position: relative">
+          <canvas #personaMedChart></canvas>
+        </div>
+      </app-window>
+
+      <app-window windowTitle="Financial Concepts: α̂ by Persona">
+        <div style="height: 400px; position: relative">
+          <canvas #personaFinChart></canvas>
+        </div>
+      </app-window>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
+      <app-window windowTitle="Personas">
+        <div class="font-mono text-sm space-y-3">
+          <div>
+            <span class="font-bold text-blue-600 dark:text-blue-400">helpful_assistant</span>
+            <p class="text-xs mt-1">Baseline. No special framing.</p>
+          </div>
+          <div>
+            <span class="font-bold text-amber-600 dark:text-amber-400">statistician</span>
+            <p class="text-xs mt-1">Explicitly empirical. Hypothesis: lowers <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span>.</p>
+          </div>
+          <div>
+            <span class="font-bold text-green-700 dark:text-green-400">clinician</span>
+            <p class="text-xs mt-1">Medical domain expert.</p>
+          </div>
+          <div>
+            <span class="font-bold text-orange-600 dark:text-orange-400">financial_analyst</span>
+            <p class="text-xs mt-1">Finance domain expert.</p>
+          </div>
+        </div>
+      </app-window>
+
+      <app-window windowTitle="Notes">
+        <ul class="list-disc pl-4 space-y-1 text-sm text-justify">
+          <li>
+            Telling the model to "be a statistician" doesn't reliably reduce <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span>.
+            For ankle sprain and stock allocation, it actually makes things worse.
+          </li>
+          <li>
+            The clinician persona does seem to ground medical responses more, with <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span>
+            dropping for most medical concepts under that framing.
+          </li>
+          <li>
+            Financial analyst results are messier. It suppresses <span [innerHTML]="'\\hat{\\alpha}' | safeLatex : false"></span> on some
+            concepts but amplifies on others, with no clear pattern.
+          </li>
+          <li>
+            Some values are just unstable regardless of persona. Stock allocation
+            and appendectomy recovery are noisy across all three.
+          </li>
+        </ul>
+      </app-window>
+    </div>
+  </div>
+</app-project-template>
