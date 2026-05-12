@@ -33,22 +33,24 @@
           href="https://www.github.com/unshDee"
           target="_blank"
           class="hover:underline underline-offset-4 decoration-(--color-primary)"
-          (click)="trackContactMethod('github', 'https://www.github.com/unshDee')"
+          (click)="
+            trackContactMethod('github', 'https://www.github.com/unshDee')
+          "
         >
           unshDee
         </a>
       </app-window>
       @defer (on viewport) {
-      <div class="slime-mask flex justify-center">
-        <app-slime-ascii
-          [posterPath]="'/posters/contact.txt'"
-          [config]="slimeConfig"
-          class="contact-slime pt-8"
-        />
-      </div>
-    } @placeholder {
-      <div></div>
-    }
+        <div class="slime-mask flex justify-center">
+          <app-slime-ascii
+            [posterPath]="'/posters/contact.txt'"
+            [config]="slimeConfig"
+            class="contact-slime pt-8"
+          />
+        </div>
+      } @placeholder {
+        <div></div>
+      }
     </div>
     <app-window windowTitle="something else?" class="font-mono">
       <form

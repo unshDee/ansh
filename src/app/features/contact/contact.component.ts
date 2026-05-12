@@ -32,7 +32,7 @@ export class ContactComponent implements OnInit {
     gamma: 0.433,
     targetFps: 12,
   };
-  
+
   constructor(private analyticsService: AnalyticsService) {}
 
   ngOnInit() {

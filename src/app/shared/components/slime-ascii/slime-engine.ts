@@ -151,9 +151,42 @@ export async function createEngine(
       let y = ay[i];
       let h = ah[i];
 
-      let fwd = sense(trail, W, H, x, y, h, 0, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
-      let lft = sense(trail, W, H, x, y, h, -SENS_ANGLE, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
-      let rgt = sense(trail, W, H, x, y, h, SENS_ANGLE, SENS_DIST, CHAR_ASPECT, BOUNDARY_R);
+      let fwd = sense(
+        trail,
+        W,
+        H,
+        x,
+        y,
+        h,
+        0,
+        SENS_DIST,
+        CHAR_ASPECT,
+        BOUNDARY_R,
+      );
+      let lft = sense(
+        trail,
+        W,
+        H,
+        x,
+        y,
+        h,
+        -SENS_ANGLE,
+        SENS_DIST,
+        CHAR_ASPECT,
+        BOUNDARY_R,
+      );
+      let rgt = sense(
+        trail,
+        W,
+        H,
+        x,
+        y,
+        h,
+        SENS_ANGLE,
+        SENS_DIST,
+        CHAR_ASPECT,
+        BOUNDARY_R,
+      );
 
       if (isScattering) {
         if (fwd >= 0) fwd = 1 - fwd;
