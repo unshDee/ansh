@@ -273,8 +273,8 @@
             <span class="font-bold">Machine Learning &amp; AI</span>:
             Retrieval-Augmented Generation (RAG) • LangChain • LangGraph •
             PyTorch • Hugging Face Transformers • Scikit-learn • LLM evaluation
-            (Ragas, DeepEval) • OpenAI API • Ollama • BAML • Langfuse •
-            ChromaDB • Jina Reranker
+            (Ragas, DeepEval) • OpenAI API • Ollama • BAML • Langfuse • ChromaDB
+            • Jina Reranker
           </li>
           <li>
             <span class="font-bold">Backend &amp; APIs</span>: Django • FastAPI
@@ -383,8 +383,8 @@
             — Added markdown code fence stripping before JSON parsing in
             <span class="font-mono">_parse_json_string()</span>, fixing
             <span class="font-mono">JSONDecodeError</span> failures caused by
-            models (gpt-4o-mini, Ollama, LM Studio) that wrap structured
-            outputs in fences. Fixes #437.
+            models (gpt-4o-mini, Ollama, LM Studio) that wrap structured outputs
+            in fences. Fixes #437.
           </li>
           <li>
             <a
@@ -395,8 +395,7 @@
             >
             — Fixed connection lifecycle bug in
             <span class="font-mono">reset_database()</span> by wrapping Cypher
-            execution in
-            <span class="font-mono">connect_neo4j()</span> /
+            execution in <span class="font-mono">connect_neo4j()</span> /
             <span class="font-mono">close_neo4j()</span> with try/finally
             cleanup. Fixes #26.
           </li>
