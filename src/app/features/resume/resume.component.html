@@ -154,6 +154,34 @@
               Improved retrieval performance through reranking strategies and
               prompt engineering for evaluation and multimodal captioning tasks.
             </li>
+            <li>
+              Developed an IT support chatbot to guide customers through
+              structured information gathering, reducing incomplete ticket
+              submissions.
+            </li>
+            <li>
+              Built a
+              <span class="font-bold"
+                >dual-index RAG architecture (Knowledge Base + Solution
+                Archive)</span
+              >
+              with multilingual German/English support using
+              <span class="font-bold">ChromaDB</span> and
+              <span class="font-bold">Jina Reranker</span>.
+            </li>
+            <li>
+              Developed
+              <span class="font-bold"
+                >LangGraph pipelines for automated Jira ticket analysis</span
+              >, including priority classification, root cause extraction, and
+              workaround identification with Pydantic-structured outputs.
+            </li>
+            <li>
+              Built a
+              <span class="font-bold">versioned prompt management system</span>
+              using markdown files for reproducible LLM workflows across
+              evaluation and ingestion tasks.
+            </li>
           </ul>
         </app-window>
         <app-window windowTitle="DFKI" class="col-span-2">
@@ -226,7 +254,8 @@
           <ul class="list-disc pl-4">
             <li>
               Created a Personally Identifiable Information detection framework
-              with 18 custom recognizers using NLTK and SpaCy.
+              with 18 custom recognizers using NLTK and SpaCy, achieving
+              <span class="font-bold">92% detection accuracy</span>.
             </li>
           </ul>
         </app-window>
@@ -244,7 +273,8 @@
             <span class="font-bold">Machine Learning &amp; AI</span>:
             Retrieval-Augmented Generation (RAG) • LangChain • LangGraph •
             PyTorch • Hugging Face Transformers • Scikit-learn • LLM evaluation
-            (Ragas, DeepEval) • OpenAI API • Ollama
+            (Ragas, DeepEval) • OpenAI API • Ollama • BAML • Langfuse •
+            ChromaDB • Jina Reranker
           </li>
           <li>
             <span class="font-bold">Backend &amp; APIs</span>: Django • FastAPI
@@ -272,6 +302,13 @@
           <h2 class="text-3xl mb-4">projects</h2>
           <app-window windowTitle="click titles for details">
             <ul class="list-disc pl-4">
+              <li>
+                <a
+                  routerLink="/projects/llm-sampling-bias"
+                  class="underline underline-offset-4 decoration-1"
+                  >Prescriptive Bias in LLM Sampling</a
+                >
+              </li>
               <li>
                 <a
                   routerLink="/projects/image-segmentation"
@@ -325,12 +362,46 @@
           <app-window windowTitle="proficiency">
             <ul class="list-disc pl-4">
               <li>English: C1 (Fluent)</li>
-              <li>German: A1 (Learning)</li>
+              <li>German: A2 (Learning)</li>
               <li>Hindi: Native</li>
             </ul>
           </app-window>
         </div>
       </div>
+
+      <!-- Open Source -->
+      <h2 class="text-3xl">open source</h2>
+      <app-window windowTitle="contributions">
+        <ul class="list-disc pl-4">
+          <li>
+            <a
+              href="https://github.com/microsoft/essex-toolkit/pull/438"
+              target="_blank"
+              class="font-bold underline underline-offset-4 decoration-1"
+              >microsoft/essex-toolkit</a
+            >
+            — Added markdown code fence stripping before JSON parsing in
+            <span class="font-mono">_parse_json_string()</span>, fixing
+            <span class="font-mono">JSONDecodeError</span> failures caused by
+            models (gpt-4o-mini, Ollama, LM Studio) that wrap structured
+            outputs in fences. Fixes #437.
+          </li>
+          <li>
+            <a
+              href="https://github.com/neo4j-labs/create-context-graph/pull/33"
+              target="_blank"
+              class="font-bold underline underline-offset-4 decoration-1"
+              >neo4j-labs/create-context-graph</a
+            >
+            — Fixed connection lifecycle bug in
+            <span class="font-mono">reset_database()</span> by wrapping Cypher
+            execution in
+            <span class="font-mono">connect_neo4j()</span> /
+            <span class="font-mono">close_neo4j()</span> with try/finally
+            cleanup. Fixes #26.
+          </li>
+        </ul>
+      </app-window>
 
       <h2 class="text-3xl">achievements</h2>
       <app-window windowTitle="achievements">
